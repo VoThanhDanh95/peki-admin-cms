@@ -1,10 +1,10 @@
-import { PrismaClient } from '@prisma/client'
-import { main as seedRoles } from './seedRoles'
+import { PrismaClient } from "@prisma/client"
+import { main as seedRoles } from "./seedRoles"
 
 const prisma = new PrismaClient()
 
 const main = async () => {
-    await seedRoles(prisma)
+  await seedRoles(prisma)
 }
 
 main()

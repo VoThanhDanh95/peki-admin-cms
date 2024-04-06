@@ -1,13 +1,9 @@
 import { useForm } from "react-hook-form"
 
 const useLoginPage = () => {
-    const form = useForm()
+  const form = useForm()
 
-    return {
-
-    }
+  return {}
 }
 
-export {
-    useLoginPage
-}
+export { useLoginPage }
