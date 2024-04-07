@@ -1,4 +1,4 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "../styles/typography.css" layer(base);
+@import "../styles/typography.css";

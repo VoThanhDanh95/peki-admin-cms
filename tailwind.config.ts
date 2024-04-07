@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss"
+
 const globalTokens = {
   base: {
     transparent: "transparent",
@@ -189,6 +190,7 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/shared/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     backgroundColor: {
@@ -198,15 +200,6 @@ const config: Config = {
       surface: semanticTokens.surface,
       overlay: semanticTokens.overlay,
       icons: semanticTokens.icons,
-      green: {
-        300: globalTokens.green[300],
-      },
-      yellow: {
-        300: globalTokens.yellow[300],
-      },
-      gray: {
-        400: globalTokens.gray[400],
-      },
     },
     borderColor: {
       ...globalTokens.base,

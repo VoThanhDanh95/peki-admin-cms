@@ -1,13 +1,13 @@
 import { Cn } from "@shared/helpers/cn"
-import { FunctionComponent } from "react"
+import { FunctionComponent, LabelHTMLAttributes } from "react"
 
 const styles = {
-  labelWrapper: Cn.c("flex flex-row items-center gap-x-2"),
+  labelWrapper: Cn.c("items-center gap-x-2"),
   label: Cn.c("font-paragraph-small-medium text-emphasized flex items-center"),
   required: Cn.c("text-icons-critical-default ml-0.5"),
 }
 
-interface Props {
+interface Props extends LabelHTMLAttributes<HTMLLabelElement> {
   label: string
   labelClassName?: string
   className?: string
@@ -19,10 +19,14 @@ const Label: FunctionComponent<Props> = ({
   labelClassName,
   label,
   required,
+  htmlFor,
 }) => {
   return (
     <div className={Cn.join([styles.labelWrapper, Cn.getIfExist(className)])}>
-      <label className={Cn.join([styles.label, Cn.getIfExist(labelClassName)])}>
+      <label
+        className={Cn.join([styles.label, Cn.getIfExist(labelClassName)])}
+        htmlFor={htmlFor}
+      >
         {label}
         {required && <span className={styles.required}>*</span>}
       </label>
