@@ -6,5 +6,13 @@
     "userNameRequired": "Tên đăng nhập bắt buộc",
     "passwordRequired": "Mật khẩu bắt buộc",
     "login": "Đăng nhập"
+  },
+  "createRootAdmin": {
+    "title": "Tạo Root Admin",
+    "userName": "Tên đăng nhập",
+    "password": "Mật khẩu",
+    "userNameRequired": "Tên đăng nhập bắt buộc",
+    "passwordRequired": "Mật khẩu bắt buộc",
+    "create": "Tạo"
   }
 }

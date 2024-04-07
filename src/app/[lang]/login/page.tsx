@@ -9,7 +9,6 @@ const styles = {
     "w-[36rem] flex flex-col bg-surface-default rounded shadow-base m-auto p-6 space-y-6",
   ),
   title: Cn.c("font-h2-bold text-emphasized text-center"),
-  buttons: Cn.c("flex justify-end"),
 }
 
 const LoginPage = async ({
@@ -24,7 +23,6 @@ const LoginPage = async ({
       <div className={styles.card}>
         <h2 className={styles.title}>{dictionary.loginPage.title}</h2>
         <LoginForm dictionary={dictionary["loginPage"]} />
-        <div className={styles.buttons}></div>
       </div>
     </div>
   )
