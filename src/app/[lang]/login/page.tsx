@@ -22,7 +22,7 @@ const LoginPage = async ({
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        <h2 className={styles.title}>{dictionary.loginPage.login}</h2>
+        <h2 className={styles.title}>{dictionary.loginPage.title}</h2>
         <LoginForm dictionary={dictionary["loginPage"]} />
         <div className={styles.buttons}></div>
       </div>

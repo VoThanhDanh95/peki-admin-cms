@@ -1,9 +1,10 @@
 {
   "loginPage": {
-    "login": "Đăng nhập",
+    "title": "Đăng nhập",
     "userName": "Tên đăng nhập",
     "password": "Mật khẩu",
     "userNameRequired": "Tên đăng nhập bắt buộc",
-    "passwordRequired": "Mật khẩu bắt buộc"
+    "passwordRequired": "Mật khẩu bắt buộc",
+    "login": "Đăng nhập"
   }
 }

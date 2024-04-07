@@ -9,7 +9,7 @@ import {
   UseFormRegister,
 } from "react-hook-form"
 
-const sizes = ["small", "medium", "large", "x-large"] as const
+const sizes = ["sm", "md", "lg", "xl"] as const
 type Size = (typeof sizes)[number]
 
 const styles = {
@@ -18,14 +18,14 @@ const styles = {
     let labelSizeStyle
 
     switch (size) {
-      case "small":
+      case "sm":
         labelSizeStyle = Cn.c("font-paragraph-xsmall-medium")
         break
-      case "medium":
+      case "md":
         labelSizeStyle = Cn.c("font-paragraph-small-medium")
         break
-      case "large":
-      case "x-large":
+      case "lg":
+      case "xl":
         labelSizeStyle = Cn.c("font-paragraph-base-medium")
         break
     }
@@ -41,19 +41,19 @@ const styles = {
     let sizeStyles
 
     switch (size) {
-      case "small":
+      case "sm":
         sizeStyles = Cn.c("py-2 px-3 h-8 font-paragraph-xsmall-regular")
         break
-      case "medium":
+      case "md":
         sizeStyles = Cn.c("p-4 h-10 font-paragraph-small-regular")
         break
-      case "large":
+      case "lg":
         sizeStyles = Cn.c("p-4 h-12 font-paragraph-base-regular")
         break
-      case "x-large":
+      case "xl":
         sizeStyles = Cn.c("py-4 px-6 h-16 font-paragraph-base-regular")
         break
-    }    
+    }
 
     return Cn.join([
       sizeStyles,
@@ -89,13 +89,13 @@ const Input = <T extends FieldValues>({
   inputClassName,
   label,
   required,
-  size = "medium",
+  size = "md",
   error,
   clearErrors,
   disabled = false,
   onFocus,
   ...rest
-}: Props<T>) => {  
+}: Props<T>) => {
   return (
     <div className={Cn.join([styles.root, Cn.getIfExist(className)])}>
       {label && (
@@ -108,7 +108,7 @@ const Input = <T extends FieldValues>({
       )}
       <div className={styles.inputWrapper}>
         <input
-          { ...register(name) }
+          {...register(name)}
           onFocus={(event) => {
             clearErrors && clearErrors(name)
             onFocus && onFocus(event)
