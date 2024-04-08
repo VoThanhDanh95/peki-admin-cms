@@ -18,13 +18,12 @@ const createRootAdmin = async (data: values.FormType) => {
       password: validData.password,
       role: {
         connect: {
-          name: 'ROOT_ADMIN'
-        }
+          name: "ROOT_ADMIN",
+        },
       },
-      status: 'ACTIVE'
-    }
+      status: "ACTIVE",
+    },
   })
-  
 }
 
 export { createRootAdmin }

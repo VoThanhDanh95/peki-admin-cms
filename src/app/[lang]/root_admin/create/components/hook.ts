@@ -5,6 +5,7 @@ import { createRootAdmin } from "../createRootAdmin"
 import { useRouter } from "next/navigation"
 
 const useCreateRootAdminForm = () => {
+  const [showPassword, setShowPassword] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const defaultValues = values.defaultValues()
@@ -20,11 +21,15 @@ const useCreateRootAdminForm = () => {
 
   const { handleSubmit } = form
 
+  const toggleShowPassword = () => {
+    setShowPassword((prevState) => !prevState)
+  }
+
   const submit: SubmitHandler<values.FormType> = async (data) => {
     setIsSubmitting(true)
     try {
       await createRootAdmin(data)
-      router.replace('/login')
+      router.replace("/login")
     } catch (error) {
       console.log(error)
     } finally {
@@ -35,6 +40,8 @@ const useCreateRootAdminForm = () => {
   return {
     form,
     isSubmitting,
+    showPassword,
+    toggleShowPassword,
     submit: handleSubmit(submit),
   }
 }

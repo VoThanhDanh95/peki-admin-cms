@@ -169,7 +169,7 @@ const Button: FunctionComponent<Props> = ({
       case "destructiveFilled":
         return "onPrimary"
       case "primaryOutline":
-      case "primaryPlain": 
+      case "primaryPlain":
       case "primaryPlainBg":
         return "primaryDefault"
       case "secondary":

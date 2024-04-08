@@ -1,5 +1,5 @@
 import { Cn } from "@shared/helpers/cn"
-import { InputHTMLAttributes } from "react"
+import { FunctionComponent, InputHTMLAttributes } from "react"
 import Label from "./Label"
 import {
   FieldError,
@@ -9,6 +9,7 @@ import {
   UseFormClearErrors,
   UseFormRegister,
 } from "react-hook-form"
+import Icon, { IconName } from "./Icon"
 
 const sizes = ["sm", "md", "lg", "xl"] as const
 type Size = (typeof sizes)[number]
@@ -38,6 +39,7 @@ const styles = {
     ])
   },
   inputWrapper: Cn.c("flex flex-col space-y-1 w-full"),
+  inputIconContainer: Cn.c("flex items-center relative"),
   input: (size: Size, isDisabled: boolean, hasError: boolean) => {
     let sizeStyles
 
@@ -65,6 +67,23 @@ const styles = {
       Cn.ifTrue(isDisabled, Cn.c("bg-surface-disabled")),
     ])
   },
+  icon: (size: Size) => {
+    let iconSizeStyle
+
+    switch (size) {
+      case "sm":
+        iconSizeStyle = Cn.c("w-3.5 h-3.5")
+        break
+      case "md":
+      case "lg":
+      case "xl":
+        iconSizeStyle = Cn.c("w-4 h-4")
+        break
+    }
+
+    return Cn.join([iconSizeStyle, Cn.c("absolute text-icons-subdued")])
+  },
+  trailingIcon: Cn.c("right-4"),
   error: Cn.c("text-critical-default font-paragraph-xsmall-regular"),
 }
 
@@ -81,6 +100,9 @@ interface Props<T extends FieldValues>
   error?: FieldError
   clearErrors?: UseFormClearErrors<T>
   validation?: RegisterOptions<T>
+  TrailingIcon?: React.ComponentType<{
+    className?: string
+  }>
 }
 
 const Input = <T extends FieldValues>({
@@ -97,6 +119,7 @@ const Input = <T extends FieldValues>({
   disabled = false,
   onFocus,
   validation,
+  TrailingIcon,
   ...rest
 }: Props<T>) => {
   return (
@@ -110,18 +133,26 @@ const Input = <T extends FieldValues>({
         />
       )}
       <div className={styles.inputWrapper}>
-        <input
-          {...register(name, validation)}
-          onFocus={(event) => {
-            clearErrors && clearErrors(name)
-            onFocus && onFocus(event)
-          }}
-          {...rest}
-          className={Cn.join([
-            styles.input(size, disabled, !!error),
-            Cn.getIfExist(inputClassName),
-          ])}
-        />
+        <div className={styles.inputIconContainer}>
+          <input
+            {...register(name, validation)}
+            onFocus={(event) => {
+              clearErrors && clearErrors(name)
+              onFocus && onFocus(event)
+            }}
+            {...rest}
+            className={Cn.join([
+              styles.input(size, disabled, !!error),
+              Cn.getIfExist(inputClassName),
+            ])}
+          />
+          {TrailingIcon && (
+            <TrailingIcon
+              className={Cn.join([styles.icon(size), styles.trailingIcon])}
+            />
+          )}
+        </div>
+
         {error?.message && <div className={styles.error}>{error.message}</div>}
       </div>
     </div>

@@ -6,6 +6,7 @@ import { FunctionComponent } from "react"
 import { Dictionary } from "../../../../../../get-dictionary"
 import { useCreateRootAdminForm } from "./hook"
 import Button from "@shared/components/Button"
+import Icon from "@shared/components/Icon"
 
 const styles = {
   form: Cn.c("flex flex-col space-y-6"),
@@ -24,6 +25,8 @@ const CreateRootAdminForm: FunctionComponent<Props> = ({ dictionary }) => {
     },
     isSubmitting,
     submit,
+    showPassword,
+    toggleShowPassword,
   } = useCreateRootAdminForm()
 
   return (
@@ -35,16 +38,36 @@ const CreateRootAdminForm: FunctionComponent<Props> = ({ dictionary }) => {
         label={dictionary.userName}
         error={errors.userName}
         clearErrors={clearErrors}
-        validation={{required: {value: true, message: dictionary.userNameRequired}}}
+        validation={{
+          required: { value: true, message: dictionary.userNameRequired },
+        }}
       />
       <Input
         name="password"
         register={register}
         required
+        type={showPassword ? "text" : "password"}
         label={dictionary.password}
         error={errors.password}
         clearErrors={clearErrors}
-        validation={{required: {value: true, message: dictionary.passwordRequired}}}
+        validation={{
+          required: { value: true, message: dictionary.passwordRequired },
+        }}
+        TrailingIcon={({ className }) =>
+          showPassword ? (
+            <Icon
+              name="closeEye"
+              className={Cn.getIfExist(className)}
+              onClick={toggleShowPassword}
+            />
+          ) : (
+            <Icon
+              name="eye"
+              className={Cn.getIfExist(className)}
+              onClick={toggleShowPassword}
+            />
+          )
+        }
       />
       <Button disabled={isSubmitting} isLoading={isSubmitting}>
         {dictionary.create}
