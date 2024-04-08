@@ -1,12 +1,5 @@
-import { PrismaClient, RoleName } from "@prisma/client"
-
-const roleNames: RoleName[] = [
-  "ROOT_ADMIN",
-  "TEACHER",
-  "MEMBER",
-  "EXAM_ATTENDEE",
-  "NORMAL_USER",
-]
+import { PrismaClient } from "@prisma/client"
+import { roleNames } from "../../src/shared/constants"
 
 export const main = async (prisma: PrismaClient) => {
   const roleCount = await prisma.role.count()

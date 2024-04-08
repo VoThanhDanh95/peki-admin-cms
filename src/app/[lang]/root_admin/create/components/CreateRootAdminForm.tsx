@@ -22,8 +22,9 @@ const CreateRootAdminForm: FunctionComponent<Props> = ({ dictionary }) => {
       formState: { errors },
       clearErrors,
     },
+    isSubmitting,
     submit,
-  } = useCreateRootAdminForm(dictionary)
+  } = useCreateRootAdminForm()
 
   return (
     <form className={styles.form} onSubmit={submit}>
@@ -34,6 +35,7 @@ const CreateRootAdminForm: FunctionComponent<Props> = ({ dictionary }) => {
         label={dictionary.userName}
         error={errors.userName}
         clearErrors={clearErrors}
+        validation={{required: {value: true, message: dictionary.userNameRequired}}}
       />
       <Input
         name="password"
@@ -42,8 +44,9 @@ const CreateRootAdminForm: FunctionComponent<Props> = ({ dictionary }) => {
         label={dictionary.password}
         error={errors.password}
         clearErrors={clearErrors}
+        validation={{required: {value: true, message: dictionary.passwordRequired}}}
       />
-      <Button>
+      <Button disabled={isSubmitting} isLoading={isSubmitting}>
         {dictionary.create}
       </Button>
     </form>

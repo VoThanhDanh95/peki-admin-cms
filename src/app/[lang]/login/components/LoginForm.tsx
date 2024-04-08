@@ -43,9 +43,7 @@ const LoginForm: FunctionComponent<Props> = ({ dictionary }) => {
         error={errors.password}
         clearErrors={clearErrors}
       />
-      <Button>
-        {dictionary.login}
-      </Button>
+      <Button>{dictionary.login}</Button>
     </form>
   )
 }

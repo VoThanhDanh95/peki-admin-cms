@@ -21,8 +21,8 @@ const CreateRootAdminPage = async ({
   const dictionary = await getDictionary(lang)
   const userCount = await prisma.user.count()
 
-  if(userCount > 0) {
-    redirect('/login')
+  if (userCount > 0) {
+    redirect("/login")
   }
 
   return (

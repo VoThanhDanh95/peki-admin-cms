@@ -1,29 +1,40 @@
 import { SubmitHandler, useForm } from "react-hook-form"
 import * as values from "./values"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Dictionary } from "../../../../../../get-dictionary"
+import { useState } from "react"
+import { createRootAdmin } from "../createRootAdmin"
+import { useRouter } from "next/navigation"
 
-const useCreateRootAdminForm = (dictionary: Dictionary["createRootAdmin"]) => {
+const useCreateRootAdminForm = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
   const defaultValues = values.defaultValues()
 
-  const schema = values.createRootAdminSchema(dictionary)
+  const router = useRouter()
 
   const form = useForm<values.FormType>({
     mode: "onBlur",
     reValidateMode: "onBlur",
     shouldFocusError: false,
     defaultValues,
-    resolver: zodResolver(schema),
   })
 
   const { handleSubmit } = form
 
-  const submit: SubmitHandler<values.FormType> = (data) => {
-    console.log(data)
+  const submit: SubmitHandler<values.FormType> = async (data) => {
+    setIsSubmitting(true)
+    try {
+      await createRootAdmin(data)
+      router.replace('/login')
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return {
     form,
+    isSubmitting,
     submit: handleSubmit(submit),
   }
 }

@@ -5,6 +5,7 @@ import {
   FieldError,
   FieldValues,
   Path,
+  RegisterOptions,
   UseFormClearErrors,
   UseFormRegister,
 } from "react-hook-form"
@@ -79,6 +80,7 @@ interface Props<T extends FieldValues>
   size?: Size
   error?: FieldError
   clearErrors?: UseFormClearErrors<T>
+  validation?: RegisterOptions<T>
 }
 
 const Input = <T extends FieldValues>({
@@ -94,6 +96,7 @@ const Input = <T extends FieldValues>({
   clearErrors,
   disabled = false,
   onFocus,
+  validation,
   ...rest
 }: Props<T>) => {
   return (
@@ -108,7 +111,7 @@ const Input = <T extends FieldValues>({
       )}
       <div className={styles.inputWrapper}>
         <input
-          {...register(name)}
+          {...register(name, validation)}
           onFocus={(event) => {
             clearErrors && clearErrors(name)
             onFocus && onFocus(event)
