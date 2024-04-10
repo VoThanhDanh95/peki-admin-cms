@@ -69,7 +69,9 @@ const LoginForm: FunctionComponent<Props> = ({ dictionary }) => {
           )
         }
       />
-      <Button disabled={isSubmitting} isLoading={isSubmitting}>{dictionary.login}</Button>
+      <Button disabled={isSubmitting} isLoading={isSubmitting}>
+        {dictionary.login}
+      </Button>
     </form>
   )
 }

@@ -7,5 +7,3 @@ export const roleNames: RoleName[] = [
   "EXAM_ATTENDEE",
   "NORMAL_USER",
 ]
-
-export const PEKI_ACCESS_TOKEN = 'peki-access-token'

@@ -2,11 +2,12 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import * as values from "./values"
 import { useState } from "react"
 import { login } from "../login"
+import { useRouter } from "next/navigation"
 
 const useLoginForm = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
-  
+
   const defaultValues = values.defaultValues()
 
   const form = useForm<values.FormType>({
@@ -15,6 +16,8 @@ const useLoginForm = () => {
     shouldFocusError: false,
     defaultValues,
   })
+
+  const router = useRouter()
 
   const { handleSubmit } = form
 
@@ -26,8 +29,8 @@ const useLoginForm = () => {
     setIsSubmitting(true)
     try {
       await login(data)
+      router.replace("/dashboard")
     } catch (error) {
-      
     } finally {
       setIsSubmitting(false)
     }
