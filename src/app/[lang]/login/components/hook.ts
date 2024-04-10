@@ -1,29 +1,43 @@
 import { SubmitHandler, useForm } from "react-hook-form"
 import * as values from "./values"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Dictionary } from "../../../../../get-dictionary"
+import { useState } from "react"
+import { login } from "../login"
 
-const useLoginForm = (dictionary: Dictionary["loginPage"]) => {
+const useLoginForm = () => {
+  const [showPassword, setShowPassword] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  
   const defaultValues = values.defaultValues()
-
-  const schema = values.signInSchema(dictionary)
 
   const form = useForm<values.FormType>({
     mode: "onBlur",
     reValidateMode: "onBlur",
     shouldFocusError: false,
     defaultValues,
-    resolver: zodResolver(schema),
   })
 
   const { handleSubmit } = form
 
-  const submit: SubmitHandler<values.FormType> = (data) => {
-    console.log(data)
+  const toggleShowPassword = () => {
+    setShowPassword((prevState) => !prevState)
+  }
+
+  const submit: SubmitHandler<values.FormType> = async (data) => {
+    setIsSubmitting(true)
+    try {
+      await login(data)
+    } catch (error) {
+      
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return {
     form,
+    isSubmitting,
+    showPassword,
+    toggleShowPassword,
     submit: handleSubmit(submit),
   }
 }
