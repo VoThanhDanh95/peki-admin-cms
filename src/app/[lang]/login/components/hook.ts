@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation"
 const useLoginForm = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const router = useRouter()
 
   const defaultValues = values.defaultValues()
 
@@ -16,8 +17,6 @@ const useLoginForm = () => {
     shouldFocusError: false,
     defaultValues,
   })
-
-  const router = useRouter()
 
   const { handleSubmit } = form
 
@@ -29,7 +28,7 @@ const useLoginForm = () => {
     setIsSubmitting(true)
     try {
       await login(data)
-      router.replace("/dashboard")
+      router.replace('/dashboard')
     } catch (error) {
     } finally {
       setIsSubmitting(false)

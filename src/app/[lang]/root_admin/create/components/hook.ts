@@ -7,10 +7,9 @@ import { useRouter } from "next/navigation"
 const useCreateRootAdminForm = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const router = useRouter()
 
   const defaultValues = values.defaultValues()
-
-  const router = useRouter()
 
   const form = useForm<values.FormType>({
     mode: "onBlur",

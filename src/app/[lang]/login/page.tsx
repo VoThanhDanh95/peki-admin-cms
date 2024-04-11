@@ -2,9 +2,6 @@ import { Cn } from "@shared/helpers/cn"
 import { Locale } from "../../../../i18n-config"
 import { getDictionary } from "../../../../get-dictionary"
 import LoginForm from "./components/LoginForm"
-import { cookies } from "next/headers"
-import config from "@shared/config/config"
-import { RedirectType, redirect } from "next/navigation"
 
 const styles = {
   container: Cn.c("flex flex-col min-h-screen bg-default"),
@@ -20,11 +17,6 @@ const LoginPage = async ({
   params: { lang: Locale }
 }) => {
   const dictionary = await getDictionary(lang)
-  const cookieStore = cookies()
-
-  if (cookieStore.has(config.pekiAccessToken)) {
-    redirect("/dashboard", RedirectType.replace)
-  }
 
   return (
     <div className={styles.container}>
