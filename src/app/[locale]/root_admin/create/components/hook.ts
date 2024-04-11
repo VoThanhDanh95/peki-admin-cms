@@ -2,7 +2,7 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import * as values from "./values"
 import { useState } from "react"
 import { createRootAdmin } from "../createRootAdmin"
-import { useRouter } from "next/navigation"
+import { useRouter } from "@/navigation"
 
 const useCreateRootAdminForm = () => {
   const [showPassword, setShowPassword] = useState(false)
