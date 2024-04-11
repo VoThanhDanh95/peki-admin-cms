@@ -1,9 +1,9 @@
 import { Cn } from "@shared/helpers/cn"
-import { Locale } from "../../../../../i18n-config"
-import { getDictionary } from "../../../../../get-dictionary"
 import CreateRootAdminForm from "./components/CreateRootAdminForm"
 import prisma from "../../../../db"
 import { redirect } from "next/navigation"
+import { getMessages, getTranslations } from "next-intl/server"
+import { NextIntlClientProvider } from "next-intl"
 
 const styles = {
   container: Cn.c("flex flex-col min-h-screen bg-default"),
@@ -13,12 +13,9 @@ const styles = {
   title: Cn.c("font-h2-bold text-emphasized text-center"),
 }
 
-const CreateRootAdminPage = async ({
-  params: { lang },
-}: {
-  params: { lang: Locale }
-}) => {
-  const dictionary = await getDictionary(lang)
+const CreateRootAdminPage = async () => {
+  const t = await getTranslations("CreateRootAdminPage")
+  const messages = await getMessages();
   const userCount = await prisma.user.count()
 
   if (userCount > 0) {
@@ -28,8 +25,10 @@ const CreateRootAdminPage = async ({
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        <h2 className={styles.title}>{dictionary.createRootAdmin.title}</h2>
-        <CreateRootAdminForm dictionary={dictionary["createRootAdmin"]} />
+        <h2 className={styles.title}>{t("title")}</h2>
+        <NextIntlClientProvider messages={messages}>
+          <CreateRootAdminForm />
+        </NextIntlClientProvider>
       </div>
     </div>
   )

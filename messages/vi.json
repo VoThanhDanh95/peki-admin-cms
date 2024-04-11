@@ -7,7 +7,7 @@
     "passwordRequired": "Mật khẩu bắt buộc",
     "login": "Đăng nhập"
   },
-  "createRootAdmin": {
+  "CreateRootAdminPage": {
     "title": "Tạo Root Admin",
     "userName": "Tên đăng nhập",
     "password": "Mật khẩu",

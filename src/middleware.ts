@@ -1,12 +1,14 @@
-import { withLocale } from "./middlewares/lang"
-import { withAuth } from "./middlewares/auth"
-import { chainMiddlewares } from "./middlewares/chainMiddlewares"
+import createMiddleware from "next-intl/middleware"
 
-const middlewares = [withAuth, withLocale]
+export default createMiddleware({
+  // A list of all locales that are supported
+  locales: ["vi"],
 
-export default chainMiddlewares(middlewares)
+  // Used when no locale matches
+  defaultLocale: "vi",
+})
 
 export const config = {
-  // Matcher ignoring `/_next/` and `/api/`
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  // Match only internationalized pathnames
+  matcher: ["/", "/(vi)/:path*"],
 }

@@ -3,20 +3,18 @@
 import Input from "@shared/components/Input"
 import { Cn } from "@shared/helpers/cn"
 import { FunctionComponent } from "react"
-import { Dictionary } from "../../../../../get-dictionary"
-import { useLoginForm } from "./hook"
+import { useCreateRootAdminForm } from "./hook"
 import Button from "@shared/components/Button"
 import Icon from "@shared/components/Icon"
+import { useTranslations } from "next-intl"
 
 const styles = {
   form: Cn.c("flex flex-col space-y-6"),
 }
 
-interface Props {
-  dictionary: Dictionary["loginPage"]
-}
+const CreateRootAdminForm: FunctionComponent = () => {
+  const t = useTranslations("CreateRootAdminPage")
 
-const LoginForm: FunctionComponent<Props> = ({ dictionary }) => {
   const {
     form: {
       register,
@@ -27,7 +25,7 @@ const LoginForm: FunctionComponent<Props> = ({ dictionary }) => {
     submit,
     showPassword,
     toggleShowPassword,
-  } = useLoginForm()
+  } = useCreateRootAdminForm()
 
   return (
     <form className={styles.form} onSubmit={submit}>
@@ -35,11 +33,11 @@ const LoginForm: FunctionComponent<Props> = ({ dictionary }) => {
         name="userName"
         register={register}
         required
-        label={dictionary.userName}
+        label={t("userName")}
         error={errors.userName}
         clearErrors={clearErrors}
         validation={{
-          required: { value: true, message: dictionary.userNameRequired },
+          required: { value: true, message: t("userNameRequired") },
         }}
       />
       <Input
@@ -47,11 +45,11 @@ const LoginForm: FunctionComponent<Props> = ({ dictionary }) => {
         register={register}
         required
         type={showPassword ? "text" : "password"}
-        label={dictionary.password}
+        label={t("password")}
         error={errors.password}
         clearErrors={clearErrors}
         validation={{
-          required: { value: true, message: dictionary.passwordRequired },
+          required: { value: true, message: t("passwordRequired") },
         }}
         TrailingIcon={({ className }) =>
           showPassword ? (
@@ -70,10 +68,10 @@ const LoginForm: FunctionComponent<Props> = ({ dictionary }) => {
         }
       />
       <Button disabled={isSubmitting} isLoading={isSubmitting}>
-        {dictionary.login}
+        {t("create")}
       </Button>
     </form>
   )
 }
 
-export default LoginForm
+export default CreateRootAdminForm
