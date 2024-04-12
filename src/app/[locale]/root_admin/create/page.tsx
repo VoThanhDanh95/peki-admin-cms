@@ -1,7 +1,7 @@
 import { Cn } from "@shared/helpers/cn"
 import CreateRootAdminForm from "./components/CreateRootAdminForm"
 import prisma from "../../../../db"
-import { redirect } from "next/navigation"
+import { redirect } from "@/navigation"
 import { getMessages, getTranslations } from "next-intl/server"
 import { NextIntlClientProvider } from "next-intl"
 
@@ -15,7 +15,7 @@ const styles = {
 
 const CreateRootAdminPage = async () => {
   const t = await getTranslations("CreateRootAdminPage")
-  const messages = await getMessages();
+  const messages = await getMessages()
   const userCount = await prisma.user.count()
 
   if (userCount > 0) {
@@ -26,7 +26,9 @@ const CreateRootAdminPage = async () => {
     <div className={styles.container}>
       <div className={styles.card}>
         <h2 className={styles.title}>{t("title")}</h2>
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider
+          messages={{CreateRootAdminPage: messages["CreateRootAdminPage"]}}
+        >
           <CreateRootAdminForm />
         </NextIntlClientProvider>
       </div>

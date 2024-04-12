@@ -1,7 +1,6 @@
 "use server"
 
 import { z } from "zod"
-import * as values from "./components/values"
 import prisma from "@/db"
 import bcrypt from "bcryptjs"
 
@@ -10,7 +9,7 @@ const createRootAdminSchema = z.object({
   password: z.string().min(1),
 })
 
-const createRootAdmin = async (data: values.FormType) => {
+const createRootAdmin = async (data: any) => {
   const validData = await createRootAdminSchema.parseAsync(data)
   const hashedPassword = await bcrypt.hash(validData.password, 10)
 
