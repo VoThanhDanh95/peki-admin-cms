@@ -27,7 +27,7 @@ const CreateRootAdminPage = async () => {
       <div className={styles.card}>
         <h2 className={styles.title}>{t("title")}</h2>
         <NextIntlClientProvider
-          messages={{CreateRootAdminPage: messages["CreateRootAdminPage"]}}
+          messages={{ CreateRootAdminPage: messages["CreateRootAdminPage"] }}
         >
           <CreateRootAdminForm />
         </NextIntlClientProvider>

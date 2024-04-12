@@ -20,7 +20,7 @@ const LoginPage: FunctionComponent = async () => {
     <div className={styles.container}>
       <div className={styles.card}>
         <h2 className={styles.title}>{t("title")}</h2>
-        <NextIntlClientProvider messages={{LoginPage: messages["LoginPage"]}}>
+        <NextIntlClientProvider messages={{ LoginPage: messages["LoginPage"] }}>
           <LoginForm />
         </NextIntlClientProvider>
       </div>

@@ -1,22 +1,20 @@
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast"
 
 const useToast = () => {
-    const toastError = (str: string) => {
-        toast.remove();
-        toast.error(str);
-    }
+  const toastError = (str: string) => {
+    toast.remove()
+    toast.error(str)
+  }
 
-    const toastSuccess = (str: string) => {
-        toast.remove();
-        toast.success(str);
-    }
+  const toastSuccess = (str: string) => {
+    toast.remove()
+    toast.success(str)
+  }
 
-    return {
-        toastError,
-        toastSuccess,
-    };
+  return {
+    toastError,
+    toastSuccess,
+  }
 }
 
-export {
-    useToast
-}
+export { useToast }

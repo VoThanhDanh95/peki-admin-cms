@@ -1,8 +1,8 @@
-import { locales } from "@/i18n";
+import { locales } from "@/i18n"
 import { Toaster } from "@shared/components/Toaster"
 
 export function generateStaticParams() {
-  return locales.map((locale) => ({locale}));
+  return locales.map((locale) => ({ locale }))
 }
 
 export default function LocaleLayout({

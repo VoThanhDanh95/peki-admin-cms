@@ -14,7 +14,7 @@ const styles = {
 
 const LoginForm: FunctionComponent = () => {
   const t = useTranslations("LoginPage")
-  
+
   const {
     form: {
       register,
@@ -33,11 +33,11 @@ const LoginForm: FunctionComponent = () => {
         name="userName"
         register={register}
         required
-        label={t('userName')}
+        label={t("userName")}
         error={errors.userName}
         clearErrors={clearErrors}
         validation={{
-          required: { value: true, message: t('userNameRequired') },
+          required: { value: true, message: t("userNameRequired") },
         }}
       />
       <Input
@@ -45,11 +45,11 @@ const LoginForm: FunctionComponent = () => {
         register={register}
         required
         type={showPassword ? "text" : "password"}
-        label={t('password')}
+        label={t("password")}
         error={errors.password}
         clearErrors={clearErrors}
         validation={{
-          required: { value: true, message: t('passwordRequired') },
+          required: { value: true, message: t("passwordRequired") },
         }}
         TrailingIcon={({ className }) =>
           showPassword ? (
@@ -68,7 +68,7 @@ const LoginForm: FunctionComponent = () => {
         }
       />
       <Button disabled={isSubmitting} isLoading={isSubmitting}>
-        {t('login')}
+        {t("login")}
       </Button>
     </form>
   )
