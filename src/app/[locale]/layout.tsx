@@ -1,3 +1,10 @@
+import { locales } from "@/i18n";
+import { Toaster } from "@shared/components/Toaster"
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({locale}));
+}
+
 export default function LocaleLayout({
   children,
   params: { locale },
@@ -7,7 +14,10 @@ export default function LocaleLayout({
 }) {
   return (
     <html lang={locale}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Toaster />
+      </body>
     </html>
   )
 }

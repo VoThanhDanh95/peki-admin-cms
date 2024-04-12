@@ -1,10 +1,12 @@
 {
-  "loginPage": {
+  "LoginPage": {
     "title": "Đăng nhập",
     "userName": "Tên đăng nhập",
     "password": "Mật khẩu",
     "userNameRequired": "Tên đăng nhập bắt buộc",
     "passwordRequired": "Mật khẩu bắt buộc",
+    "unexistingUsername": "Tên đăng nhập không tồn tại",
+    "invalidPassword": "Mật khẩu không hợp lệ",
     "login": "Đăng nhập"
   },
   "CreateRootAdminPage": {
@@ -13,6 +15,7 @@
     "password": "Mật khẩu",
     "userNameRequired": "Tên đăng nhập bắt buộc",
     "passwordRequired": "Mật khẩu bắt buộc",
-    "create": "Tạo"
+    "create": "Tạo",
+    "createSuccessfully": "Tạo root admin thành công"
   }
 }

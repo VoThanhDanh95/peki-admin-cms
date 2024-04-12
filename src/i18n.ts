@@ -5,7 +5,7 @@ import { isOneOf } from "@shared/helpers/typeGuards"
 // Can be imported from a shared config
 export const locales = ["vi"] as const
 
-export const localePrefix = 'as-needed' as const
+export const localePrefix = "as-needed" as const
 
 export default getRequestConfig(async ({ locale }) => {
   // Validate that the incoming `locale` parameter is valid
