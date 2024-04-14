@@ -32,7 +32,7 @@ const useCreateRootAdminForm = () => {
     setIsSubmitting(true)
     try {
       await createRootAdmin(data)
-      toastSuccess(t('createSuccessfully'))
+      toastSuccess(t("createSuccessfully"))
       router.replace("/login")
     } catch (error) {
       if (error instanceof Error) {

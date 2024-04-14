@@ -26,8 +26,8 @@ const login = async (data: unknown) => {
     },
   })
 
-  if(!existingUser) {
-    throw new Error(t('unexistingUsername'))
+  if (!existingUser) {
+    throw new Error(t("unexistingUsername"))
   }
 
   const isPasswordMatched = await bcrypt.compare(
@@ -36,17 +36,12 @@ const login = async (data: unknown) => {
   )
 
   if (!isPasswordMatched) {
-    throw new Error(t('invalidPassword'))
+    throw new Error(t("invalidPassword"))
   }
 
-  const cookieValue = jwt.sign(
-    {
-      userId: existingUser.id,
-    },
-    config.cookieSecret,
-  )
-
-  cookies().set(config.pekiAccessToken, cookieValue)
+  return {
+    id: existingUser.id,
+  }
 }
 
 export { login }
