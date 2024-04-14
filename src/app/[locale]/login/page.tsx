@@ -3,6 +3,8 @@ import LoginForm from "./components/LoginForm"
 import { FunctionComponent } from "react"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages, getTranslations } from "next-intl/server"
+import { auth } from "@shared/helpers/getServerSession"
+import { redirect } from "@/navigation"
 
 const styles = {
   container: Cn.c("flex flex-col min-h-screen bg-default"),
@@ -15,6 +17,11 @@ const styles = {
 const LoginPage: FunctionComponent = async () => {
   const t = await getTranslations("LoginPage")
   const messages = await getMessages()
+  const session = await auth()
+
+  if(session) {
+    redirect('/dashboard')
+  }
 
   return (
     <div className={styles.container}>

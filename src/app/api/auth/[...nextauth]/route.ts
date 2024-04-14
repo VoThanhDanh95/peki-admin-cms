@@ -1,5 +1,5 @@
 import prisma from "@/db"
-import NextAuth from "next-auth"
+import NextAuth, { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { z } from "zod"
 import bcrypt from "bcryptjs"
@@ -9,7 +9,7 @@ const createRootAdminSchema = z.object({
   password: z.string().min(1),
 })
 
-const handler = NextAuth({
+export const authOptions = {
   pages: {
     signIn: "/login",
   },
@@ -52,6 +52,8 @@ const handler = NextAuth({
       },
     }),
   ],
-})
+} satisfies NextAuthOptions
+
+const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST }
