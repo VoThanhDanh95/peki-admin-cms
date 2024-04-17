@@ -20,6 +20,11 @@
   },
   "SideMenu": {
     "dashboard": "Trang chủ",
+    "question": "Câu hỏi",
     "logout": "Đăng xuất"
+  },
+  "QuestionPage": {
+    "addNewQuestion": "Thêm câu hỏi mới",
+    "searchPlaceholder": "Tìm kiếm"
   }
 }

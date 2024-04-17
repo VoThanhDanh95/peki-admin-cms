@@ -125,6 +125,59 @@ const styles = {
       variantStyle,
     ])
   },
+  icon: (variant: Variant, size: Size, isDisabled: boolean) => {
+    let sizeStyle: string
+    switch (size) {
+      case "sm":
+      case "md":
+        sizeStyle = Cn.c("w-4 h-4")
+        break
+      case "lg":
+        sizeStyle = Cn.c("w-6 h-6")
+        break
+    }
+
+    let enabledVariantStyle: string
+    switch (variant) {
+      case "primaryFilled":
+        enabledVariantStyle = Cn.c("text-icons-on-primary")
+        break
+      case "primaryOutline":
+      case "primaryPlainBg":
+        enabledVariantStyle = Cn.c("text-icons-primary-default")
+        break
+      case "primaryPlain":
+        enabledVariantStyle = Cn.join([
+          Cn.c("text-icons-primary-default"),
+          Cn.c("group-hover:text-icons-primary-emphasized"),
+        ])
+        break
+      case "secondary":
+        enabledVariantStyle = Cn.c("text-icons-emphasized")
+        break
+      case "destructiveFilled":
+        enabledVariantStyle = Cn.c("text-icons-on-destructive")
+        break
+      case "destructiveOutline":
+        enabledVariantStyle = Cn.c("text-icons-critical-default")
+        break
+      case "destructivePlain":
+        enabledVariantStyle = Cn.join([
+          Cn.c("text-icons-critical-default"),
+          Cn.c("group-hover:text-icons-critical-emphasized"),
+        ])
+        break
+      case "ghost":
+        enabledVariantStyle = Cn.c("text-icons-emphasized")
+        break
+    }
+
+    const variantStyle = isDisabled
+      ? Cn.c("text-icons-disabled")
+      : enabledVariantStyle
+
+    return Cn.join([sizeStyle, variantStyle])
+  },
 }
 
 const buttonVariants = [
@@ -151,6 +204,9 @@ interface Props
   isLoading?: boolean
   size?: Size
   variant?: Variant
+  LeadingIcon?: React.ComponentType<{
+    className?: string
+  }>
 }
 
 const Button: FunctionComponent<Props> = ({
@@ -161,6 +217,7 @@ const Button: FunctionComponent<Props> = ({
   size = "md",
   variant = "primaryFilled",
   disabled = false,
+  LeadingIcon,
   ...rest
 }) => {
   const loaderVariant: LoaderVariant = useMemo(() => {
@@ -205,7 +262,12 @@ const Button: FunctionComponent<Props> = ({
         {isLoading ? (
           <Loader variant={loaderVariant} size={loaderSize} />
         ) : (
-          children
+          <>
+            {LeadingIcon && (
+              <LeadingIcon className={styles.icon(variant, size, disabled)} />
+            )}
+            <div>{children}</div>
+          </>
         )}
       </div>
     </button>

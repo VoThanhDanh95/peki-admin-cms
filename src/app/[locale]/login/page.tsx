@@ -19,8 +19,8 @@ const LoginPage: FunctionComponent = async () => {
   const messages = await getMessages()
   const session = await auth()
 
-  if(session) {
-    redirect('/dashboard')
+  if (session) {
+    redirect("/dashboard")
   }
 
   return (

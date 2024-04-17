@@ -40,7 +40,12 @@ const styles = {
   },
   inputWrapper: Cn.c("flex flex-col space-y-1 w-full"),
   inputIconContainer: Cn.c("flex items-center relative"),
-  input: (size: Size, isDisabled: boolean, hasError: boolean) => {
+  input: (
+    size: Size,
+    isDisabled: boolean,
+    hasError: boolean,
+    hasLeadingIcon: boolean,
+  ) => {
     let sizeStyles
 
     switch (size) {
@@ -63,6 +68,7 @@ const styles = {
       Cn.c(
         "border border-default w-full cursor-pointer rounded-lg bg-surface-default focus:outline-none focus:border-primary-default placeholder-default text-emphasized",
       ),
+      Cn.ifTrue(hasLeadingIcon, "pl-9"),
       Cn.ifTrue(hasError, Cn.c("border-critical-default")),
       Cn.ifTrue(isDisabled, Cn.c("bg-surface-disabled")),
     ])
@@ -84,10 +90,11 @@ const styles = {
     return Cn.join([iconSizeStyle, Cn.c("absolute text-icons-subdued")])
   },
   trailingIcon: Cn.c("right-4"),
+  leadingIcon: Cn.c("left-4"),
   error: Cn.c("text-critical-default font-paragraph-xsmall-regular"),
 }
 
-interface Props<T extends FieldValues>
+export interface Props<T extends FieldValues>
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   name: Path<T>
   register: UseFormRegister<T>
@@ -100,6 +107,9 @@ interface Props<T extends FieldValues>
   error?: FieldError
   clearErrors?: UseFormClearErrors<T>
   validation?: RegisterOptions<T>
+  LeadingIcon?: React.ComponentType<{
+    className?: string
+  }>
   TrailingIcon?: React.ComponentType<{
     className?: string
   }>
@@ -120,6 +130,7 @@ const Input = <T extends FieldValues>({
   onFocus,
   validation,
   TrailingIcon,
+  LeadingIcon,
   ...rest
 }: Props<T>) => {
   return (
@@ -142,10 +153,15 @@ const Input = <T extends FieldValues>({
             }}
             {...rest}
             className={Cn.join([
-              styles.input(size, disabled, !!error),
+              styles.input(size, disabled, !!error, !!LeadingIcon),
               Cn.getIfExist(inputClassName),
             ])}
           />
+          {LeadingIcon && (
+            <LeadingIcon
+              className={Cn.join([styles.icon(size), styles.leadingIcon])}
+            />
+          )}
           {TrailingIcon && (
             <TrailingIcon
               className={Cn.join([styles.icon(size), styles.trailingIcon])}

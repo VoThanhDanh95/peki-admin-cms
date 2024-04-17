@@ -1,19 +1,27 @@
-'use client'
+"use client"
 
 import Eye from "../../../public/eye.svg"
 import CloseEye from "../../../public/close-eye.svg"
 import Logout from "../../../public/logout.svg"
 import Dashboard from "../../../public/dashboard.svg"
 import Logo from "../../../public/logo.svg"
+import QuestionMark from "../../../public/question-mark.svg"
+import Plus from "../../../public/plus.svg"
+import Search from "../../../public/search.svg"
+import Close from "../../../public/close.svg"
 import { FunctionComponent, MouseEventHandler } from "react"
 import { Cn } from "@shared/helpers/cn"
 
 const iconNames = [
-  "eye", 
+  "eye",
   "closeEye",
   "logout",
   "dashboard",
-  "logo"
+  "logo",
+  "questionMark",
+  "plus",
+  "search",
+  'close'
 ] as const
 
 export type IconName = (typeof iconNames)[number]
@@ -52,6 +60,14 @@ const Icon: FunctionComponent<Props> = ({
       return <Dashboard {...iconProps} />
     case "logo":
       return <Logo {...iconProps} />
+    case "questionMark":
+      return <QuestionMark {...iconProps} />
+    case "plus":
+      return <Plus {...iconProps} />
+    case "search":
+      return <Search {...iconProps} />
+    case "close":
+      return <Close {...iconProps} />
   }
 }
 
