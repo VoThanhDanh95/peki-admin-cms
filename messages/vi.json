@@ -17,5 +17,9 @@
     "passwordRequired": "Mật khẩu bắt buộc",
     "create": "Tạo",
     "createSuccessfully": "Tạo root admin thành công"
+  },
+  "SideMenu": {
+    "dashboard": "Trang chủ",
+    "logout": "Đăng xuất"
   }
 }
