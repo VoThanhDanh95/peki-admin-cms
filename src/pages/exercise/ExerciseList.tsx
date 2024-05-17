@@ -3,7 +3,7 @@ import { SimpleExercise } from '../../types/exercise'
 import ExerciseAvailabilityField from './components/ExerciseAvailabilityField';
 
 const exerciseFilters = [
-    <SearchInput source="q" alwaysOn />
+    <SearchInput source="name" alwaysOn />
 ]
 
 export const ExerciseList = () => {

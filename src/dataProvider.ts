@@ -38,13 +38,12 @@ const apiUrl = `${import.meta.env.VITE_API_URL}/cms`
 
 export const dataProvider: DataProvider = {
     getList: async function <RecordType extends RaRecord<Identifier> = any>(resource: string, params: GetListParams): Promise<GetListResult<RecordType>> {
-        const { q } = params.filter
         const { field, order } = params.sort
         const { page, perPage } = params.pagination
 
         const sort = `sort=${field}&order=${order.toLowerCase()}`
         const pagination = `page=${page - 1}&pageSize=${perPage}`
-        const filter = `filter=${JSON.stringify({ name: q })}`
+        const filter = `filter=${JSON.stringify(params.filter)}`
 
         const url = `${apiUrl}/${resource}?${sort}&${pagination}&${filter}`
         const { json } = await fetchJson(url);
