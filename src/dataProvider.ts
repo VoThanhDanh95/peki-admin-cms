@@ -43,7 +43,7 @@ export const dataProvider: DataProvider = {
 
         const sort = `sort=${field}&order=${order.toLowerCase()}`
         const pagination = `page=${page - 1}&pageSize=${perPage}`
-        const filter = `filter=${JSON.stringify(params.filter)}`
+        const filter = `filter=${encodeURIComponent(JSON.stringify(params.filter))}`
 
         const url = `${apiUrl}/${resource}?${sort}&${pagination}&${filter}`
         const { json } = await fetchJson(url);
@@ -60,8 +60,22 @@ export const dataProvider: DataProvider = {
     getMany: function <RecordType extends RaRecord<Identifier> = any>(resource: string, params: GetManyParams): Promise<GetManyResult<RecordType>> {
         throw new Error("Function not implemented.");
     },
-    getManyReference: function <RecordType extends RaRecord<Identifier> = any>(resource: string, params: GetManyReferenceParams): Promise<GetManyReferenceResult<RecordType>> {
-        throw new Error("Function not implemented.");
+    getManyReference: async function <RecordType extends RaRecord<Identifier> = any>(resource: string, params: GetManyReferenceParams): Promise<GetManyReferenceResult<RecordType>> {
+        const { target, id } = params
+        const { field, order } = params.sort
+        const { page, perPage } = params.pagination
+
+        const sort = `sort=${field}&order=${order.toLowerCase()}`
+        const pagination = `page=${page - 1}&pageSize=${perPage}`
+        const filter = `filter=${encodeURIComponent(JSON.stringify({
+            [target]: id
+        }))}`
+        const url = `${apiUrl}/${resource}?${sort}&${pagination}&${filter}`
+        const { json } = await fetchJson(url);
+        return {
+            data: json.data,
+            total: json.total,
+        };
     },
     update: function <RecordType extends RaRecord<Identifier> = any>(resource: string, params: UpdateParams<any>): Promise<UpdateResult<RecordType>> {
         throw new Error("Function not implemented.");

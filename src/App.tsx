@@ -10,6 +10,8 @@ import { authProvider } from "./authProvider";
 import { ExerciseList } from "./pages/exercise/ExerciseList";
 import { i18nProvider } from "./i18nProvider";
 import QuestionContentList from "./pages/questionContent/QuestionContentList";
+import ExerciseDetail from "./pages/exercise/ExerciseDetail";
+import QuestionContentDetail from "./pages/questionContent/QuestionContentDetail";
 
 export const App = () => (
   <Admin dataProvider={dataProvider} authProvider={authProvider} i18nProvider={i18nProvider}>
@@ -17,11 +19,12 @@ export const App = () => (
       name="exercises"
       list={ExerciseList}
       edit={EditGuesser}
-      show={ShowGuesser}
+      show={ExerciseDetail}
     />
     <Resource
       name="question_contents"
       list={QuestionContentList}
+      show={QuestionContentDetail}
     />
   </Admin>
 );
