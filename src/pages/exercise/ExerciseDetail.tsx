@@ -1,4 +1,4 @@
-import { DateField, FunctionField, NumberField, ReferenceManyField, Show, TabbedShowLayout, TextField, useGetRecordId } from "react-admin";
+import { DateField, FunctionField, NumberField, ReferenceManyField, Show, TabbedShowLayout, TextField } from "react-admin";
 import { SimpleExercise } from "../../types/exercise";
 import QuestionContentDataGrid from "../shared/QuestionContentDatagrid";
 import ExerciseAvailabilityField from "./components/ExerciseAvailabilityField";
@@ -16,17 +16,17 @@ const ExerciseDetail = () => {
                     <NumberField source="level" />
                     <TextField source="skill" />
                     <DateField source="createAt" />
-                    <FunctionField
+                    <FunctionField<SimpleExercise>
                         label="Duration"
                         sortBy='duration'
                         sortable
-                        render={(r: SimpleExercise) => `${r.duration / 60} mins`}
+                        render={(r) => `${r.duration / 60} mins`}
                     />
-                    <FunctionField
+                    <FunctionField<SimpleExercise>
                         label="Availability"
                         sortBy='startAt'
                         sortable
-                        render={(r: SimpleExercise) => <ExerciseAvailabilityField startAt={r.startAt} endAt={r.endAt} />}
+                        render={(r) => <ExerciseAvailabilityField startAt={r.startAt} endAt={r.endAt} />}
                     />
                     <TextField source="status" />
                 </TabbedShowLayout.Tab>
@@ -34,7 +34,6 @@ const ExerciseDetail = () => {
                     <ReferenceManyField
                         reference="question_contents"
                         target="exerciseId"
-                        label="Question Contents"
                     >
                         <QuestionContentDataGrid
                             rowClick="show"

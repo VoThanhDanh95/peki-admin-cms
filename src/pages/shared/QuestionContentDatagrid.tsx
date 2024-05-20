@@ -1,4 +1,4 @@
-import { Datagrid, DatagridProps, DateField, FunctionField, NumberField, TextField } from "react-admin"
+import { Datagrid, DatagridProps, DateField, FunctionField, NumberField, RichTextField, TextField } from "react-admin"
 import { SimpleQuestionContent } from "../../types/questionContent"
 
 type Props = DatagridProps

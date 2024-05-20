@@ -1,31 +1,31 @@
-type MultipleChoices = {
+export type MultipleChoices = {
     questions: {
         question: string
         answerOptions: string[]
     }[],
     answers: string[]
 }
-type TextBaseInLine = {
+export type TextBaseInLine = {
     summary: string,
     answers: string[],
 }
-type TextBaseNewLine = {
+export type TextBaseNewLine = {
     questions: string[]
     answers: string[]
 }
-type OptionsSelectionInLine = {
+export type OptionsSelectionInLine = {
     summary: string,
     answerOptions: string[],
     answers: string[],
 }
 
-type OptionsSelectionNewLine = {
+export type OptionsSelectionNewLine = {
     questions: string[]
     answerOptions: string[],
     answers: string[]
 }
 
-type TextBaseInLineMultipleQuestion = {
+export type TextBaseInLineMultipleQuestion = {
     summary: string[],
     answers: string[],
 }

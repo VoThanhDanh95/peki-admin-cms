@@ -8,26 +8,52 @@ export type Question = {
     questionAnswers: QuestionAnswer
 }
 
-type MultipleChoicesQuestionType =
-    'True/False/Not Given' |
-    'Yes/No/Not Given' |
-    'Multiple Choices One Answer' |
-    'Multiple Choices Multiple Answers';
-type TextBaseInLineQuestionType =
-    'Sentence Completion One-Two Sentence' |
-    'Summary Completion Fill Words' |
-    'Table' |
-    'Flowchart' |
-    'Diagram';
-type TextBaseNewLineQuestionType = 'Short-answer questions Paragraph' | 'Short-answer questions One-Two Sentence';
-type OptionsSelectionNewLineQuestionType = 'Matching Heading' | 'Matching Features' | 'Matching Sentence Endings' | 'Which Paragraph Contains';
-type OptionsSelectionInLineQuestionType = 'Summary Completion Select Words';
-type TextBaseInLineMultipleQuestionType = 'Sentence Completion Paragraph';
+export const multiChoicesQuestionType = [
+    'True/False/Not Given',
+    'Yes/No/Not Given',
+    'Multiple Choices One Answer',
+    'Multiple Choices Multiple Answers'
+] as const
 
-type QuestionType =
+export const textBasedInlineQuestionType = [
+    'Sentence Completion One-Two Sentence',
+    'Summary Completion Fill Words',
+    'Table',
+    'Flowchart',
+    'Diagram'
+] as const
+
+export const textBasedNewLineQuestionType = [
+    'Short-answer questions Paragraph',
+    'Short-answer questions One-Two Sentence'
+] as const
+
+export const optionsSelectionNewLineQuestionType = [
+    'Matching Heading',
+    'Matching Features',
+    'Matching Sentence Endings',
+    'Which Paragraph Contains'
+] as const
+
+export const optionsSelectionInLineQuestionType = [
+    'Summary Completion Select Words'
+] as const
+
+export const textBasedInLineMultipleQuestionType = [
+    'Sentence Completion Paragraph'
+] as const
+
+type MultipleChoicesQuestionType = typeof multiChoicesQuestionType[number];
+type TextBasedInLineQuestionType = typeof textBasedInlineQuestionType[number];
+type TextBasedNewLineQuestionType = typeof textBasedNewLineQuestionType[number];
+type OptionsSelectionNewLineQuestionType = typeof optionsSelectionNewLineQuestionType[number];
+type OptionsSelectionInLineQuestionType = typeof optionsSelectionInLineQuestionType[number];
+type TextBasedInLineMultipleQuestionType = typeof textBasedInLineMultipleQuestionType[number];
+
+export type QuestionType =
     MultipleChoicesQuestionType |
-    TextBaseInLineQuestionType |
-    TextBaseNewLineQuestionType |
+    TextBasedInLineQuestionType |
+    TextBasedNewLineQuestionType |
     OptionsSelectionNewLineQuestionType |
     OptionsSelectionInLineQuestionType |
-    TextBaseInLineMultipleQuestionType
+    TextBasedInLineMultipleQuestionType

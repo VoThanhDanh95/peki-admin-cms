@@ -1,5 +1,5 @@
-import { Datagrid, DateField, FunctionField, List, NumberField, SearchInput, TextField, TextInput } from 'react-admin';
-import { SimpleExercise } from '../../types/exercise'
+import { Datagrid, DateField, FunctionField, List, NumberField, SearchInput, TextField } from 'react-admin';
+import { SimpleExercise } from '../../types/exercise';
 import ExerciseAvailabilityField from './components/ExerciseAvailabilityField';
 
 const exerciseFilters = [
@@ -21,17 +21,17 @@ export const ExerciseList = () => {
                 <TextField source='skill' />
                 <TextField source="id" />
                 <DateField source='createAt' />
-                <FunctionField
+                <FunctionField<SimpleExercise>
                     label="Duration"
                     sortBy='duration'
                     sortable
-                    render={(r: SimpleExercise) => `${r.duration / 60} mins`}
+                    render={(r) => `${r.duration / 60} mins`}
                 />
-                <FunctionField
+                <FunctionField<SimpleExercise>
                     label="Availability"
                     sortBy='startAt'
                     sortable
-                    render={(r: SimpleExercise) => <ExerciseAvailabilityField startAt={r.startAt} endAt={r.endAt} />}
+                    render={(r) => <ExerciseAvailabilityField startAt={r.startAt} endAt={r.endAt} />}
                 />
                 <TextField source="status" />
             </Datagrid>
