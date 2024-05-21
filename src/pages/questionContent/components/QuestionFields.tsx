@@ -1,4 +1,4 @@
-import { NumberField, RecordContextProvider, SimpleShowLayout, TextField, useRecordContext } from "react-admin";
+import { NumberField, SimpleShowLayout, TextField, useRecordContext } from "react-admin";
 import { Question } from "../../../types/question";
 import QuestionAnswersDetail from "./QuestionAnswersDetail";
 
@@ -11,9 +11,7 @@ const QuestionFields = () => {
             <NumberField source="level" />
             <TextField source="requirement" />
             <TextField source="id" />
-            <RecordContextProvider value={[record.questionType, record.questionAnswers]}>
-                <QuestionAnswersDetail />
-            </RecordContextProvider>
+            <QuestionAnswersDetail />
         </SimpleShowLayout>
     )
 }

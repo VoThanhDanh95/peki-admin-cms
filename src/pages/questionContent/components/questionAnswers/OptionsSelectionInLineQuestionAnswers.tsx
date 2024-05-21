@@ -1,17 +1,18 @@
 import { FunctionField, RichTextField, SimpleShowLayout } from "react-admin"
 import { OptionsSelectionInLine } from "../../../../types/questionAnswer"
+import { Question } from "../../../../types/question"
 
 const OptionsSelectionInLineQuestionAnswers = () => {
     return (
         <SimpleShowLayout>
-            <RichTextField source="summary" />
+            <RichTextField label="summary" source="questionAnswers.summary" />
             <FunctionField
                 label="answer options"
-                render={(r: OptionsSelectionInLine) => r.answerOptions.map((option, index) => <div key={index}>{`${index + 1}.${option}`}</div>)}
+                render={(r: Question) => (r.questionAnswers as OptionsSelectionInLine).answerOptions.map((option, index) => <div key={index}>{`${index + 1}.${option}`}</div>)}
             />
             <FunctionField
                 label="answer"
-                render={(r: OptionsSelectionInLine) => r.answers.map((answer, index) => <div key={index}>{`${index + 1}.${answer}`}</div>)}
+                render={(r: Question) => r.questionAnswers.answers.map((answer, index) => <div key={index}>{`${index + 1}.${answer}`}</div>)}
             />
         </SimpleShowLayout>
     )

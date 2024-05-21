@@ -1,7 +1,6 @@
-import { RecordContextProvider, useRecordContext } from "react-admin"
-import { QuestionType, multiChoicesQuestionType, optionsSelectionInLineQuestionType, optionsSelectionNewLineQuestionType, textBasedInLineMultipleQuestionType, textBasedInlineQuestionType, textBasedNewLineQuestionType } from "../../../types/question"
-import { QuestionAnswer } from "../../../types/questionAnswer"
+import { useRecordContext } from "react-admin"
 import { isOneOf } from "../../../helper/typeguard"
+import { Question, multiChoicesQuestionType, optionsSelectionInLineQuestionType, optionsSelectionNewLineQuestionType, textBasedInLineMultipleQuestionType, textBasedInlineQuestionType, textBasedNewLineQuestionType } from "../../../types/question"
 import MultipleChoicesQuestionAnswers from "./questionAnswers/MultipleChoicesQuestionAnswers"
 import TextBaseInLineQuestionAnswers from "./questionAnswers/TextBaseInLineQuestionAnswers"
 import TextBaseNewLineQuestionAnswers from "./questionAnswers/TextBaseNewLineQuestionAnswers"
@@ -10,53 +9,41 @@ import OptionsSelectionNewLineQuestionAnswers from "./questionAnswers/OptionsSel
 import TextBasedInLineMultipleQuestionTypeQuestionAnswers from "./questionAnswers/TextBasedInLineMultipleQuestionTypeQuestionAnswers"
 
 const QuestionAnswersDetail = () => {
-    const [questionType, questionAnswers] = useRecordContext<[QuestionType, QuestionAnswer]>()
+    const { questionType } = useRecordContext<Question>()
 
     if (isOneOf(multiChoicesQuestionType)(questionType)) {
         return (
-            <RecordContextProvider value={questionAnswers}>
-                <MultipleChoicesQuestionAnswers />
-            </RecordContextProvider>
+            <MultipleChoicesQuestionAnswers />
         )
     }
 
     if (isOneOf(textBasedInlineQuestionType)(questionType)) {
         return (
-            <RecordContextProvider value={questionAnswers}>
-                <TextBaseInLineQuestionAnswers />
-            </RecordContextProvider>
+            <TextBaseInLineQuestionAnswers />
         )
     }
 
     if (isOneOf(textBasedNewLineQuestionType)(questionType)) {
         return (
-            <RecordContextProvider value={questionAnswers}>
-                <TextBaseNewLineQuestionAnswers />
-            </RecordContextProvider>
+            <TextBaseNewLineQuestionAnswers />
         )
     }
 
     if (isOneOf(optionsSelectionInLineQuestionType)(questionType)) {
         return (
-            <RecordContextProvider value={questionAnswers}>
-                <OptionsSelectionInLineQuestionAnswers />
-            </RecordContextProvider>
+            <OptionsSelectionInLineQuestionAnswers />
         )
     }
 
     if (isOneOf(optionsSelectionNewLineQuestionType)(questionType)) {
         return (
-            <RecordContextProvider value={questionAnswers}>
-                <OptionsSelectionNewLineQuestionAnswers />
-            </RecordContextProvider>
+            <OptionsSelectionNewLineQuestionAnswers />
         )
     }
 
     if (isOneOf(textBasedInLineMultipleQuestionType)(questionType)) {
         return (
-            <RecordContextProvider value={questionAnswers}>
-                <TextBasedInLineMultipleQuestionTypeQuestionAnswers />
-            </RecordContextProvider>
+            <TextBasedInLineMultipleQuestionTypeQuestionAnswers />
         )
     }
 
