@@ -2,7 +2,7 @@ import { FunctionField, SimpleShowLayout } from "react-admin"
 import { OptionsSelectionNewLine } from "../../../../types/questionAnswer"
 import { Question } from "../../../../types/question"
 
-const OptionsSelectionNewLineQuestionAnswers = () => {
+const OptionsSelectionNewLineQuestionAnswersDetail = () => {
     return (
         <SimpleShowLayout>
             <FunctionField
@@ -21,4 +21,4 @@ const OptionsSelectionNewLineQuestionAnswers = () => {
     )
 }
 
-export default OptionsSelectionNewLineQuestionAnswers
+export default OptionsSelectionNewLineQuestionAnswersDetail

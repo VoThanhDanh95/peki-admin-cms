@@ -1,13 +1,13 @@
 import { FunctionField, SimpleShowLayout } from "react-admin"
-import { TextBaseInLineMultipleQuestion } from "../../../../types/questionAnswer"
+import { TextBaseNewLine } from "../../../../types/questionAnswer"
 import { Question } from "../../../../types/question"
 
-const TextBasedInLineMultipleQuestionTypeQuestionAnswers = () => {
+const TextBaseNewLineQuestionAnswersDetail = () => {
     return (
         <SimpleShowLayout>
             <FunctionField
-                label="summary"
-                render={(r: Question) => (r.questionAnswers as TextBaseInLineMultipleQuestion).summary.map((summary, index) => <div key={index}>{`${index + 1}.${summary}`}</div>)}
+                label="question"
+                render={(r: Question) => (r.questionAnswers as TextBaseNewLine).questions.map((question, index) => <div key={index}>{`${index + 1}.${question}`}</div>)}
             />
             <FunctionField
                 label="answer"
@@ -17,4 +17,4 @@ const TextBasedInLineMultipleQuestionTypeQuestionAnswers = () => {
     )
 }
 
-export default TextBasedInLineMultipleQuestionTypeQuestionAnswers
+export default TextBaseNewLineQuestionAnswersDetail

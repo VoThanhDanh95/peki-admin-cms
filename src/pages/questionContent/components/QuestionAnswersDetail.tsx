@@ -1,49 +1,49 @@
 import { useRecordContext } from "react-admin"
 import { isOneOf } from "../../../helper/typeguard"
 import { Question, multiChoicesQuestionType, optionsSelectionInLineQuestionType, optionsSelectionNewLineQuestionType, textBasedInLineMultipleQuestionType, textBasedInlineQuestionType, textBasedNewLineQuestionType } from "../../../types/question"
-import MultipleChoicesQuestionAnswers from "./questionAnswersDetail/MultipleChoicesQuestionAnswers"
-import TextBaseInLineQuestionAnswers from "./questionAnswersDetail/TextBaseInLineQuestionAnswers"
-import TextBaseNewLineQuestionAnswers from "./questionAnswersDetail/TextBaseNewLineQuestionAnswers"
-import OptionsSelectionInLineQuestionAnswers from "./questionAnswersDetail/OptionsSelectionInLineQuestionAnswers"
-import OptionsSelectionNewLineQuestionAnswers from "./questionAnswersDetail/OptionsSelectionNewLineQuestionAnswers"
-import TextBasedInLineMultipleQuestionTypeQuestionAnswers from "./questionAnswersDetail/TextBasedInLineMultipleQuestionTypeQuestionAnswers"
+import MultipleChoicesQuestionAnswersDetail from "./questionAnswersDetail/MultipleChoicesQuestionAnswersDetail"
+import TextBaseInLineQuestionAnswersDetail from "./questionAnswersDetail/TextBaseInLineQuestionAnswersDetail"
+import TextBaseNewLineQuestionAnswersDetail from "./questionAnswersDetail/TextBaseNewLineQuestionAnswersDetail"
+import OptionsSelectionInLineQuestionAnswersDetail from "./questionAnswersDetail/OptionsSelectionInLineQuestionAnswersDetail"
+import OptionsSelectionNewLineQuestionAnswersDetail from "./questionAnswersDetail/OptionsSelectionNewLineQuestionAnswersDetail"
+import TextBasedInLineMultipleQuestionTypeQuestionAnswersDetail from "./questionAnswersDetail/TextBasedInLineMultipleQuestionTypeQuestionAnswersDetail"
 
 const QuestionAnswersDetail = () => {
     const { questionType } = useRecordContext<Question>()
 
     if (isOneOf(multiChoicesQuestionType)(questionType)) {
         return (
-            <MultipleChoicesQuestionAnswers />
+            <MultipleChoicesQuestionAnswersDetail />
         )
     }
 
     if (isOneOf(textBasedInlineQuestionType)(questionType)) {
         return (
-            <TextBaseInLineQuestionAnswers />
+            <TextBaseInLineQuestionAnswersDetail />
         )
     }
 
     if (isOneOf(textBasedNewLineQuestionType)(questionType)) {
         return (
-            <TextBaseNewLineQuestionAnswers />
+            <TextBaseNewLineQuestionAnswersDetail />
         )
     }
 
     if (isOneOf(optionsSelectionInLineQuestionType)(questionType)) {
         return (
-            <OptionsSelectionInLineQuestionAnswers />
+            <OptionsSelectionInLineQuestionAnswersDetail />
         )
     }
 
     if (isOneOf(optionsSelectionNewLineQuestionType)(questionType)) {
         return (
-            <OptionsSelectionNewLineQuestionAnswers />
+            <OptionsSelectionNewLineQuestionAnswersDetail />
         )
     }
 
     if (isOneOf(textBasedInLineMultipleQuestionType)(questionType)) {
         return (
-            <TextBasedInLineMultipleQuestionTypeQuestionAnswers />
+            <TextBasedInLineMultipleQuestionTypeQuestionAnswersDetail />
         )
     }
 

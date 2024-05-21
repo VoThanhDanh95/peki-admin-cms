@@ -2,7 +2,7 @@ import { FunctionField, SimpleShowLayout } from "react-admin";
 import { MultipleChoices } from "../../../../types/questionAnswer";
 import { Question } from "../../../../types/question";
 
-const MultipleChoicesQuestionAnswers = () => {
+const MultipleChoicesQuestionAnswersDetail = () => {
     return (
         <SimpleShowLayout>
             <FunctionField
@@ -25,4 +25,4 @@ const MultipleChoicesQuestionAnswers = () => {
     );
 }
 
-export default MultipleChoicesQuestionAnswers
+export default MultipleChoicesQuestionAnswersDetail
