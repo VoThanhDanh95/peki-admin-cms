@@ -1,12 +1,12 @@
 import { useRecordContext } from "react-admin"
 import { isOneOf } from "../../../helper/typeguard"
 import { Question, multiChoicesQuestionType, optionsSelectionInLineQuestionType, optionsSelectionNewLineQuestionType, textBasedInLineMultipleQuestionType, textBasedInlineQuestionType, textBasedNewLineQuestionType } from "../../../types/question"
-import MultipleChoicesQuestionAnswers from "./questionAnswers/MultipleChoicesQuestionAnswers"
-import TextBaseInLineQuestionAnswers from "./questionAnswers/TextBaseInLineQuestionAnswers"
-import TextBaseNewLineQuestionAnswers from "./questionAnswers/TextBaseNewLineQuestionAnswers"
-import OptionsSelectionInLineQuestionAnswers from "./questionAnswers/OptionsSelectionInLineQuestionAnswers"
-import OptionsSelectionNewLineQuestionAnswers from "./questionAnswers/OptionsSelectionNewLineQuestionAnswers"
-import TextBasedInLineMultipleQuestionTypeQuestionAnswers from "./questionAnswers/TextBasedInLineMultipleQuestionTypeQuestionAnswers"
+import MultipleChoicesQuestionAnswers from "./questionAnswersDetail/MultipleChoicesQuestionAnswers"
+import TextBaseInLineQuestionAnswers from "./questionAnswersDetail/TextBaseInLineQuestionAnswers"
+import TextBaseNewLineQuestionAnswers from "./questionAnswersDetail/TextBaseNewLineQuestionAnswers"
+import OptionsSelectionInLineQuestionAnswers from "./questionAnswersDetail/OptionsSelectionInLineQuestionAnswers"
+import OptionsSelectionNewLineQuestionAnswers from "./questionAnswersDetail/OptionsSelectionNewLineQuestionAnswers"
+import TextBasedInLineMultipleQuestionTypeQuestionAnswers from "./questionAnswersDetail/TextBasedInLineMultipleQuestionTypeQuestionAnswers"
 
 const QuestionAnswersDetail = () => {
     const { questionType } = useRecordContext<Question>()
