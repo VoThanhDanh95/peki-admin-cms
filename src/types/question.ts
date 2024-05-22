@@ -43,6 +43,15 @@ export const textBasedInLineMultipleQuestionType = [
     'Sentence Completion Paragraph'
 ] as const
 
+export const allQuestionType = [
+    ...multiChoicesQuestionType,
+    ...optionsSelectionNewLineQuestionType,
+    ...optionsSelectionInLineQuestionType,
+    ...textBasedInlineQuestionType,
+    ...textBasedNewLineQuestionType,
+    ...textBasedInLineMultipleQuestionType
+] as const
+
 type MultipleChoicesQuestionType = typeof multiChoicesQuestionType[number];
 type TextBasedInLineQuestionType = typeof textBasedInlineQuestionType[number];
 type TextBasedNewLineQuestionType = typeof textBasedNewLineQuestionType[number];

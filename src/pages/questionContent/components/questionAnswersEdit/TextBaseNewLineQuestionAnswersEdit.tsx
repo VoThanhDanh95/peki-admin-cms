@@ -1,27 +1,22 @@
 import { ArrayInput, SimpleFormIterator, TextInput, useRecordContext } from "react-admin"
 
-const MultipleChoicesQuestionAnswersEdit = () => {
+const TextBaseNewLineQuestionAnswersEdit = () => {
     const { getSource } = useRecordContext<{ getSource: (source: string) => string }>()
 
     return (
         <>
             <ArrayInput label="questions" source={getSource('questionAnswers.questions')}>
                 <SimpleFormIterator fullWidth>
-                    <TextInput source='question' fullWidth />
-                    <ArrayInput label="options" source="answerOptions">
-                        <SimpleFormIterator inline>
-                            <TextInput source="" />
-                        </SimpleFormIterator>
-                    </ArrayInput>
+                    <TextInput source="" fullWidth />
                 </SimpleFormIterator>
             </ArrayInput>
             <ArrayInput label="answers" source={getSource('questionAnswers.answers')}>
                 <SimpleFormIterator fullWidth>
-                    <TextInput source="" />
+                    <TextInput source="" fullWidth />
                 </SimpleFormIterator>
             </ArrayInput>
         </>
     )
 }
 
-export default MultipleChoicesQuestionAnswersEdit
+export default TextBaseNewLineQuestionAnswersEdit
