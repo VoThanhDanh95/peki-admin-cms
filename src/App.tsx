@@ -13,6 +13,7 @@ import QuestionContentList from "./pages/questionContent/QuestionContentList";
 import ExerciseDetail from "./pages/exercise/ExerciseDetail";
 import QuestionContentDetail from "./pages/questionContent/QuestionContentDetail";
 import QuestionContentEdit from "./pages/questionContent/QuestionContentEdit";
+import QuestionContentCreate from "./pages/questionContent/QuestionContentCreate";
 
 export const App = () => (
   <Admin dataProvider={dataProvider} authProvider={authProvider} i18nProvider={i18nProvider}>
@@ -27,6 +28,7 @@ export const App = () => (
       list={QuestionContentList}
       show={QuestionContentDetail}
       edit={QuestionContentEdit}
+      create={QuestionContentCreate}
     />
   </Admin>
 );
