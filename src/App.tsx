@@ -14,14 +14,17 @@ import ExerciseDetail from "./pages/exercise/ExerciseDetail";
 import QuestionContentDetail from "./pages/questionContent/QuestionContentDetail";
 import QuestionContentEdit from "./pages/questionContent/QuestionContentEdit";
 import QuestionContentCreate from "./pages/questionContent/QuestionContentCreate";
+import ExerciseCreate from "./pages/exercise/ExerciseCreate";
+import ExerciseEdit from "./pages/exercise/ExerciseEdit";
 
 export const App = () => (
   <Admin dataProvider={dataProvider} authProvider={authProvider} i18nProvider={i18nProvider}>
     <Resource
       name="exercises"
       list={ExerciseList}
-      edit={EditGuesser}
+      edit={ExerciseEdit}
       show={ExerciseDetail}
+      create={ExerciseCreate}
     />
     <Resource
       name="question_contents"

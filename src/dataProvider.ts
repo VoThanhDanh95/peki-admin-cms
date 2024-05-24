@@ -77,8 +77,13 @@ export const dataProvider: DataProvider = {
             total: json.total,
         };
     },
-    update: function <RecordType extends RaRecord<Identifier> = any>(resource: string, params: UpdateParams<any>): Promise<UpdateResult<RecordType>> {
-        throw new Error("Function not implemented.");
+    update: async function <RecordType extends RaRecord<Identifier> = any>(resource: string, params: UpdateParams<any>): Promise<UpdateResult<RecordType>> {
+        const url = `${apiUrl}/${resource}/${params.id}`;
+        const { json } = await fetchJson(url, {
+            method: 'PUT',
+            body: JSON.stringify(params.data),
+        })
+        return { data: json };
     },
     updateMany: function <RecordType extends RaRecord<Identifier> = any>(resource: string, params: UpdateManyParams<any>): Promise<UpdateManyResult<RecordType>> {
         throw new Error("Function not implemented.");
@@ -89,10 +94,14 @@ export const dataProvider: DataProvider = {
             body: JSON.stringify(params.data),
         })
         return { data: json };
-
     },
-    delete: function <RecordType extends RaRecord<Identifier> = any>(resource: string, params: DeleteParams<RecordType>): Promise<DeleteResult<RecordType>> {
-        throw new Error("Function not implemented.");
+    delete: async function <RecordType extends RaRecord<Identifier> = any>(resource: string, params: DeleteParams<RecordType>): Promise<DeleteResult<RecordType>> {
+        const url = `${apiUrl}/${resource}/${params.id}`;
+        const { json } = await fetchJson(url, {
+            method: 'DELETE',
+        });
+
+        return { data: json };
     },
     deleteMany: function <RecordType extends RaRecord<Identifier> = any>(resource: string, params: DeleteManyParams<RecordType>): Promise<DeleteManyResult<RecordType>> {
         throw new Error("Function not implemented.");
