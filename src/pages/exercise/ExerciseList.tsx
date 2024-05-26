@@ -6,13 +6,17 @@ const exerciseFilters = [
     <SearchInput source="name" alwaysOn />
 ]
 
+const ExerciseBuckActions = () => {
+    return null
+}
+
 export const ExerciseList = () => {
     return (
         <List
             sort={{ field: "createAt", order: "DESC" }}
             filters={exerciseFilters}
         >
-            <Datagrid rowClick="show">
+            <Datagrid rowClick="show" bulkActionButtons={<ExerciseBuckActions />}>
                 <TextField source="name" />
                 <TextField source="intro" />
                 <TextField source="category" />

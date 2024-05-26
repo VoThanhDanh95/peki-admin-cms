@@ -1,10 +1,10 @@
-import { Edit } from "react-admin";
-import ExerciseForm, { transformData } from "./components/ExerciseForm";
+import { Edit, RecordContextProvider, WithRecord } from "react-admin";
+import ExerciseForm, { decodeData, encodeData } from "./components/ExerciseForm";
 
 const ExerciseEdit = () => {
     const transform = ({ isAlwaysAvailable, ...rest }: any) => ({
         ...rest,
-        ...transformData({
+        ...encodeData({
             isAlwaysAvailable: isAlwaysAvailable,
             startAt: rest.startAt,
             endAt: rest.endAt
@@ -14,7 +14,16 @@ const ExerciseEdit = () => {
 
     return (
         <Edit transform={transform}>
-            <ExerciseForm />
+            <WithRecord render={({ startAt, endAt, duration, id, createAt, ...rest }) => {
+                return (
+                    <RecordContextProvider value={{
+                        ...rest,
+                        ...decodeData({ startAt, endAt, duration })
+                    }}>
+                        <ExerciseForm />
+                    </RecordContextProvider>
+                )
+            }} />
         </Edit>
     )
 }

@@ -1,10 +1,10 @@
 import { Create } from "react-admin";
-import ExerciseForm, { transformData } from "./components/ExerciseForm";
+import ExerciseForm, { encodeData } from "./components/ExerciseForm";
 
 const ExerciseCreate = () => {
     const transform = ({ isAlwaysAvailable, ...rest }: any) => ({
         ...rest,
-        ...transformData({
+        ...encodeData({
             isAlwaysAvailable: isAlwaysAvailable,
             startAt: rest.startAt,
             endAt: rest.endAt
@@ -13,7 +13,7 @@ const ExerciseCreate = () => {
     })
 
     return (
-        <Create transform={transform}>
+        <Create transform={transform} redirect="show">
             <ExerciseForm />
         </Create>
     )
