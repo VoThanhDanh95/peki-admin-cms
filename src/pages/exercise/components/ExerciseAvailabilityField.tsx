@@ -1,3 +1,4 @@
+import { format } from "date-fns"
 import { useMemo } from "react"
 import { useTranslate } from "react-admin"
 
@@ -6,15 +7,15 @@ const ExerciseAvailabilityField = ({ startAt, endAt }: { startAt: number, endAt:
 
     const text = useMemo(() => {
         if (startAt === -1 && endAt !== -1) {
-            return t('custom.exerciseAvailability.availableTo', { endAt: Intl.DateTimeFormat().format(new Date(endAt)) })
+            return t('custom.exerciseAvailability.availableTo', { endAt: format(new Date(endAt), 'dd-MM-yyyy') })
         }
 
         if (startAt !== -1 && endAt === -1) {
-            return t('custom.exerciseAvailability.availableFrom', { endAt: Intl.DateTimeFormat().format(new Date(startAt)) })
+            return t('custom.exerciseAvailability.availableFrom', { startAt: format(new Date(startAt), 'dd-MM-yyyy') })
         }
 
         if (startAt !== -1 && endAt !== -1) {
-            return `${Intl.DateTimeFormat().format(new Date(startAt))}-${Intl.DateTimeFormat().format(new Date(endAt))}`
+            return `${format(new Date(startAt), 'dd/MM/yyyy')}-${format(new Date(endAt), 'dd/MM/yyyy')}`
         }
 
         return t(`custom.exerciseAvailability.alwaysAvailable`)

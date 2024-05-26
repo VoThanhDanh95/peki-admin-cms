@@ -7,8 +7,8 @@ export const messages = {
 
         },
         exerciseAvailability: {
-            availableTo: "Mở tới ngày ${endAt}",
-            availableFrom: "Mở vào ngày ${startAt}",
+            availableTo: "Mở tới ngày %{endAt}",
+            availableFrom: "Mở vào ngày %{startAt}",
             alwaysAvailable: "Luôn mở"
         }
     }
