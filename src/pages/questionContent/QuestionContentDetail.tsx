@@ -1,4 +1,4 @@
-import { ArrayField, DateField, FunctionField, NumberField, RecordContextProvider, RichTextField, Show, TabbedShowLayout, TextField, WithListContext } from "react-admin"
+import { ArrayField, DateField, FunctionField, Labeled, NumberField, RecordContextProvider, RichTextField, Show, TabbedShowLayout, TextField, WithListContext } from "react-admin"
 import { QuestionContent } from "../../types/questionContent"
 import QuestionFields from "./components/QuestionFields"
 
@@ -7,17 +7,29 @@ const QuestionContentDetail = () => {
         <Show>
             <TabbedShowLayout>
                 <TabbedShowLayout.Tab label="Main">
-                    <RichTextField source="content" />
-                    <TextField source="topic" />
-                    <NumberField source="level" />
-                    <FunctionField<QuestionContent>
-                        label="Grammars"
-                        render={(r) => <>
-                            {r.grammars.map((grammar, index) => <div key={index}>{`- ${grammar}`}</div>)}
-                        </>}
-                    />
-                    <DateField source="createAt" />
-                    <TextField source="id" />
+                    <Labeled color="primary.main">
+                        <RichTextField source="content" />
+                    </Labeled>
+                    <Labeled color="primary.main">
+                        <TextField source="topic" />
+                    </Labeled>
+                    <Labeled color="primary.main">
+                        <NumberField source="level" />
+                    </Labeled>
+                    <Labeled color="primary.main">
+                        <FunctionField<QuestionContent>
+                            label="Grammars"
+                            render={(r) => <>
+                                {r.grammars.map((grammar, index) => <div key={index}>{`- ${grammar}`}</div>)}
+                            </>}
+                        />
+                    </Labeled>
+                    <Labeled color="primary.main">
+                        <DateField source="createAt" />
+                    </Labeled>
+                    <Labeled color="primary.main">
+                        <TextField source="id" />
+                    </Labeled>
                 </TabbedShowLayout.Tab>
                 <TabbedShowLayout.Tab label="Questions">
                     <ArrayField source="questions" label={false}>

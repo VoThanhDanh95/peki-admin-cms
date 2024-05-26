@@ -1,4 +1,4 @@
-import { Datagrid, DatagridProps, DateField, FunctionField, NumberField, RichTextField, TextField } from "react-admin"
+import { Datagrid, DatagridProps, DateField, FunctionField, NumberField, RichTextField, TextField, WithRecord } from "react-admin"
 import { SimpleQuestionContent } from "../../types/questionContent"
 
 type Props = DatagridProps
@@ -6,12 +6,14 @@ type Props = DatagridProps
 const QuestionContentDataGrid = (props: Props) => {
     return (
         <Datagrid {...props}>
-            <FunctionField
-                label="content"
-                sortBy='content'
-                sortable
-                render={(r: SimpleQuestionContent) => r.content.length > 200 ? r.content.slice(0, 200) + "..." : r.content}
-            />
+            <WithRecord render={({ content, ...rest }) => {
+                return <RichTextField source="content" record={{
+                    ...rest,
+                    content: content.length > 200 ? content.slice(0, 200) + "..." : content
+                }}
+                />
+            }} />
+
             <TextField source="topic" />
             <NumberField source="level" />
             <FunctionField
