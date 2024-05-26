@@ -1,4 +1,4 @@
-import { Question } from "./question"
+import { Question, QuestionType } from "./question"
 
 export type SimpleQuestionContent = {
     id: string
@@ -19,5 +19,6 @@ export type QuestionContent = {
     grammars: string[]
     exerciseId: string
     createAt: number
+    questionType: QuestionType
     questions: Question[]
 }
