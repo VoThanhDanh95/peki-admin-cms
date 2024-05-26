@@ -1,23 +1,50 @@
-import { FunctionField, SimpleShowLayout } from "react-admin"
-import { OptionsSelectionNewLine } from "../../../../types/questionAnswer"
-import { Question } from "../../../../types/question"
+import { Box, Stack, Typography } from '@mui/material';
+import { FunctionField, Labeled } from "react-admin";
+import { Question } from "../../../../types/question";
+import { OptionsSelectionNewLine } from "../../../../types/questionAnswer";
 
 const OptionsSelectionNewLineQuestionAnswersDetail = () => {
     return (
-        <SimpleShowLayout>
-            <FunctionField
-                label="questions"
-                render={(r: Question) => (r.questionAnswers as OptionsSelectionNewLine).questions.map((question, index) => <div key={index}>{`${index + 1}.${question}`}</div>)}
-            />
-            <FunctionField
-                label="answer options"
-                render={(r: Question) => (r.questionAnswers as OptionsSelectionNewLine).answerOptions.map((option, index) => <div key={index}>{`${index + 1}.${option}`}</div>)}
-            />
-            <FunctionField
-                label="answer"
-                render={(r: Question) => r.questionAnswers.answers.map((answer, index) => <div key={index}>{`${index + 1}.${answer}`}</div>)}
-            />
-        </SimpleShowLayout>
+        <>
+            <Labeled color="primary.main" fullWidth>
+                <FunctionField
+                    label="Options"
+                    render={(r: Question) => (r.questionAnswers as OptionsSelectionNewLine).answerOptions.map((option, index) => <div key={index}>{`${index + 1}. ${option}`}</div>)}
+                />
+            </Labeled>
+            <Labeled color="primary.main" fullWidth>
+                <FunctionField
+                    label="Questions"
+                    render={(r: Question) => {
+                        const questions = (r.questionAnswers as OptionsSelectionNewLine).questions
+                        const answers = r.questionAnswers.answers
+
+                        return questions.map((question, index) => {
+                            return (
+                                <Box key={index}>
+                                    <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{`${index + 1}. ${question}`}</Typography>
+                                    <Stack direction='row'>
+                                        <Typography
+                                            variant="body2"
+                                            style={{ marginLeft: 10 }}
+                                            color='info.main'
+                                        >
+                                            Answer:
+                                        </Typography>
+                                        <Typography
+                                            variant="body2"
+                                            style={{ marginLeft: 5 }}
+                                        >
+                                            {answers[index]}
+                                        </Typography>
+                                    </Stack>
+                                </Box>
+                            )
+                        })
+                    }}
+                />
+            </Labeled>
+        </>
     )
 }
 

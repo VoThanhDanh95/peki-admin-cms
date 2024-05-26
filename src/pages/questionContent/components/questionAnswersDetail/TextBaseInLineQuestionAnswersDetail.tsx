@@ -1,15 +1,22 @@
-import { FunctionField, RichTextField, SimpleShowLayout } from "react-admin"
+import { FunctionField, Labeled, RichTextField } from "react-admin"
 import { Question } from "../../../../types/question"
+import { Typography } from '@mui/material';
 
 const TextBaseInLineQuestionAnswersDetail = () => {
     return (
-        <SimpleShowLayout>
-            <RichTextField label="summary" source="questionAnswers.summary" />
-            <FunctionField
-                label="answer"
-                render={(r: Question) => r.questionAnswers.answers.map((answer, index) => <div key={index}>{`${index + 1}.${answer}`}</div>)}
-            />
-        </SimpleShowLayout>
+        <>
+            <Labeled color="primary.main" fullWidth>
+                <RichTextField label="Summary" source="questionAnswers.summary" />
+            </Labeled>
+            <Labeled color="primary.main">
+                <FunctionField
+                    label="Answers"
+                    render={(r: Question) => r.questionAnswers.answers.map((answer, index) =>
+                        <Typography variant="body2" key={index}>{`${index + 1}. ${answer}`}</Typography>
+                    )}
+                />
+            </Labeled>
+        </>
     )
 }
 
