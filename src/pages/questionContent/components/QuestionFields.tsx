@@ -18,7 +18,10 @@ const QuestionFields = () => {
             >
                 <Typography variant="body1" color="primary.main">{record.questionType}</Typography>
             </AccordionSummary>
-            <AccordionDetails>
+            <AccordionDetails
+                id={`${record.id}-content`}
+                aria-labelledby={`${record.id}-header`}
+            >
                 <SimpleShowLayout>
                     <Labeled color="primary.main">
                         <TextField source="questionType" />
