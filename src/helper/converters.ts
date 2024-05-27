@@ -38,6 +38,8 @@ export const convertFormQuestions = (formQuestions: FormQuestion) => {
             questionAnswers: fromOptionsSelectionNewLine(formQuestions.questionAnswers)
         }
     }
+
+    return formQuestions
 }
 
 const fromYesNoNotGiven = (questionAnswers: { question: string, answer: string }[]) => {

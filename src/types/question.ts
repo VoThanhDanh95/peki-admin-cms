@@ -30,27 +30,28 @@ export type OptionsSelectionNewLineQuestionType =
     | MatchingSentenceEndings
     | WhichParagraphContains
 
+export type SentenceCompletionOneTwoSentence = 'Sentence Completion One-Two Sentence'
+export type SummaryCompletionFillWords = 'Summary Completion Fill Words'
+export type Table = 'Table'
+export type Flowchart = 'Flowchart'
+export type Diagram = 'Diagram'
+
+export type TextBasedInlineQuestionType =
+    | SentenceCompletionOneTwoSentence
+    | SummaryCompletionFillWords
+    | Table
+    | Flowchart
+    | Diagram
+
 export type QuestionType =
     | ChoiceBasedQuestionType
     | OptionsSelectionNewLineQuestionType
-
-
-
-
-export const textBasedInlineQuestionType = [
-    'Sentence Completion One-Two Sentence',
-    'Summary Completion Fill Words',
-    'Table',
-    'Flowchart',
-    'Diagram'
-] as const
+    | TextBasedInlineQuestionType
 
 export const textBasedNewLineQuestionType = [
     'Short-answer questions Paragraph',
     'Short-answer questions One-Two Sentence'
 ] as const
-
-
 
 export const optionsSelectionInLineQuestionType = [
     'Summary Completion Select Words'
