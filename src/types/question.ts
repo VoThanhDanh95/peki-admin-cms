@@ -19,8 +19,20 @@ export type ChoiceBasedQuestionType =
     | MultipleChoicesOneAnswer
     | MultipleChoicesMultipleAnswers
 
+export type MatchingHeading = 'Matching Heading'
+export type MatchingFeatures = 'Matching Features'
+export type MatchingSentenceEndings = 'Matching Sentence Endings'
+export type WhichParagraphContains = 'Which Paragraph Contains'
+
+export type OptionsSelectionNewLineQuestionType =
+    | MatchingHeading
+    | MatchingFeatures
+    | MatchingSentenceEndings
+    | WhichParagraphContains
+
 export type QuestionType =
     | ChoiceBasedQuestionType
+    | OptionsSelectionNewLineQuestionType
 
 
 
@@ -38,12 +50,7 @@ export const textBasedNewLineQuestionType = [
     'Short-answer questions One-Two Sentence'
 ] as const
 
-export const optionsSelectionNewLineQuestionType = [
-    'Matching Heading',
-    'Matching Features',
-    'Matching Sentence Endings',
-    'Which Paragraph Contains'
-] as const
+
 
 export const optionsSelectionInLineQuestionType = [
     'Summary Completion Select Words'

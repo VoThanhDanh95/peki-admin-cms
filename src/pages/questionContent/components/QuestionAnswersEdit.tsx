@@ -1,13 +1,13 @@
 import { useRecordContext } from "react-admin"
 import { isOneOf } from "../../../helper/typeguard"
-import { Question, optionsSelectionInLineQuestionType, optionsSelectionNewLineQuestionType, textBasedInLineMultipleQuestionType, textBasedInlineQuestionType, textBasedNewLineQuestionType } from "../../../types/question"
+import { Question, optionsSelectionInLineQuestionType, textBasedInLineMultipleQuestionType, textBasedInlineQuestionType, textBasedNewLineQuestionType } from "../../../types/question"
 import MultipleChoicesQuestionAnswersEdit from "./questionAnswersEdit/MultipleChoicesQuestionAnswersEdit"
 import OptionsSelectionInLineQuestionAnswersEdit from "./questionAnswersEdit/OptionsSelectionInLineQuestionAnswersEdit"
 import OptionsSelectionNewLineQuestionAnswersEdit from "./questionAnswersEdit/OptionsSelectionNewLineQuestionAnswersEdit"
 import TextBasedInLineMultipleQuestionTypeQuestionAnswersEdit from "./questionAnswersEdit/TextBasedInLineMultipleQuestionTypeQuestionAnswersEdit"
 import TextBaseInLineQuestionAnswersEdit from "./questionAnswersEdit/TextBaseInLineQuestionAnswersEdit"
 import TextBaseNewLineQuestionAnswersEdit from "./questionAnswersEdit/TextBaseNewLineQuestionAnswersEdit"
-import { multiChoicesQuestionType } from "../../../helper/constants"
+import { multiChoicesQuestionType, optionsSelectionNewLineQuestionType } from "../../../helper/constants"
 
 const QuestionAnswersEdit = () => {
     const { scopedFormData } = useRecordContext<{ scopedFormData?: Question }>()

@@ -1,5 +1,6 @@
 import { FormQuestion } from "../types/form"
-import { trueFalseNotGiven, yesNoNotGiven } from "./constants"
+import { optionsSelectionNewLineQuestionType, trueFalseNotGiven, yesNoNotGiven } from "./constants"
+import { isOneOf } from "./typeguard"
 
 export const convertFormQuestions = (formQuestions: FormQuestion) => {
     const { questionAnswers, ...rest } = formQuestions
@@ -30,44 +31,62 @@ export const convertFormQuestions = (formQuestions: FormQuestion) => {
             questionAnswers: fromMultiChoices(formQuestions.questionAnswers)
         }
     }
+
+    if (isOneOf(optionsSelectionNewLineQuestionType)(formQuestions.questionType)) {
+        return {
+            ...rest,
+            questionAnswers: fromOptionsSelectionNewLine(formQuestions.questionAnswers)
+        }
+    }
 }
 
-const fromYesNoNotGiven = (formQuestions: { question: string, answer: string }[]) => {
+const fromYesNoNotGiven = (questionAnswers: { question: string, answer: string }[]) => {
     return {
-        questions: formQuestions.map(formQuestion => ({
-            question: formQuestion.question,
+        questions: questionAnswers.map(questionAnswer => ({
+            question: questionAnswer.question,
             answerOptions: yesNoNotGiven
         })),
-        answers: formQuestions.map(formQuestion => formQuestion.answer)
+        answers: questionAnswers.map(questionAnswer => questionAnswer.answer)
     }
 }
 
-const fromTrueFalseNotGiven = (formQuestions: { question: string, answer: string }[]) => {
+const fromTrueFalseNotGiven = (questionAnswers: { question: string, answer: string }[]) => {
     return {
-        questions: formQuestions.map(formQuestion => ({
-            question: formQuestion.question,
+        questions: questionAnswers.map(questionAnswer => ({
+            question: questionAnswer.question,
             answerOptions: trueFalseNotGiven
         })),
-        answers: formQuestions.map(formQuestion => formQuestion.answer)
+        answers: questionAnswers.map(questionAnswer => questionAnswer.answer)
     }
 }
 
-const fromSingleChoice = (formQuestions: { question: string, options: Array<{ option: string, isAnswer: boolean }> }[]) => {
+const fromSingleChoice = (questionAnswers: { question: string, options: Array<{ option: string, isAnswer: boolean }> }[]) => {
     return {
-        questions: formQuestions.map(formQuestion => ({
-            question: formQuestion.question,
-            answerOptions: formQuestion.options.map(item => item.option)
+        questions: questionAnswers.map(questionAnswer => ({
+            question: questionAnswer.question,
+            answerOptions: questionAnswer.options.map(item => item.option)
         })),
-        answers: formQuestions.flatMap(formQuestion => formQuestion.options.filter(option => option.isAnswer)).map(item => item.option)
+        answers: questionAnswers.flatMap(questionAnswer => questionAnswer.options.filter(option => option.isAnswer)).map(item => item.option)
     }
 }
 
-const fromMultiChoices = (formQuestions: { question: string, options: Array<{ option: string, isAnswer: boolean }> }[]) => {
+const fromMultiChoices = (questionAnswers: { question: string, options: Array<{ option: string, isAnswer: boolean }> }[]) => {
     return {
-        questions: formQuestions.map(formQuestion => ({
-            question: formQuestion.question,
-            answerOptions: formQuestion.options.map(item => item.option)
+        questions: questionAnswers.map(questionAnswer => ({
+            question: questionAnswer.question,
+            answerOptions: questionAnswer.options.map(item => item.option)
         })),
-        answers: formQuestions.flatMap(formQuestion => formQuestion.options.filter(option => option.isAnswer)).map(item => item.option)
+        answers: questionAnswers.flatMap(questionAnswer => questionAnswer.options.filter(option => option.isAnswer)).map(item => item.option)
+    }
+}
+
+const fromOptionsSelectionNewLine = (questionAnswers: {
+    options: string[]
+    questions: Array<{ question: string, answer: string }>
+}) => {
+    return {
+        answerOptions: questionAnswers.options,
+        questions: questionAnswers.questions.map(question => question.question),
+        answers: questionAnswers.questions.map(question => question.answer),
     }
 }

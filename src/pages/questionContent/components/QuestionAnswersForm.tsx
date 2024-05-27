@@ -3,7 +3,8 @@ import { useWatch } from 'react-hook-form'
 import { isOneOf } from "../../../helper/typeguard";
 import MultipleChoicesQuestionAnswersForm from "./questionAnswersForm/MultipleChoicesQuestionAnswersForm";
 import { useSimpleFormIteratorItem } from "react-admin";
-import { multiChoicesQuestionType } from "../../../helper/constants";
+import { multiChoicesQuestionType, optionsSelectionNewLineQuestionType } from "../../../helper/constants";
+import OptionsSelectionNewLineQuestionAnswersForm from "./questionAnswersForm/OptionsSelectionNewLineQuestionAnswersForm";
 
 const QuestionAnswersForm = () => {
     const { index } = useSimpleFormIteratorItem()
@@ -15,11 +16,7 @@ const QuestionAnswersForm = () => {
     //     )
     // }
 
-    // if (isOneOf(optionsSelectionNewLineQuestionType)(scopedFormData?.questionType)) {
-    //     return (
-    //         <OptionsSelectionNewLineQuestionAnswersCreate />
-    //     )
-    // }
+
 
     // if (isOneOf(textBasedInLineMultipleQuestionType)(scopedFormData?.questionType)) {
     //     return (
@@ -43,6 +40,12 @@ const QuestionAnswersForm = () => {
         if (isOneOf(multiChoicesQuestionType)(questionType)) {
             return (
                 <MultipleChoicesQuestionAnswersForm />
+            )
+        }
+
+        if (isOneOf(optionsSelectionNewLineQuestionType)(questionType)) {
+            return (
+                <OptionsSelectionNewLineQuestionAnswersForm />
             )
         }
 
