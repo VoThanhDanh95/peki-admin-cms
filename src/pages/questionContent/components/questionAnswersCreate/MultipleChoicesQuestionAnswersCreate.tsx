@@ -1,11 +1,12 @@
-import { ArrayInput, SimpleFormIterator, TextInput, useRecordContext } from "react-admin";
+import { ArrayInput, SimpleFormIterator, TextInput, useRecordContext, useSimpleFormIteratorItem } from "react-admin";
 
 const MultipleChoicesQuestionAnswersCreate = () => {
-    const { getSource } = useRecordContext<{ getSource: (source: string) => string }>()
-
+    console.log("RENDER MultipleChoicesQuestionAnswersCreate");
+    const { index } = useSimpleFormIteratorItem()
+    //const { getSource } = useRecordContext<{ getSource: (source: string) => string }>()
     return (
         <>
-            <ArrayInput label="questions" source={getSource('questionAnswers.questions')}>
+            <ArrayInput label="questions" source={`questionAnswers.${index}.questions`}>
                 <SimpleFormIterator fullWidth>
                     <TextInput source='question' fullWidth />
                     <ArrayInput label="options" source="answerOptions">
@@ -15,7 +16,7 @@ const MultipleChoicesQuestionAnswersCreate = () => {
                     </ArrayInput>
                 </SimpleFormIterator>
             </ArrayInput>
-            <ArrayInput label="answers" source={getSource('questionAnswers.answers')}>
+            <ArrayInput label="answers" source={`questionAnswers.${index}answers`}>
                 <SimpleFormIterator fullWidth>
                     <TextInput source="" />
                 </SimpleFormIterator>

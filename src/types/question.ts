@@ -8,12 +8,22 @@ export type Question = {
     questionAnswers: QuestionAnswer
 }
 
-export const multiChoicesQuestionType = [
-    'True/False/Not Given',
-    'Yes/No/Not Given',
-    'Multiple Choices One Answer',
-    'Multiple Choices Multiple Answers'
-] as const
+export type TrueFalseNotGiven = 'True/False/Not Given'
+export type YesNoNotGiven = 'Yes/No/Not Given'
+export type MultipleChoicesOneAnswer = 'Multiple Choices One Answer'
+export type MultipleChoicesMultipleAnswers = 'Multiple Choices Multiple Answers'
+
+export type ChoiceBasedQuestionType =
+    | TrueFalseNotGiven
+    | YesNoNotGiven
+    | MultipleChoicesOneAnswer
+    | MultipleChoicesMultipleAnswers
+
+export type QuestionType =
+    | ChoiceBasedQuestionType
+
+
+
 
 export const textBasedInlineQuestionType = [
     'Sentence Completion One-Two Sentence',
@@ -42,27 +52,3 @@ export const optionsSelectionInLineQuestionType = [
 export const textBasedInLineMultipleQuestionType = [
     'Sentence Completion Paragraph'
 ] as const
-
-export const allQuestionType = [
-    ...multiChoicesQuestionType,
-    ...optionsSelectionNewLineQuestionType,
-    ...optionsSelectionInLineQuestionType,
-    ...textBasedInlineQuestionType,
-    ...textBasedNewLineQuestionType,
-    ...textBasedInLineMultipleQuestionType
-] as const
-
-type MultipleChoicesQuestionType = typeof multiChoicesQuestionType[number];
-type TextBasedInLineQuestionType = typeof textBasedInlineQuestionType[number];
-type TextBasedNewLineQuestionType = typeof textBasedNewLineQuestionType[number];
-type OptionsSelectionNewLineQuestionType = typeof optionsSelectionNewLineQuestionType[number];
-type OptionsSelectionInLineQuestionType = typeof optionsSelectionInLineQuestionType[number];
-type TextBasedInLineMultipleQuestionType = typeof textBasedInLineMultipleQuestionType[number];
-
-export type QuestionType =
-    MultipleChoicesQuestionType |
-    TextBasedInLineQuestionType |
-    TextBasedNewLineQuestionType |
-    OptionsSelectionNewLineQuestionType |
-    OptionsSelectionInLineQuestionType |
-    TextBasedInLineMultipleQuestionType

@@ -1,7 +1,7 @@
 import { RichTextInput } from "ra-input-rich-text"
 import { ArrayInput, Edit, FormDataConsumer, NumberInput, RecordContextProvider, SelectInput, SimpleForm, SimpleFormIterator, TextInput } from "react-admin"
-import { allQuestionType } from "../../types/question"
 import QuestionAnswersEdit from "./components/QuestionAnswersEdit"
+import { allQuestionType } from "../../helper/constants"
 
 const QuestionContentEdit = () => {
     return (
