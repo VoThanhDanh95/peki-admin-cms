@@ -1,13 +1,13 @@
 import { useRecordContext } from "react-admin"
 import { isOneOf } from "../../../helper/typeguard"
-import { Question, optionsSelectionInLineQuestionType, textBasedInLineMultipleQuestionType, textBasedNewLineQuestionType } from "../../../types/question"
+import { Question, optionsSelectionInLineQuestionType, textBasedNewLineQuestionType } from "../../../types/question"
 import MultipleChoicesQuestionAnswersDetail from "./questionAnswersDetail/MultipleChoicesQuestionAnswersDetail"
 import TextBaseInLineQuestionAnswersDetail from "./questionAnswersDetail/TextBaseInLineQuestionAnswersDetail"
 import TextBaseNewLineQuestionAnswersDetail from "./questionAnswersDetail/TextBaseNewLineQuestionAnswersDetail"
 import OptionsSelectionInLineQuestionAnswersDetail from "./questionAnswersDetail/OptionsSelectionInLineQuestionAnswersDetail"
 import OptionsSelectionNewLineQuestionAnswersDetail from "./questionAnswersDetail/OptionsSelectionNewLineQuestionAnswersDetail"
 import TextBasedInLineMultipleQuestionTypeQuestionAnswersDetail from "./questionAnswersDetail/TextBasedInLineMultipleQuestionTypeQuestionAnswersDetail"
-import { multiChoicesQuestionType, optionsSelectionNewLineQuestionType, textBasedInlineQuestionType } from "../../../helper/constants"
+import { multiChoicesQuestionType, optionsSelectionNewLineQuestionType, textBasedInLineMultipleQuestionType, textBasedInlineQuestionType } from "../../../helper/constants"
 
 const QuestionAnswersDetail = () => {
     const { questionType } = useRecordContext<Question>()

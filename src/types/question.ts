@@ -43,10 +43,16 @@ export type TextBasedInlineQuestionType =
     | Flowchart
     | Diagram
 
+export type SentenceCompletionParagraph = 'Sentence Completion Paragraph'
+
+export type TextBasedInLineMultipleQuestionType =
+    | SentenceCompletionParagraph
+
 export type QuestionType =
     | ChoiceBasedQuestionType
     | OptionsSelectionNewLineQuestionType
     | TextBasedInlineQuestionType
+    | TextBasedInLineMultipleQuestionType
 
 export const textBasedNewLineQuestionType = [
     'Short-answer questions Paragraph',
@@ -57,6 +63,3 @@ export const optionsSelectionInLineQuestionType = [
     'Summary Completion Select Words'
 ] as const
 
-export const textBasedInLineMultipleQuestionType = [
-    'Sentence Completion Paragraph'
-] as const

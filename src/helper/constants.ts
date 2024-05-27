@@ -1,4 +1,4 @@
-import { ChoiceBasedQuestionType, OptionsSelectionNewLineQuestionType, QuestionType, TextBasedInlineQuestionType } from "../types/question"
+import { ChoiceBasedQuestionType, OptionsSelectionNewLineQuestionType, QuestionType, TextBasedInLineMultipleQuestionType, TextBasedInlineQuestionType } from "../types/question"
 
 export const yesNoNotGiven = [
     "Yes",
@@ -34,11 +34,15 @@ export const textBasedInlineQuestionType: TextBasedInlineQuestionType[] = [
     'Diagram'
 ] as const
 
+export const textBasedInLineMultipleQuestionType: TextBasedInLineMultipleQuestionType[] = [
+    'Sentence Completion Paragraph'
+] as const
+
 export const allQuestionType: QuestionType[] = [
     ...multiChoicesQuestionType,
     ...optionsSelectionNewLineQuestionType,
     // ...optionsSelectionInLineQuestionType,
     ...textBasedInlineQuestionType,
     // ...textBasedNewLineQuestionType,
-    // ...textBasedInLineMultipleQuestionType
+    ...textBasedInLineMultipleQuestionType
 ] as const

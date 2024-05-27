@@ -1,5 +1,5 @@
 import { FormQuestion } from "../types/form"
-import { optionsSelectionNewLineQuestionType, trueFalseNotGiven, yesNoNotGiven } from "./constants"
+import { optionsSelectionNewLineQuestionType, textBasedInLineMultipleQuestionType, trueFalseNotGiven, yesNoNotGiven } from "./constants"
 import { isOneOf } from "./typeguard"
 
 export const convertFormQuestions = (formQuestions: FormQuestion) => {
@@ -32,10 +32,21 @@ export const convertFormQuestions = (formQuestions: FormQuestion) => {
         }
     }
 
-    if (isOneOf(optionsSelectionNewLineQuestionType)(formQuestions.questionType)) {
+    if (formQuestions.questionType === 'Matching Features'
+        || formQuestions.questionType === 'Matching Heading'
+        || formQuestions.questionType === 'Matching Sentence Endings'
+        || formQuestions.questionType === 'Which Paragraph Contains'
+    ) {
         return {
             ...rest,
             questionAnswers: fromOptionsSelectionNewLine(formQuestions.questionAnswers)
+        }
+    }
+
+    if (formQuestions.questionType === 'Sentence Completion Paragraph') {
+        return {
+            ...rest,
+            questionAnswers: fromTextBasedInLineMultipleQuestions(formQuestions.questionAnswers)
         }
     }
 
@@ -90,5 +101,12 @@ const fromOptionsSelectionNewLine = (questionAnswers: {
         answerOptions: questionAnswers.options,
         questions: questionAnswers.questions.map(question => question.question),
         answers: questionAnswers.questions.map(question => question.answer),
+    }
+}
+
+const fromTextBasedInLineMultipleQuestions = (questionAnswers: Array<{ summary: string, answer: string }>) => {
+    return {
+        summary: questionAnswers.map(({ summary }) => summary),
+        answers: questionAnswers.map(({ answer }) => answer),
     }
 }
