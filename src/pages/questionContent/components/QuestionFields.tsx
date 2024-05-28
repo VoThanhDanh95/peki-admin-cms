@@ -1,13 +1,13 @@
-import { Labeled, NumberField, SimpleShowLayout, TextField, useRecordContext } from "react-admin";
-import QuestionAnswersDetail from "./QuestionAnswersDetail";
-import { Accordion, Typography } from '@mui/material';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { QuestionContent } from "../../../types/questionContent";
+import { Accordion, Typography } from '@mui/material';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import { Labeled, NumberField, SimpleShowLayout, TextField, useRecordContext } from "react-admin";
+import { Question } from "../../../types/question";
+import QuestionAnswersDetail from "./QuestionAnswersDetail";
 
 const QuestionFields = () => {
-    const record = useRecordContext<QuestionContent>()
+    const record = useRecordContext<Question>()
 
     return (
         <Accordion>

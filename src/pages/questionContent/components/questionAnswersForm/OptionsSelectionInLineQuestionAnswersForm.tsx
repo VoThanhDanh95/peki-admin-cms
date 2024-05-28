@@ -24,7 +24,7 @@ const OptionsSelectionInLineQuestionAnswersForm = () => {
                 </SimpleFormIterator>
             </ArrayInput>
             <ArrayInput label="Answers" source={`questions.${index}.questionAnswers.answers`}>
-                <SimpleFormIterator fullWidth>
+                <SimpleFormIterator fullWidth addButton={<Button label="Add answer" />}>
                     <SelectInput
                         choices={options?.map(option => ({
                             id: option,

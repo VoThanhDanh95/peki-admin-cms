@@ -1,4 +1,4 @@
-import { MultipleChoicesQuestionAnswer, OptionsSelectionNewLineQuestionAnswer, TextBasedInLineMultipleQuestionQuestionAnswer, TextBasedInLineQuestionAnswer, TextBasedNewLineQuestionAnswer } from "./questionAnswer"
+import { MultipleChoicesQuestionAnswer, OptionsSelectionInLineQuestionAnswer, OptionsSelectionNewLineQuestionAnswer, TextBasedInLineMultipleQuestionQuestionAnswer, TextBasedInLineQuestionAnswer, TextBasedNewLineQuestionAnswer } from "./questionAnswer"
 
 export type QuestionBase = {
     id: string
@@ -26,6 +26,10 @@ export type OptionsSelectionNewLineQuestionType =
     | MatchingSentenceEndings
     | WhichParagraphContains
 
+export type SummaryCompletionSelectWords = 'Summary Completion Select Words'
+export type OptionsSelectionInLineQuestionType =
+    | SummaryCompletionSelectWords
+
 export type SentenceCompletionOneTwoSentence = 'Sentence Completion One-Two Sentence'
 export type SummaryCompletionFillWords = 'Summary Completion Fill Words'
 export type Table = 'Table'
@@ -48,10 +52,6 @@ export type TextBasedNewLineQuestionType =
     | ShortAnswerQuestionsParagraph
     | ShortAnswerQuestionsOneTwoSentence
 
-export type SummaryCompletionSelectWords = 'Summary Completion Select Words'
-export type OptionsSelectionInLineQuestionType =
-    | SummaryCompletionSelectWords
-
 export type QuestionType =
     | ChoiceBasedQuestionType
     | OptionsSelectionInLineQuestionType
@@ -68,6 +68,11 @@ type MultipleChoicesQuestion = QuestionBase & {
 type OptionsSelectionNewLineQuestion = QuestionBase & {
     questionType: OptionsSelectionNewLineQuestionType
     questionAnswers: OptionsSelectionNewLineQuestionAnswer
+}
+
+type OptionsSelectioInLineQuestion = QuestionBase & {
+    questionType: OptionsSelectionInLineQuestionType
+    questionAnswers: OptionsSelectionInLineQuestionAnswer
 }
 
 type TextBasedInlineQuestion = QuestionBase & {
@@ -88,6 +93,7 @@ type TextBasedInLineMultipleQuestionQuestion = QuestionBase & {
 export type Question =
     | MultipleChoicesQuestion
     | OptionsSelectionNewLineQuestion
+    | OptionsSelectioInLineQuestion
     | TextBasedInlineQuestion
     | TextBasedNewLineQuestion
     | TextBasedInLineMultipleQuestionQuestion

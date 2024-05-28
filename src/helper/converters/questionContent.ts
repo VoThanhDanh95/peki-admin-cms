@@ -1,9 +1,9 @@
-import { FormQuestion } from "../types/form"
-import { Question } from "../types/question"
-import { MultipleChoicesQuestionAnswer, OptionsSelectionNewLineQuestionAnswer, TextBasedInLineMultipleQuestionQuestionAnswer, TextBasedNewLineQuestionAnswer } from "../types/questionAnswer"
-import { trueFalseNotGiven, yesNoNotGiven } from "./constants"
+import { FormQuestion } from "../../types/form"
+import { Question } from "../../types/question"
+import { MultipleChoicesQuestionAnswer, OptionsSelectionInLineQuestionAnswer, OptionsSelectionNewLineQuestionAnswer, TextBasedInLineMultipleQuestionQuestionAnswer, TextBasedInLineQuestionAnswer, TextBasedNewLineQuestionAnswer } from "../../types/questionAnswer"
+import { trueFalseNotGiven, yesNoNotGiven } from "../constants"
 
-export const convertFormQuestions = (formQuestions: FormQuestion) => {
+export const fromFormQuestion = (formQuestions: FormQuestion): Omit<Question, 'id'> => {
     const { questionAnswers, ...rest } = formQuestions
     if (formQuestions.questionType === 'Yes/No/Not Given') {
         return {
@@ -44,6 +44,13 @@ export const convertFormQuestions = (formQuestions: FormQuestion) => {
         }
     }
 
+    if (formQuestions.questionType === 'Summary Completion Select Words') {
+        return {
+            ...rest,
+            questionAnswers: fromOptionsSelectionInLineForm(formQuestions.questionAnswers)
+        }
+    }
+
     if (formQuestions.questionType === 'Sentence Completion Paragraph') {
         return {
             ...rest,
@@ -59,7 +66,20 @@ export const convertFormQuestions = (formQuestions: FormQuestion) => {
         }
     }
 
-    return formQuestions
+    if (formQuestions.questionType === 'Diagram'
+        || formQuestions.questionType === 'Flowchart'
+        || formQuestions.questionType === 'Table'
+        || formQuestions.questionType === 'Sentence Completion One-Two Sentence'
+        || formQuestions.questionType === 'Summary Completion Fill Words'
+    ) {
+        return {
+            ...rest,
+            questionAnswers: fromTextBaseInLineForm(formQuestions.questionAnswers)
+        }
+    }
+
+    throw new Error("Unsupported question form");
+
 }
 
 const fromYesNoNotGivenForm = (questionAnswers: { question: string, answer: string }[]): MultipleChoicesQuestionAnswer => {
@@ -113,6 +133,14 @@ const fromOptionsSelectionNewLineForm = (questionAnswers: {
     }
 }
 
+const fromOptionsSelectionInLineForm = (questionAnswers: {
+    summary: string,
+    answerOptions: string[],
+    answers: string[],
+}): OptionsSelectionInLineQuestionAnswer => {
+    return questionAnswers
+}
+
 const fromTextBasedInLineMultipleQuestionsForm = (questionAnswers: Array<{ summary: string, answer: string }>): TextBasedInLineMultipleQuestionQuestionAnswer => {
     return {
         summary: questionAnswers.map(({ summary }) => summary),
@@ -127,11 +155,16 @@ const fromTextBaseNewLineForm = (questionAnswers: { question: string, answer: st
     }
 }
 
-export const convertQuestion = (question: Question) => {
+const fromTextBaseInLineForm = (questionAnswers: { summary: string, answers: string[] }): TextBasedInLineQuestionAnswer => {
+    return questionAnswers
+}
+
+export const toFormQuestion = (question: Question): FormQuestion => {
     const { questionAnswers, ...rest } = question
     if (question.questionType === 'Yes/No/Not Given') {
         return {
             ...rest,
+            questionType: question.questionType,
             questionAnswers: toYesNoNotGivenForm(question.questionAnswers)
         }
     }
@@ -139,6 +172,7 @@ export const convertQuestion = (question: Question) => {
     if (question.questionType === 'True/False/Not Given') {
         return {
             ...rest,
+            questionType: question.questionType,
             questionAnswers: toTrueFalseNotGivenForm(question.questionAnswers)
         }
     }
@@ -146,6 +180,7 @@ export const convertQuestion = (question: Question) => {
     if (question.questionType === 'Multiple Choices One Answer') {
         return {
             ...rest,
+            questionType: question.questionType,
             questionAnswers: toSingleChoiceForm(question.questionAnswers)
         }
     }
@@ -153,6 +188,7 @@ export const convertQuestion = (question: Question) => {
     if (question.questionType === 'Multiple Choices Multiple Answers') {
         return {
             ...rest,
+            questionType: question.questionType,
             questionAnswers: toMultiChoicesForm(question.questionAnswers)
         }
     }
@@ -164,13 +200,23 @@ export const convertQuestion = (question: Question) => {
     ) {
         return {
             ...rest,
+            questionType: question.questionType,
             questionAnswers: toOptionsSelectionNewLineForm(question.questionAnswers)
+        }
+    }
+
+    if (question.questionType === 'Summary Completion Select Words') {
+        return {
+            ...rest,
+            questionType: question.questionType,
+            questionAnswers: toOptionsSelectionInLineForm(question.questionAnswers)
         }
     }
 
     if (question.questionType === 'Sentence Completion Paragraph') {
         return {
             ...rest,
+            questionType: question.questionType,
             questionAnswers: toTextBasedInLineMultipleQuestionsForm(question.questionAnswers)
         }
     }
@@ -180,11 +226,26 @@ export const convertQuestion = (question: Question) => {
     ) {
         return {
             ...rest,
+            questionType: question.questionType,
             questionAnswers: toTextBaseNewLineForm(question.questionAnswers)
         }
     }
 
-    return question
+    if (question.questionType === 'Diagram'
+        || question.questionType === 'Flowchart'
+        || question.questionType === 'Table'
+        || question.questionType === 'Summary Completion Fill Words'
+        || question.questionType === 'Sentence Completion One-Two Sentence'
+    ) {
+        return {
+            ...rest,
+            questionType: question.questionType,
+            questionAnswers: toTextBaseInLineForm(question.questionAnswers)
+        }
+    }
+
+    throw new Error("Unsupported question type");
+
 }
 
 const toYesNoNotGivenForm = (questionAnswers: MultipleChoicesQuestionAnswer): Array<{ question: string, answer: string }> => {
@@ -242,6 +303,14 @@ const toOptionsSelectionNewLineForm = (questionAnswers: OptionsSelectionNewLineQ
     }
 }
 
+const toOptionsSelectionInLineForm = (questionAnswers: OptionsSelectionInLineQuestionAnswer): {
+    summary: string,
+    answerOptions: string[],
+    answers: string[],
+} => {
+    return questionAnswers
+}
+
 const toTextBasedInLineMultipleQuestionsForm = (questionAnswers: TextBasedInLineMultipleQuestionQuestionAnswer): Array<{ summary: string, answer: string }> => {
     const summary = questionAnswers.summary
     const answers = questionAnswers.answers
@@ -260,4 +329,11 @@ const toTextBaseNewLineForm = (questionAnswers: TextBasedNewLineQuestionAnswer):
         question,
         answer: answers[index]
     }))
+}
+
+const toTextBaseInLineForm = (questionAnswers: TextBasedInLineQuestionAnswer): {
+    summary: string,
+    answers: string[],
+} => {
+    return questionAnswers
 }

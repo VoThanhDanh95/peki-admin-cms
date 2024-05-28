@@ -1,4 +1,4 @@
-import { Question, QuestionType } from "./question"
+import { Question } from "./question"
 
 export type SimpleQuestionContent = {
     id: string

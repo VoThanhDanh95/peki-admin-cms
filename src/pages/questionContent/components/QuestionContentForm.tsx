@@ -2,7 +2,7 @@ import { Stack } from '@mui/material'
 import { RichTextInput } from "ra-input-rich-text"
 import { ArrayInput, AutocompleteInput, Button, NumberInput, ReferenceInput, SelectInput, SimpleFormIterator, TabbedForm, TextInput } from "react-admin"
 import QuestionAnswersForm from './QuestionAnswersForm'
-import { convertFormQuestions } from '../../../helper/converters'
+import { fromFormQuestion } from '../../../helper/converters/questionContent'
 import { FormQuestionContent } from '../../../types/form'
 import { allQuestionType } from '../../../helper/constants'
 
@@ -59,7 +59,7 @@ export const transform = (formData: FormQuestionContent) => {
     const { questions, ...rest } = formData
     return {
         ...rest,
-        questions: questions.map(question => convertFormQuestions(question))
+        questions: questions.map(question => fromFormQuestion(question))
     }
 
 }
