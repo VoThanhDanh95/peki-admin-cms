@@ -1,6 +1,5 @@
 import { FormQuestion } from "../types/form"
-import { optionsSelectionNewLineQuestionType, textBasedInLineMultipleQuestionType, trueFalseNotGiven, yesNoNotGiven } from "./constants"
-import { isOneOf } from "./typeguard"
+import { trueFalseNotGiven, yesNoNotGiven } from "./constants"
 
 export const convertFormQuestions = (formQuestions: FormQuestion) => {
     const { questionAnswers, ...rest } = formQuestions
@@ -47,6 +46,14 @@ export const convertFormQuestions = (formQuestions: FormQuestion) => {
         return {
             ...rest,
             questionAnswers: fromTextBasedInLineMultipleQuestions(formQuestions.questionAnswers)
+        }
+    }
+
+    if (formQuestions.questionType === 'Short-answer questions One-Two Sentence'
+        || formQuestions.questionType === 'Short-answer questions Paragraph') {
+        return {
+            ...rest,
+            questionAnswers: fromTextBaseNewLine(formQuestions.questionAnswers)
         }
     }
 
@@ -108,5 +115,12 @@ const fromTextBasedInLineMultipleQuestions = (questionAnswers: Array<{ summary: 
     return {
         summary: questionAnswers.map(({ summary }) => summary),
         answers: questionAnswers.map(({ answer }) => answer),
+    }
+}
+
+const fromTextBaseNewLine = (questionAnswers: { question: string, answer: string }[]) => {
+    return {
+        questions: questionAnswers.map(({ question }) => question),
+        answers: questionAnswers.map(({ answer }) => answer)
     }
 }

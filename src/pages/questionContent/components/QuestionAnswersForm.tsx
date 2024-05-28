@@ -3,10 +3,11 @@ import { useWatch } from 'react-hook-form'
 import { isOneOf } from "../../../helper/typeguard";
 import MultipleChoicesQuestionAnswersForm from "./questionAnswersForm/MultipleChoicesQuestionAnswersForm";
 import { useSimpleFormIteratorItem } from "react-admin";
-import { multiChoicesQuestionType, optionsSelectionNewLineQuestionType, textBasedInLineMultipleQuestionType, textBasedInlineQuestionType } from "../../../helper/constants";
+import { choiceBasedQuestionType, optionsSelectionNewLineQuestionType, textBasedInLineMultipleQuestionType, textBasedInlineQuestionType, textBasedNewLineQuestionType } from "../../../helper/constants";
 import OptionsSelectionNewLineQuestionAnswersForm from "./questionAnswersForm/OptionsSelectionNewLineQuestionAnswersForm";
 import TextBaseInLineQuestionAnswersForm from "./questionAnswersForm/TextBaseInLineQuestionAnswersForm";
 import TextBasedInLineMultipleQuestionsQuestionAnswersForm from "./questionAnswersForm/TextBasedInLineMultipleQuestionsQuestionAnswersForm";
+import TextBaseNewLineQuestionAnswersForm from "./questionAnswersForm/TextBaseNewLineQuestionAnswersForm";
 
 const QuestionAnswersForm = () => {
     const { index } = useSimpleFormIteratorItem()
@@ -18,14 +19,10 @@ const QuestionAnswersForm = () => {
     //     )
     // }
 
-    // if (isOneOf(textBasedNewLineQuestionType)(scopedFormData?.questionType)) {
-    //     return (
-    //         <TextBaseNewLineQuestionAnswersCreate />
-    //     )
-    // }
+
 
     return useMemo(() => {
-        if (isOneOf(multiChoicesQuestionType)(questionType)) {
+        if (isOneOf(choiceBasedQuestionType)(questionType)) {
             return (
                 <MultipleChoicesQuestionAnswersForm />
             )
@@ -46,6 +43,12 @@ const QuestionAnswersForm = () => {
         if (isOneOf(textBasedInLineMultipleQuestionType)(questionType)) {
             return (
                 <TextBasedInLineMultipleQuestionsQuestionAnswersForm />
+            )
+        }
+
+        if (isOneOf(textBasedNewLineQuestionType)(questionType)) {
+            return (
+                <TextBaseNewLineQuestionAnswersForm />
             )
         }
 

@@ -1,6 +1,6 @@
 import { RichTextInput } from "ra-input-rich-text"
 import { useEffect } from "react"
-import { ArrayInput, SimpleFormIterator, TextInput, useSimpleFormIteratorItem } from "react-admin"
+import { ArrayInput, Button, SimpleFormIterator, TextInput, useSimpleFormIteratorItem } from "react-admin"
 import { useFormContext, useWatch } from 'react-hook-form'
 
 const TextBaseInLineQuestionAnswersForm = () => {
@@ -15,9 +15,9 @@ const TextBaseInLineQuestionAnswersForm = () => {
 
     return (
         <>
-            <RichTextInput label="summary" source={`questions.${index}.questionAnswers.summary`} fullWidth />
-            <ArrayInput label="answers" source={`questions.${index}.questionAnswers.answers`}>
-                <SimpleFormIterator fullWidth>
+            <RichTextInput label="Summary" source={`questions.${index}.questionAnswers.summary`} fullWidth />
+            <ArrayInput label="Answers" source={`questions.${index}.questionAnswers.answers`}>
+                <SimpleFormIterator fullWidth addButton={<Button label="Add answer" />}>
                     <TextInput source="" fullWidth />
                 </SimpleFormIterator>
             </ArrayInput>

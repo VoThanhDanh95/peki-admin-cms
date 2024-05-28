@@ -89,14 +89,11 @@ export const dataProvider: DataProvider = {
         throw new Error("Function not implemented.");
     },
     create: async function <RecordType extends Omit<RaRecord<Identifier>, "id"> = any, ResultRecordType extends RaRecord<Identifier> = RecordType & { id: Identifier; }>(resource: string, params: CreateParams<any>): Promise<CreateResult<ResultRecordType>> {
-        // const { json } = await fetchJson(`${apiUrl}/${resource}`, {
-        //     method: 'POST',
-        //     body: JSON.stringify(params.data),
-        // })
-        // return { data: json };
-        console.log(params.data);
-
-        throw new Error("Function not implemented.");
+        const { json } = await fetchJson(`${apiUrl}/${resource}`, {
+            method: 'POST',
+            body: JSON.stringify(params.data),
+        })
+        return { data: json };
     },
     delete: async function <RecordType extends RaRecord<Identifier> = any>(resource: string, params: DeleteParams<RecordType>): Promise<DeleteResult<RecordType>> {
         const url = `${apiUrl}/${resource}/${params.id}`;

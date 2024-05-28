@@ -1,5 +1,5 @@
 import { trueFalseNotGiven, yesNoNotGiven } from "../helper/constants"
-import { MultipleChoicesMultipleAnswers, MultipleChoicesOneAnswer, OptionsSelectionNewLineQuestionType, TextBasedInLineMultipleQuestionType, TrueFalseNotGiven, YesNoNotGiven } from "./question"
+import { MultipleChoicesMultipleAnswers, MultipleChoicesOneAnswer, OptionsSelectionNewLineQuestionType, TextBasedInLineMultipleQuestionType, TextBasedNewLineQuestionType, TrueFalseNotGiven, YesNoNotGiven } from "./question"
 
 type YesNoNotGivenAnswer = typeof yesNoNotGiven[number]
 type TrueFalseNotGivenAnswer = typeof trueFalseNotGiven[number]
@@ -17,8 +17,9 @@ export type FormQuestion =
     | FormTrueFalseNotGivenQuestion
     | FormMultipleChoicesOneAnswerQuestion
     | FormMultipleChoicesMultipleAnswersQuestion
-    | FormOptionsSelectionNewLineAnswersQuestion
+    | FormOptionsSelectionNewLineQuestion
     | FormTextBasedInLineMultipleQuestionsQuestion
+    | FormTextBaseNewLineQuestion
 
 type FormBaseQuestion = {
     level: number
@@ -45,7 +46,7 @@ type FormMultipleChoicesMultipleAnswersQuestion = FormBaseQuestion & {
     questionAnswers: Array<{ question: string, options: Array<{ option: string, isAnswer: boolean }> }>
 }
 
-type FormOptionsSelectionNewLineAnswersQuestion = FormBaseQuestion & {
+type FormOptionsSelectionNewLineQuestion = FormBaseQuestion & {
     questionType: OptionsSelectionNewLineQuestionType
     questionAnswers: {
         options: string[]
@@ -56,4 +57,9 @@ type FormOptionsSelectionNewLineAnswersQuestion = FormBaseQuestion & {
 type FormTextBasedInLineMultipleQuestionsQuestion = FormBaseQuestion & {
     questionType: TextBasedInLineMultipleQuestionType
     questionAnswers: Array<{ summary: string, answer: string }>
+}
+
+type FormTextBaseNewLineQuestion = FormBaseQuestion & {
+    questionType: TextBasedNewLineQuestionType
+    questionAnswers: Array<{ question: string, answer: string }>
 }

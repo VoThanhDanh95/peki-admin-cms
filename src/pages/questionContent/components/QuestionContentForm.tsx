@@ -1,6 +1,6 @@
 import { Stack } from '@mui/material'
 import { RichTextInput } from "ra-input-rich-text"
-import { ArrayInput, Button, NumberInput, SelectInput, SimpleFormIterator, TabbedForm, TextInput } from "react-admin"
+import { ArrayInput, AutocompleteInput, Button, NumberInput, ReferenceInput, SelectInput, SimpleFormIterator, TabbedForm, TextInput } from "react-admin"
 import QuestionAnswersForm from './QuestionAnswersForm'
 import { convertFormQuestions } from '../../../helper/converters'
 import { FormQuestionContent } from '../../../types/form'
@@ -22,6 +22,13 @@ const QuestionContentForm = () => {
                         <TextInput source="" fullWidth />
                     </SimpleFormIterator>
                 </ArrayInput>
+                <ReferenceInput source="exerciseId" reference="exercises">
+                    <AutocompleteInput
+                        label="Exercise"
+                        optionText="name"
+                        filterToQuery={searchText => ({ name: searchText })}
+                    />
+                </ReferenceInput>
             </TabbedForm.Tab>
             <TabbedForm.Tab label="Questions">
                 <ArrayInput source="questions" label={false} fullWidth>

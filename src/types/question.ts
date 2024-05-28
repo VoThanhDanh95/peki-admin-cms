@@ -48,16 +48,19 @@ export type SentenceCompletionParagraph = 'Sentence Completion Paragraph'
 export type TextBasedInLineMultipleQuestionType =
     | SentenceCompletionParagraph
 
+export type ShortAnswerQuestionsParagraph = 'Short-answer questions Paragraph'
+export type ShortAnswerQuestionsOneTwoSentence = 'Short-answer questions One-Two Sentence'
+
+export type TextBasedNewLineQuestionType =
+    | ShortAnswerQuestionsParagraph
+    | ShortAnswerQuestionsOneTwoSentence
+
 export type QuestionType =
     | ChoiceBasedQuestionType
     | OptionsSelectionNewLineQuestionType
     | TextBasedInlineQuestionType
     | TextBasedInLineMultipleQuestionType
-
-export const textBasedNewLineQuestionType = [
-    'Short-answer questions Paragraph',
-    'Short-answer questions One-Two Sentence'
-] as const
+    | TextBasedNewLineQuestionType
 
 export const optionsSelectionInLineQuestionType = [
     'Summary Completion Select Words'

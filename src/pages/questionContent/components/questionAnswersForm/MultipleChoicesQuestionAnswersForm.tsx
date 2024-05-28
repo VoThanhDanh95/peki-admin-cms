@@ -51,7 +51,7 @@ const MultipleChoicesQuestionAnswersForm = () => {
             <SimpleFormIterator fullWidth addButton={<Button label="Add question" />}>
                 <TextInput source='question' fullWidth />
                 <ArrayInput label="Options" source='options'>
-                    <SimpleFormIterator fullWidth inline>
+                    <SimpleFormIterator fullWidth inline addButton={<Button label="Add option" />}>
                         <TextInput source="option" />
                         <BooleanInput source="isAnswer" />
                     </SimpleFormIterator>
