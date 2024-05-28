@@ -1,39 +1,39 @@
-export type MultipleChoices = {
+export type MultipleChoicesQuestionAnswer = {
     questions: {
         question: string
         answerOptions: string[]
     }[],
     answers: string[]
 }
-export type TextBaseInLine = {
+export type TextBasedInLineQuestionAnswer = {
     summary: string,
     answers: string[],
 }
-export type TextBaseNewLine = {
+export type TextBasedNewLineQuestionAnswer = {
     questions: string[]
     answers: string[]
 }
-export type OptionsSelectionInLine = {
+export type OptionsSelectionInLineQuestionAnswer = {
     summary: string,
     answerOptions: string[],
     answers: string[],
 }
 
-export type OptionsSelectionNewLine = {
+export type OptionsSelectionNewLineQuestionAnswer = {
     questions: string[]
     answerOptions: string[],
     answers: string[]
 }
 
-export type TextBaseInLineMultipleQuestion = {
+export type TextBasedInLineMultipleQuestionQuestionAnswer = {
     summary: string[],
     answers: string[],
 }
 
 export type QuestionAnswer =
-    MultipleChoices |
-    TextBaseInLine |
-    TextBaseNewLine |
-    OptionsSelectionInLine |
-    OptionsSelectionNewLine |
-    TextBaseInLineMultipleQuestion
+    | MultipleChoicesQuestionAnswer
+    | TextBasedInLineQuestionAnswer
+    | TextBasedNewLineQuestionAnswer
+    | OptionsSelectionInLineQuestionAnswer
+    | OptionsSelectionNewLineQuestionAnswer
+    | TextBasedInLineMultipleQuestionQuestionAnswer

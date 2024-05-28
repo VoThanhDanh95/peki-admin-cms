@@ -1,11 +1,9 @@
-import { QuestionAnswer } from "./questionAnswer"
+import { MultipleChoicesQuestionAnswer, OptionsSelectionNewLineQuestionAnswer, TextBasedInLineMultipleQuestionQuestionAnswer, TextBasedInLineQuestionAnswer, TextBasedNewLineQuestionAnswer } from "./questionAnswer"
 
-export type Question = {
+export type QuestionBase = {
     id: string
     level: number
-    questionType: QuestionType
     requirement: string
-    questionAnswers: QuestionAnswer
 }
 
 export type TrueFalseNotGiven = 'True/False/Not Given'
@@ -45,7 +43,7 @@ export type TextBasedInlineQuestionType =
 
 export type SentenceCompletionParagraph = 'Sentence Completion Paragraph'
 
-export type TextBasedInLineMultipleQuestionType =
+export type TextBasedInLineMultipleQuestionsQuestionType =
     | SentenceCompletionParagraph
 
 export type ShortAnswerQuestionsParagraph = 'Short-answer questions Paragraph'
@@ -59,10 +57,42 @@ export type QuestionType =
     | ChoiceBasedQuestionType
     | OptionsSelectionNewLineQuestionType
     | TextBasedInlineQuestionType
-    | TextBasedInLineMultipleQuestionType
+    | TextBasedInLineMultipleQuestionsQuestionType
     | TextBasedNewLineQuestionType
 
 export const optionsSelectionInLineQuestionType = [
     'Summary Completion Select Words'
 ] as const
+
+type MultipleChoicesQuestion = QuestionBase & {
+    questionType: ChoiceBasedQuestionType
+    questionAnswers: MultipleChoicesQuestionAnswer
+}
+
+type OptionsSelectionNewLineQuestion = QuestionBase & {
+    questionType: OptionsSelectionNewLineQuestionType
+    questionAnswers: OptionsSelectionNewLineQuestionAnswer
+}
+
+type TextBasedInlineQuestion = QuestionBase & {
+    questionType: TextBasedInlineQuestionType
+    questionAnswers: TextBasedInLineQuestionAnswer
+}
+
+type TextBasedNewLineQuestion = QuestionBase & {
+    questionType: TextBasedNewLineQuestionType
+    questionAnswers: TextBasedNewLineQuestionAnswer
+}
+
+type TextBasedInLineMultipleQuestionQuestion = QuestionBase & {
+    questionType: TextBasedInLineMultipleQuestionsQuestionType
+    questionAnswers: TextBasedInLineMultipleQuestionQuestionAnswer
+}
+
+export type Question =
+    | MultipleChoicesQuestion
+    | OptionsSelectionNewLineQuestion
+    | TextBasedInlineQuestion
+    | TextBasedNewLineQuestion
+    | TextBasedInLineMultipleQuestionQuestion
 

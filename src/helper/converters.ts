@@ -1,4 +1,6 @@
 import { FormQuestion } from "../types/form"
+import { Question } from "../types/question"
+import { MultipleChoicesQuestionAnswer, OptionsSelectionNewLineQuestionAnswer, TextBasedInLineMultipleQuestionQuestionAnswer, TextBasedNewLineQuestionAnswer } from "../types/questionAnswer"
 import { trueFalseNotGiven, yesNoNotGiven } from "./constants"
 
 export const convertFormQuestions = (formQuestions: FormQuestion) => {
@@ -6,28 +8,28 @@ export const convertFormQuestions = (formQuestions: FormQuestion) => {
     if (formQuestions.questionType === 'Yes/No/Not Given') {
         return {
             ...rest,
-            questionAnswers: fromYesNoNotGiven(formQuestions.questionAnswers)
+            questionAnswers: fromYesNoNotGivenForm(formQuestions.questionAnswers)
         }
     }
 
     if (formQuestions.questionType === 'True/False/Not Given') {
         return {
             ...rest,
-            questionAnswers: fromTrueFalseNotGiven(formQuestions.questionAnswers)
+            questionAnswers: fromTrueFalseNotGivenForm(formQuestions.questionAnswers)
         }
     }
 
     if (formQuestions.questionType === 'Multiple Choices One Answer') {
         return {
             ...rest,
-            questionAnswers: fromSingleChoice(formQuestions.questionAnswers)
+            questionAnswers: fromSingleChoiceForm(formQuestions.questionAnswers)
         }
     }
 
     if (formQuestions.questionType === 'Multiple Choices Multiple Answers') {
         return {
             ...rest,
-            questionAnswers: fromMultiChoices(formQuestions.questionAnswers)
+            questionAnswers: fromMultiChoicesForm(formQuestions.questionAnswers)
         }
     }
 
@@ -38,14 +40,14 @@ export const convertFormQuestions = (formQuestions: FormQuestion) => {
     ) {
         return {
             ...rest,
-            questionAnswers: fromOptionsSelectionNewLine(formQuestions.questionAnswers)
+            questionAnswers: fromOptionsSelectionNewLineForm(formQuestions.questionAnswers)
         }
     }
 
     if (formQuestions.questionType === 'Sentence Completion Paragraph') {
         return {
             ...rest,
-            questionAnswers: fromTextBasedInLineMultipleQuestions(formQuestions.questionAnswers)
+            questionAnswers: fromTextBasedInLineMultipleQuestionsForm(formQuestions.questionAnswers)
         }
     }
 
@@ -53,34 +55,34 @@ export const convertFormQuestions = (formQuestions: FormQuestion) => {
         || formQuestions.questionType === 'Short-answer questions Paragraph') {
         return {
             ...rest,
-            questionAnswers: fromTextBaseNewLine(formQuestions.questionAnswers)
+            questionAnswers: fromTextBaseNewLineForm(formQuestions.questionAnswers)
         }
     }
 
     return formQuestions
 }
 
-const fromYesNoNotGiven = (questionAnswers: { question: string, answer: string }[]) => {
+const fromYesNoNotGivenForm = (questionAnswers: { question: string, answer: string }[]): MultipleChoicesQuestionAnswer => {
     return {
         questions: questionAnswers.map(questionAnswer => ({
             question: questionAnswer.question,
-            answerOptions: yesNoNotGiven
+            answerOptions: yesNoNotGiven.slice()
         })),
         answers: questionAnswers.map(questionAnswer => questionAnswer.answer)
     }
 }
 
-const fromTrueFalseNotGiven = (questionAnswers: { question: string, answer: string }[]) => {
+const fromTrueFalseNotGivenForm = (questionAnswers: { question: string, answer: string }[]): MultipleChoicesQuestionAnswer => {
     return {
         questions: questionAnswers.map(questionAnswer => ({
             question: questionAnswer.question,
-            answerOptions: trueFalseNotGiven
+            answerOptions: trueFalseNotGiven.slice()
         })),
         answers: questionAnswers.map(questionAnswer => questionAnswer.answer)
     }
 }
 
-const fromSingleChoice = (questionAnswers: { question: string, options: Array<{ option: string, isAnswer: boolean }> }[]) => {
+const fromSingleChoiceForm = (questionAnswers: { question: string, options: Array<{ option: string, isAnswer: boolean }> }[]): MultipleChoicesQuestionAnswer => {
     return {
         questions: questionAnswers.map(questionAnswer => ({
             question: questionAnswer.question,
@@ -90,7 +92,7 @@ const fromSingleChoice = (questionAnswers: { question: string, options: Array<{ 
     }
 }
 
-const fromMultiChoices = (questionAnswers: { question: string, options: Array<{ option: string, isAnswer: boolean }> }[]) => {
+const fromMultiChoicesForm = (questionAnswers: { question: string, options: Array<{ option: string, isAnswer: boolean }> }[]): MultipleChoicesQuestionAnswer => {
     return {
         questions: questionAnswers.map(questionAnswer => ({
             question: questionAnswer.question,
@@ -100,10 +102,10 @@ const fromMultiChoices = (questionAnswers: { question: string, options: Array<{ 
     }
 }
 
-const fromOptionsSelectionNewLine = (questionAnswers: {
+const fromOptionsSelectionNewLineForm = (questionAnswers: {
     options: string[]
     questions: Array<{ question: string, answer: string }>
-}) => {
+}): OptionsSelectionNewLineQuestionAnswer => {
     return {
         answerOptions: questionAnswers.options,
         questions: questionAnswers.questions.map(question => question.question),
@@ -111,16 +113,151 @@ const fromOptionsSelectionNewLine = (questionAnswers: {
     }
 }
 
-const fromTextBasedInLineMultipleQuestions = (questionAnswers: Array<{ summary: string, answer: string }>) => {
+const fromTextBasedInLineMultipleQuestionsForm = (questionAnswers: Array<{ summary: string, answer: string }>): TextBasedInLineMultipleQuestionQuestionAnswer => {
     return {
         summary: questionAnswers.map(({ summary }) => summary),
         answers: questionAnswers.map(({ answer }) => answer),
     }
 }
 
-const fromTextBaseNewLine = (questionAnswers: { question: string, answer: string }[]) => {
+const fromTextBaseNewLineForm = (questionAnswers: { question: string, answer: string }[]): TextBasedNewLineQuestionAnswer => {
     return {
         questions: questionAnswers.map(({ question }) => question),
         answers: questionAnswers.map(({ answer }) => answer)
     }
+}
+
+export const convertQuestion = (question: Question) => {
+    const { questionAnswers, ...rest } = question
+    if (question.questionType === 'Yes/No/Not Given') {
+        return {
+            ...rest,
+            questionAnswers: toYesNoNotGivenForm(question.questionAnswers)
+        }
+    }
+
+    if (question.questionType === 'True/False/Not Given') {
+        return {
+            ...rest,
+            questionAnswers: toTrueFalseNotGivenForm(question.questionAnswers)
+        }
+    }
+
+    if (question.questionType === 'Multiple Choices One Answer') {
+        return {
+            ...rest,
+            questionAnswers: toSingleChoiceForm(question.questionAnswers)
+        }
+    }
+
+    if (question.questionType === 'Multiple Choices Multiple Answers') {
+        return {
+            ...rest,
+            questionAnswers: toMultiChoicesForm(question.questionAnswers)
+        }
+    }
+
+    if (question.questionType === 'Matching Features'
+        || question.questionType === 'Matching Heading'
+        || question.questionType === 'Matching Sentence Endings'
+        || question.questionType === 'Which Paragraph Contains'
+    ) {
+        return {
+            ...rest,
+            questionAnswers: toOptionsSelectionNewLineForm(question.questionAnswers)
+        }
+    }
+
+    if (question.questionType === 'Sentence Completion Paragraph') {
+        return {
+            ...rest,
+            questionAnswers: toTextBasedInLineMultipleQuestionsForm(question.questionAnswers)
+        }
+    }
+
+    if (question.questionType === 'Short-answer questions One-Two Sentence'
+        || question.questionType === 'Short-answer questions Paragraph'
+    ) {
+        return {
+            ...rest,
+            questionAnswers: toTextBaseNewLineForm(question.questionAnswers)
+        }
+    }
+
+    return question
+}
+
+const toYesNoNotGivenForm = (questionAnswers: MultipleChoicesQuestionAnswer): Array<{ question: string, answer: string }> => {
+    const answers = questionAnswers.answers
+    return questionAnswers.questions.map(({ question }, index) => ({
+        question,
+        answer: answers[index]
+    }))
+}
+
+const toTrueFalseNotGivenForm = (questionAnswers: MultipleChoicesQuestionAnswer): Array<{ question: string, answer: string }> => {
+    const answers = questionAnswers.answers
+    return questionAnswers.questions.map(({ question }, index) => ({
+        question,
+        answer: answers[index]
+    }))
+}
+
+const toSingleChoiceForm = (questionAnswers: MultipleChoicesQuestionAnswer): Array<{ question: string, options: Array<{ option: string, isAnswer: boolean }> }> => {
+    const answers = questionAnswers.answers
+    return questionAnswers.questions.map(({ question, answerOptions }, index) => ({
+        question,
+        options: answerOptions.map(option => ({
+            option,
+            isAnswer: option === answers[index]
+        }))
+    }))
+}
+
+const toMultiChoicesForm = (questionAnswers: MultipleChoicesQuestionAnswer): Array<{ question: string, options: Array<{ option: string, isAnswer: boolean }> }> => {
+    const answers = questionAnswers.answers
+    return questionAnswers.questions.map(({ question, answerOptions }, index) => ({
+        question,
+        options: answerOptions.map(option => ({
+            option,
+            isAnswer: option === answers[index]
+        }))
+    }))
+}
+
+const toOptionsSelectionNewLineForm = (questionAnswers: OptionsSelectionNewLineQuestionAnswer): {
+    options: string[]
+    questions: Array<{ question: string, answer: string }>
+} => {
+    const answers = questionAnswers.answers
+    const questions = questionAnswers.questions
+    const options = questionAnswers.answerOptions
+
+    return {
+        options,
+        questions: questions.map((question, index) => ({
+            question,
+            answer: answers[index]
+        }))
+    }
+}
+
+const toTextBasedInLineMultipleQuestionsForm = (questionAnswers: TextBasedInLineMultipleQuestionQuestionAnswer): Array<{ summary: string, answer: string }> => {
+    const summary = questionAnswers.summary
+    const answers = questionAnswers.answers
+
+    return summary.map((sum, index) => ({
+        summary: sum,
+        answer: answers[index]
+    }))
+}
+
+const toTextBaseNewLineForm = (questionAnswers: TextBasedNewLineQuestionAnswer): Array<{ question: string, answer: string }> => {
+    const questions = questionAnswers.questions
+    const answers = questionAnswers.answers
+
+    return questions.map((question, index) => ({
+        question,
+        answer: answers[index]
+    }))
 }

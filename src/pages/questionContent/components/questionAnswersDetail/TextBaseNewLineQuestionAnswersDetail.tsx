@@ -1,7 +1,7 @@
 import { Box, Stack, Typography } from '@mui/material';
 import { FunctionField, Labeled } from "react-admin";
 import { Question } from "../../../../types/question";
-import { TextBaseNewLine } from "../../../../types/questionAnswer";
+import { TextBasedNewLineQuestionAnswer } from "../../../../types/questionAnswer";
 
 const TextBaseNewLineQuestionAnswersDetail = () => {
     return (
@@ -10,7 +10,7 @@ const TextBaseNewLineQuestionAnswersDetail = () => {
                 <FunctionField
                     label="Questions"
                     render={(r: Question) => {
-                        const questions = (r.questionAnswers as TextBaseNewLine).questions
+                        const questions = (r.questionAnswers as TextBasedNewLineQuestionAnswer).questions
                         const answers = r.questionAnswers.answers;
 
                         return questions.map((question, index) => {

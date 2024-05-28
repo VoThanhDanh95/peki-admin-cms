@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import { FunctionField, Labeled } from "react-admin";
 import { Question } from "../../../../types/question";
-import { MultipleChoices } from "../../../../types/questionAnswer";
+import { MultipleChoicesQuestionAnswer } from "../../../../types/questionAnswer";
 
 const MultipleChoicesQuestionAnswersDetail = () => {
     return (
@@ -9,7 +9,7 @@ const MultipleChoicesQuestionAnswersDetail = () => {
             <FunctionField
                 label="Questions"
                 render={(r: Question) => {
-                    const questionsAndOptions = (r.questionAnswers as MultipleChoices).questions
+                    const questionsAndOptions = (r.questionAnswers as MultipleChoicesQuestionAnswer).questions
                     const answers = r.questionAnswers.answers
 
                     return questionsAndOptions.map(({ question, answerOptions }, index) => {

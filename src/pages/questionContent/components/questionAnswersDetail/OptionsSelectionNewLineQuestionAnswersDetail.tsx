@@ -1,7 +1,7 @@
 import { Box, Stack, Typography } from '@mui/material';
 import { FunctionField, Labeled } from "react-admin";
 import { Question } from "../../../../types/question";
-import { OptionsSelectionNewLine } from "../../../../types/questionAnswer";
+import { OptionsSelectionNewLineQuestionAnswer } from "../../../../types/questionAnswer";
 
 const OptionsSelectionNewLineQuestionAnswersDetail = () => {
     return (
@@ -9,14 +9,14 @@ const OptionsSelectionNewLineQuestionAnswersDetail = () => {
             <Labeled color="primary.main" fullWidth>
                 <FunctionField
                     label="Options"
-                    render={(r: Question) => (r.questionAnswers as OptionsSelectionNewLine).answerOptions.map((option, index) => <div key={index}>{`${index + 1}. ${option}`}</div>)}
+                    render={(r: Question) => (r.questionAnswers as OptionsSelectionNewLineQuestionAnswer).answerOptions.map((option, index) => <div key={index}>{`${index + 1}. ${option}`}</div>)}
                 />
             </Labeled>
             <Labeled color="primary.main" fullWidth>
                 <FunctionField
                     label="Questions"
                     render={(r: Question) => {
-                        const questions = (r.questionAnswers as OptionsSelectionNewLine).questions
+                        const questions = (r.questionAnswers as OptionsSelectionNewLineQuestionAnswer).questions
                         const answers = r.questionAnswers.answers
 
                         return questions.map((question, index) => {

@@ -5,7 +5,7 @@ export type SimpleQuestionContent = {
     content: string
     level: number
     topic: string
-    questions: object[]
+    questions: Question[]
     grammars: string[]
     exerciseId: string
     createAt: number

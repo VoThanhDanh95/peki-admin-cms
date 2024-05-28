@@ -1,7 +1,7 @@
 import { Box, Stack, Typography } from '@mui/material';
 import { FunctionField, Labeled, RichTextField } from "react-admin";
 import { Question } from "../../../../types/question";
-import { TextBaseInLineMultipleQuestion } from "../../../../types/questionAnswer";
+import { TextBasedInLineMultipleQuestionQuestionAnswer } from "../../../../types/questionAnswer";
 
 const TextBasedInLineMultipleQuestionTypeQuestionAnswersDetail = () => {
     return (
@@ -9,7 +9,7 @@ const TextBasedInLineMultipleQuestionTypeQuestionAnswersDetail = () => {
             <FunctionField
                 label="Questions"
                 render={(r: Question) => {
-                    const summaries = (r.questionAnswers as TextBaseInLineMultipleQuestion).summary
+                    const summaries = (r.questionAnswers as TextBasedInLineMultipleQuestionQuestionAnswer).summary
                     const answers = r.questionAnswers.answers;
 
                     return summaries.map((summary, index) => {

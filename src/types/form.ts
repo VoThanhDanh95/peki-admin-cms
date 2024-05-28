@@ -1,5 +1,5 @@
 import { trueFalseNotGiven, yesNoNotGiven } from "../helper/constants"
-import { MultipleChoicesMultipleAnswers, MultipleChoicesOneAnswer, OptionsSelectionNewLineQuestionType, TextBasedInLineMultipleQuestionType, TextBasedNewLineQuestionType, TrueFalseNotGiven, YesNoNotGiven } from "./question"
+import { MultipleChoicesMultipleAnswers, MultipleChoicesOneAnswer, OptionsSelectionNewLineQuestionType, TextBasedInLineMultipleQuestionsQuestionType, TextBasedNewLineQuestionType, TrueFalseNotGiven, YesNoNotGiven } from "./question"
 
 type YesNoNotGivenAnswer = typeof yesNoNotGiven[number]
 type TrueFalseNotGivenAnswer = typeof trueFalseNotGiven[number]
@@ -55,7 +55,7 @@ type FormOptionsSelectionNewLineQuestion = FormBaseQuestion & {
 }
 
 type FormTextBasedInLineMultipleQuestionsQuestion = FormBaseQuestion & {
-    questionType: TextBasedInLineMultipleQuestionType
+    questionType: TextBasedInLineMultipleQuestionsQuestionType
     questionAnswers: Array<{ summary: string, answer: string }>
 }
 
