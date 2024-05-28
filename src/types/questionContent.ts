@@ -19,6 +19,5 @@ export type QuestionContent = {
     grammars: string[]
     exerciseId: string
     createAt: number
-    questionType: QuestionType
     questions: Question[]
 }

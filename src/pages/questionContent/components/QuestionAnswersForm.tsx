@@ -3,23 +3,16 @@ import { useWatch } from 'react-hook-form'
 import { isOneOf } from "../../../helper/typeguard";
 import MultipleChoicesQuestionAnswersForm from "./questionAnswersForm/MultipleChoicesQuestionAnswersForm";
 import { useSimpleFormIteratorItem } from "react-admin";
-import { choiceBasedQuestionType, optionsSelectionNewLineQuestionType, textBasedInLineMultipleQuestionType, textBasedInlineQuestionType, textBasedNewLineQuestionType } from "../../../helper/constants";
+import { choiceBasedQuestionType, optionsSelectionInLineQuestionType, optionsSelectionNewLineQuestionType, textBasedInLineMultipleQuestionType, textBasedInlineQuestionType, textBasedNewLineQuestionType } from "../../../helper/constants";
 import OptionsSelectionNewLineQuestionAnswersForm from "./questionAnswersForm/OptionsSelectionNewLineQuestionAnswersForm";
 import TextBaseInLineQuestionAnswersForm from "./questionAnswersForm/TextBaseInLineQuestionAnswersForm";
 import TextBasedInLineMultipleQuestionsQuestionAnswersForm from "./questionAnswersForm/TextBasedInLineMultipleQuestionsQuestionAnswersForm";
 import TextBaseNewLineQuestionAnswersForm from "./questionAnswersForm/TextBaseNewLineQuestionAnswersForm";
+import OptionsSelectionInLineQuestionAnswersForm from "./questionAnswersForm/OptionsSelectionInLineQuestionAnswersForm";
 
 const QuestionAnswersForm = () => {
     const { index } = useSimpleFormIteratorItem()
     const questionType = useWatch({ name: `questions.${index}.questionType` })
-
-    // if (isOneOf(optionsSelectionInLineQuestionType)(scopedFormData?.questionType)) {
-    //     return (
-    //         <OptionsSelectionInLineQuestionAnswersCreate />
-    //     )
-    // }
-
-
 
     return useMemo(() => {
         if (isOneOf(choiceBasedQuestionType)(questionType)) {
@@ -49,6 +42,12 @@ const QuestionAnswersForm = () => {
         if (isOneOf(textBasedNewLineQuestionType)(questionType)) {
             return (
                 <TextBaseNewLineQuestionAnswersForm />
+            )
+        }
+
+        if (isOneOf(optionsSelectionInLineQuestionType)(questionType)) {
+            return (
+                <OptionsSelectionInLineQuestionAnswersForm />
             )
         }
 

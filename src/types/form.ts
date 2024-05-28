@@ -19,7 +19,7 @@ export type FormQuestion =
     | FormMultipleChoicesMultipleAnswersQuestion
     | FormOptionsSelectionNewLineQuestion
     | FormTextBasedInLineMultipleQuestionsQuestion
-    | FormTextBaseNewLineQuestion
+    | FormTextBasedNewLineQuestion
 
 type FormBaseQuestion = {
     level: number
@@ -59,7 +59,7 @@ type FormTextBasedInLineMultipleQuestionsQuestion = FormBaseQuestion & {
     questionAnswers: Array<{ summary: string, answer: string }>
 }
 
-type FormTextBaseNewLineQuestion = FormBaseQuestion & {
+type FormTextBasedNewLineQuestion = FormBaseQuestion & {
     questionType: TextBasedNewLineQuestionType
     questionAnswers: Array<{ question: string, answer: string }>
 }

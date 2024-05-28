@@ -10,7 +10,6 @@ export type TrueFalseNotGiven = 'True/False/Not Given'
 export type YesNoNotGiven = 'Yes/No/Not Given'
 export type MultipleChoicesOneAnswer = 'Multiple Choices One Answer'
 export type MultipleChoicesMultipleAnswers = 'Multiple Choices Multiple Answers'
-
 export type ChoiceBasedQuestionType =
     | TrueFalseNotGiven
     | YesNoNotGiven
@@ -21,7 +20,6 @@ export type MatchingHeading = 'Matching Heading'
 export type MatchingFeatures = 'Matching Features'
 export type MatchingSentenceEndings = 'Matching Sentence Endings'
 export type WhichParagraphContains = 'Which Paragraph Contains'
-
 export type OptionsSelectionNewLineQuestionType =
     | MatchingHeading
     | MatchingFeatures
@@ -33,7 +31,6 @@ export type SummaryCompletionFillWords = 'Summary Completion Fill Words'
 export type Table = 'Table'
 export type Flowchart = 'Flowchart'
 export type Diagram = 'Diagram'
-
 export type TextBasedInlineQuestionType =
     | SentenceCompletionOneTwoSentence
     | SummaryCompletionFillWords
@@ -42,27 +39,26 @@ export type TextBasedInlineQuestionType =
     | Diagram
 
 export type SentenceCompletionParagraph = 'Sentence Completion Paragraph'
-
 export type TextBasedInLineMultipleQuestionsQuestionType =
     | SentenceCompletionParagraph
 
 export type ShortAnswerQuestionsParagraph = 'Short-answer questions Paragraph'
 export type ShortAnswerQuestionsOneTwoSentence = 'Short-answer questions One-Two Sentence'
-
 export type TextBasedNewLineQuestionType =
     | ShortAnswerQuestionsParagraph
     | ShortAnswerQuestionsOneTwoSentence
 
+export type SummaryCompletionSelectWords = 'Summary Completion Select Words'
+export type OptionsSelectionInLineQuestionType =
+    | SummaryCompletionSelectWords
+
 export type QuestionType =
     | ChoiceBasedQuestionType
+    | OptionsSelectionInLineQuestionType
     | OptionsSelectionNewLineQuestionType
     | TextBasedInlineQuestionType
     | TextBasedInLineMultipleQuestionsQuestionType
     | TextBasedNewLineQuestionType
-
-export const optionsSelectionInLineQuestionType = [
-    'Summary Completion Select Words'
-] as const
 
 type MultipleChoicesQuestion = QuestionBase & {
     questionType: ChoiceBasedQuestionType
