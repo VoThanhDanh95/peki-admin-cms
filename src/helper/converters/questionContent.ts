@@ -1,4 +1,4 @@
-import { FormQuestion } from "../../types/form"
+import { FormQuestion } from "../../types/forms/questionContent"
 import { Question } from "../../types/question"
 import { MultipleChoicesQuestionAnswer, OptionsSelectionInLineQuestionAnswer, OptionsSelectionNewLineQuestionAnswer, TextBasedInLineMultipleQuestionQuestionAnswer, TextBasedInLineQuestionAnswer, TextBasedNewLineQuestionAnswer } from "../../types/questionAnswer"
 import { trueFalseNotGiven, yesNoNotGiven } from "../constants"

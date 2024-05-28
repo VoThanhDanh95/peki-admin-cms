@@ -3,7 +3,7 @@ import { RichTextInput } from "ra-input-rich-text"
 import { ArrayInput, AutocompleteInput, Button, NumberInput, ReferenceInput, SelectInput, SimpleFormIterator, TabbedForm, TextInput } from "react-admin"
 import QuestionAnswersForm from './QuestionAnswersForm'
 import { fromFormQuestion } from '../../../helper/converters/questionContent'
-import { FormQuestionContent } from '../../../types/form'
+import { FormQuestionContent } from '../../../types/forms/questionContent'
 import { allQuestionType } from '../../../helper/constants'
 
 const QuestionContentForm = () => {

@@ -1,6 +1,4 @@
 import { Stack } from '@mui/material';
-import { format } from "date-fns";
-import { parse } from "date-fns/parse";
 import { BooleanInput, DateInput, FormDataConsumer, NumberInput, SelectInput, SimpleForm, TextInput, useTranslate } from "react-admin";
 
 const modes = ["practice", "test", "custom"] as const
@@ -57,74 +55,6 @@ const ExerciseForm = () => {
             </FormDataConsumer>
         </SimpleForm>
     )
-}
-
-export const encodeData = ({
-    isAlwaysAvailable,
-    startAt,
-    endAt,
-}: {
-    isAlwaysAvailable: boolean,
-    startAt?: string,
-    endAt?: string
-}) => {
-    if (isAlwaysAvailable) {
-        return {
-            startAt: -1,
-            endAt: -1
-        }
-    }
-
-    return {
-        startAt: startAt ? parse(startAt, 'yyyy-MM-dd', new Date()).getTime() : -1,
-        endAt: endAt ? parse(endAt, 'yyyy-MM-dd', new Date()).getTime() : -1
-    }
-}
-
-export const decodeData = ({
-    startAt,
-    endAt,
-    duration
-}: {
-    startAt: number
-    endAt: number
-    duration: number
-}) => {
-
-
-    if (startAt === -1 && endAt === -1) {
-        return {
-            isAlwaysAvailable: true,
-            startAt: undefined,
-            endAt: undefined,
-            duration: duration / 60
-        }
-    }
-
-    if (startAt === -1) {
-        return {
-            isAlwaysAvailable: false,
-            startAt: undefined,
-            endAt: format(new Date(endAt), 'yyyy-MM-dd'),
-            duration: duration / 60
-        }
-    }
-
-    if (endAt === -1) {
-        return {
-            isAlwaysAvailable: false,
-            startAt: format(new Date(startAt), 'yyyy-MM-dd'),
-            endAt: undefined,
-            duration: duration / 60
-        }
-    }
-
-    return {
-        isAlwaysAvailable: false,
-        startAt: format(new Date(startAt), 'yyyy-MM-dd'),
-        endAt: format(new Date(endAt), 'yyyy-MM-dd'),
-        duration: duration / 60
-    }
 }
 
 export default ExerciseForm

@@ -1,8 +1,4 @@
-import { trueFalseNotGiven, yesNoNotGiven } from "../helper/constants"
-import { MultipleChoicesMultipleAnswers, MultipleChoicesOneAnswer, OptionsSelectionInLineQuestionType, OptionsSelectionNewLineQuestionType, TextBasedInLineMultipleQuestionsQuestionType, TextBasedInlineQuestionType, TextBasedNewLineQuestionType, TrueFalseNotGiven, YesNoNotGiven } from "./question"
-
-type YesNoNotGivenAnswer = typeof yesNoNotGiven[number]
-type TrueFalseNotGivenAnswer = typeof trueFalseNotGiven[number]
+import { MultipleChoicesMultipleAnswers, MultipleChoicesOneAnswer, OptionsSelectionInLineQuestionType, OptionsSelectionNewLineQuestionType, TextBasedInLineMultipleQuestionsQuestionType, TextBasedInlineQuestionType, TextBasedNewLineQuestionType, TrueFalseNotGiven, YesNoNotGiven } from "../question"
 
 export type FormQuestionContent = {
     content: string
