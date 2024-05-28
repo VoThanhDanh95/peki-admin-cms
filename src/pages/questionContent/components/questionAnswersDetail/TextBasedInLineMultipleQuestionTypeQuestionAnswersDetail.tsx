@@ -1,7 +1,7 @@
-import { FunctionField, Labeled, SimpleShowLayout } from "react-admin"
-import { TextBaseInLineMultipleQuestion } from "../../../../types/questionAnswer"
-import { Question } from "../../../../types/question"
 import { Box, Stack, Typography } from '@mui/material';
+import { FunctionField, Labeled, RichTextField } from "react-admin";
+import { Question } from "../../../../types/question";
+import { TextBaseInLineMultipleQuestion } from "../../../../types/questionAnswer";
 
 const TextBasedInLineMultipleQuestionTypeQuestionAnswersDetail = () => {
     return (
@@ -14,12 +14,12 @@ const TextBasedInLineMultipleQuestionTypeQuestionAnswersDetail = () => {
 
                     return summaries.map((summary, index) => {
                         return (
-                            <Box key={index}>
-                                <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{`${index + 1}. ${summary}`}</Typography>
+                            <Box key={index} style={{ marginLeft: 10, marginBottom: 5 }}>
+                                <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{`Question #${index + 1}`}</Typography>
+                                <RichTextField record={{ summary }} source="summary" />
                                 <Stack direction='row'>
                                     <Typography
                                         variant="body2"
-                                        style={{ marginLeft: 10 }}
                                         color='info.main'
                                     >
                                         Answer:
