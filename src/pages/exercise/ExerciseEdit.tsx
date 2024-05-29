@@ -4,7 +4,7 @@ import ExerciseForm from "./components/ExerciseForm";
 
 const ExerciseEdit = () => {
     return (
-        <Edit transform={fromFormExercise}>
+        <Edit transform={fromFormExercise} redirect="show">
             <WithRecord render={(exercise) => {
                 return (
                     <RecordContextProvider value={toFormExercise(exercise)}>

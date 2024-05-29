@@ -3,7 +3,7 @@ import QuestionContentForm, { transform } from "./components/QuestionContentForm
 
 const QuestionContentCreate = () => {
     return (
-        <Create transform={transform}>
+        <Create transform={transform} redirect="show">
             <QuestionContentForm />
         </Create>
     )

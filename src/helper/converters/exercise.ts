@@ -1,9 +1,9 @@
 import { format } from "date-fns";
-import { Exercise } from "../../types/exercise";
+import { MutationExercise, Exercise } from "../../types/exercise";
 import { FormExercise } from "../../types/forms/exercise";
 import { parse } from "date-fns/parse";
 
-export const fromFormExercise = (exercise: FormExercise): Omit<Exercise, 'id' | 'createAt'> => {
+export const fromFormExercise = (exercise: FormExercise): MutationExercise => {
     const { isAlwaysAvailable, startAt, endAt, duration, ...rest } = exercise
 
     let parsedStartAt = startAt ? parse(startAt, 'yyyy-MM-dd', new Date()).getTime() : -1
