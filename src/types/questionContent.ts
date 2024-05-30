@@ -21,3 +21,12 @@ export type QuestionContent = {
     createAt: number
     questions: Question[]
 }
+
+export type MutationQuestionContent = {
+    content: string
+    level: number
+    topic: string
+    grammars: string[]
+    exerciseId?: string
+    questions: Omit<Question, 'id'>[]
+}

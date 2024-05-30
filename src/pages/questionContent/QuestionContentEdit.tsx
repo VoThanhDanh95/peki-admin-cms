@@ -1,49 +1,18 @@
-import { RichTextInput } from "ra-input-rich-text"
-import { ArrayInput, Edit, FormDataConsumer, NumberInput, RecordContextProvider, SelectInput, SimpleForm, SimpleFormIterator, TextInput } from "react-admin"
-import QuestionAnswersEdit from "./components/QuestionAnswersEdit"
-import { allQuestionType } from "../../helper/constants"
+import { Edit, RecordContextProvider, WithRecord } from "react-admin"
+import { fromFormQuestionContent, toFormQuestionContent } from "../../helper/converters/questionContent"
+import QuestionContentForm from "./components/QuestionContentForm"
+import { FormQuestionContent } from "../../types/forms/questionContent"
 
 const QuestionContentEdit = () => {
     return (
-        <Edit>
-            <SimpleForm>
-                <RichTextInput source="content" fullWidth />
-                <TextInput source="topic" fullWidth />
-                <NumberInput source="level" fullWidth />
-                <ArrayInput source="grammars" fullWidth>
-                    <SimpleFormIterator>
-                        <TextInput source="" fullWidth />
-                    </SimpleFormIterator>
-                </ArrayInput>
-                <ArrayInput source="questions" fullWidth>
-                    <SimpleFormIterator fullWidth>
-                        <NumberInput source="level" fullWidth />
-                        <SelectInput
-                            source="questionType"
-                            choices={allQuestionType.map(item => ({
-                                id: item,
-                                name: item,
-                            }))}
-                            fullWidth
-                        />
-                        <TextInput source="requirement" fullWidth multiline />
-                        <FormDataConsumer>
-                            {
-                                ({
-                                    scopedFormData,
-                                    getSource,
-                                }) => {
-                                    return (
-                                        <RecordContextProvider value={{ scopedFormData, getSource }}>
-                                            <QuestionAnswersEdit />
-                                        </RecordContextProvider>
-                                    )
-                                }
-                            }
-                        </FormDataConsumer>
-                    </SimpleFormIterator>
-                </ArrayInput>
-            </SimpleForm>
+        <Edit transform={(formData: FormQuestionContent) => fromFormQuestionContent(formData, 'edit')} redirect="show">
+            <WithRecord render={(questionContent) => {
+                return (
+                    <RecordContextProvider value={toFormQuestionContent(questionContent)}>
+                        <QuestionContentForm mode="edit" />
+                    </RecordContextProvider>
+                )
+            }} />
         </Edit>
     )
 }

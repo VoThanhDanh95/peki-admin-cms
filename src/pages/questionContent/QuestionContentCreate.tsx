@@ -1,10 +1,12 @@
 import { Create } from "react-admin"
-import QuestionContentForm, { transform } from "./components/QuestionContentForm"
+import QuestionContentForm from "./components/QuestionContentForm"
+import { fromFormQuestionContent } from "../../helper/converters/questionContent"
+import { FormQuestionContent } from "../../types/forms/questionContent"
 
 const QuestionContentCreate = () => {
     return (
-        <Create transform={transform} redirect="show">
-            <QuestionContentForm />
+        <Create transform={(formData: FormQuestionContent) => fromFormQuestionContent(formData, 'create')} redirect="show">
+            <QuestionContentForm mode="create" />
         </Create>
     )
 }

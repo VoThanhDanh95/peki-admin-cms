@@ -5,6 +5,7 @@ export type FormQuestionContent = {
     grammars: string[]
     level: number
     topic: string
+    exerciseId?: string
     questions: FormQuestion[]
 }
 

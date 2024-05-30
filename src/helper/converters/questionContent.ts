@@ -1,7 +1,18 @@
-import { FormQuestion } from "../../types/forms/questionContent"
+import { FormQuestion, FormQuestionContent } from "../../types/forms/questionContent"
 import { Question } from "../../types/question"
 import { MultipleChoicesQuestionAnswer, OptionsSelectionInLineQuestionAnswer, OptionsSelectionNewLineQuestionAnswer, TextBasedInLineMultipleQuestionQuestionAnswer, TextBasedInLineQuestionAnswer, TextBasedNewLineQuestionAnswer } from "../../types/questionAnswer"
+import { MutationQuestionContent, QuestionContent } from "../../types/questionContent"
 import { trueFalseNotGiven, yesNoNotGiven } from "../constants"
+
+export const fromFormQuestionContent = (formQuestionContent: FormQuestionContent, mode: 'edit' | 'create'): MutationQuestionContent => {
+    const { questions, exerciseId, ...rest } = formQuestionContent
+
+    return {
+        ...rest,
+        exerciseId: mode === 'create' ? exerciseId : undefined,
+        questions: questions.map(question => fromFormQuestion(question))
+    }
+}
 
 export const fromFormQuestion = (formQuestions: FormQuestion): Omit<Question, 'id'> => {
     const { questionAnswers, ...rest } = formQuestions
@@ -159,6 +170,15 @@ const fromTextBaseInLineForm = (questionAnswers: { summary: string, answers: str
     return questionAnswers
 }
 
+export const toFormQuestionContent = (questionContent: QuestionContent): FormQuestionContent => {
+    const { id, createAt, questions, ...rest } = questionContent
+
+    return {
+        ...rest,
+        questions: questions.map(question => toFormQuestion(question))
+    }
+}
+
 export const toFormQuestion = (question: Question): FormQuestion => {
     const { questionAnswers, ...rest } = question
     if (question.questionType === 'Yes/No/Not Given') {
@@ -277,11 +297,11 @@ const toSingleChoiceForm = (questionAnswers: MultipleChoicesQuestionAnswer): Arr
 
 const toMultiChoicesForm = (questionAnswers: MultipleChoicesQuestionAnswer): Array<{ question: string, options: Array<{ option: string, isAnswer: boolean }> }> => {
     const answers = questionAnswers.answers
-    return questionAnswers.questions.map(({ question, answerOptions }, index) => ({
+    return questionAnswers.questions.map(({ question, answerOptions }) => ({
         question,
         options: answerOptions.map(option => ({
             option,
-            isAnswer: option === answers[index]
+            isAnswer: answers.includes(option)
         }))
     }))
 }

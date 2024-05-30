@@ -1,12 +1,12 @@
 import { Stack } from '@mui/material'
 import { RichTextInput } from "ra-input-rich-text"
 import { ArrayInput, AutocompleteInput, Button, NumberInput, ReferenceInput, SelectInput, SimpleFormIterator, TabbedForm, TextInput } from "react-admin"
-import QuestionAnswersForm from './QuestionAnswersForm'
-import { fromFormQuestion } from '../../../helper/converters/questionContent'
-import { FormQuestionContent } from '../../../types/forms/questionContent'
 import { allQuestionType } from '../../../helper/constants'
+import QuestionAnswersForm from './QuestionAnswersForm'
 
-const QuestionContentForm = () => {
+const QuestionContentForm = ({ mode }: {
+    mode: 'create' | 'edit'
+}) => {
     return (
         <TabbedForm>
             <TabbedForm.Tab label="Main">
@@ -22,7 +22,7 @@ const QuestionContentForm = () => {
                         <TextInput source="" fullWidth />
                     </SimpleFormIterator>
                 </ArrayInput>
-                <ReferenceInput source="exerciseId" reference="exercises">
+                <ReferenceInput source="exerciseId" reference="exercises" disabled={mode === 'edit'} >
                     <AutocompleteInput
                         label="Exercise"
                         optionText="name"
@@ -53,15 +53,6 @@ const QuestionContentForm = () => {
             </TabbedForm.Tab>
         </TabbedForm>
     )
-}
-
-export const transform = (formData: FormQuestionContent) => {
-    const { questions, ...rest } = formData
-    return {
-        ...rest,
-        questions: questions.map(question => fromFormQuestion(question))
-    }
-
 }
 
 export default QuestionContentForm

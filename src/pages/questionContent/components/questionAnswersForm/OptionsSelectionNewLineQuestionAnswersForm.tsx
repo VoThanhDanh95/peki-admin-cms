@@ -1,17 +1,9 @@
-import { useEffect } from "react"
-import { ArrayInput, Button, SelectInput, SimpleFormIterator, TextInput, useRecordContext, useSimpleFormIteratorItem } from "react-admin"
-import { useWatch, useFormContext } from 'react-hook-form'
+import { ArrayInput, Button, SelectInput, SimpleFormIterator, TextInput, useSimpleFormIteratorItem } from "react-admin"
+import { useWatch } from 'react-hook-form'
 
 const OptionsSelectionNewLineQuestionAnswersForm = () => {
     const { index } = useSimpleFormIteratorItem()
-    const questionType = useWatch({ name: `questions.${index}.questionType` })
-    const { setValue } = useFormContext()
     const options: string[] | undefined = useWatch({ name: `questions.${index}.questionAnswers.options` })
-
-    useEffect(() => {
-        setValue(`questions.${index}.questionAnswers.options`, [])
-        setValue(`questions.${index}.questionAnswers.questions`, [])
-    }, [questionType])
 
     return (
         <>

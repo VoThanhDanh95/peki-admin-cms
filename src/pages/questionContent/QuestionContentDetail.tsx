@@ -1,10 +1,19 @@
-import { ArrayField, DateField, FunctionField, Labeled, NumberField, RecordContextProvider, RichTextField, Show, TabbedShowLayout, TextField, WithListContext } from "react-admin"
+import { ArrayField, DateField, DeleteButton, EditButton, FunctionField, Labeled, NumberField, RecordContextProvider, RichTextField, Show, TabbedShowLayout, TextField, TopToolbar, WithListContext } from "react-admin"
 import { QuestionContent } from "../../types/questionContent"
 import QuestionFields from "./components/QuestionFields"
 
+const QuestionContentDetailShowActions = () => {
+    return (
+        <TopToolbar>
+            <EditButton />
+            <DeleteButton />
+        </TopToolbar>
+    )
+}
+
 const QuestionContentDetail = () => {
     return (
-        <Show>
+        <Show actions={<QuestionContentDetailShowActions />}>
             <TabbedShowLayout>
                 <TabbedShowLayout.Tab label="Main">
                     <Labeled color="primary.main">

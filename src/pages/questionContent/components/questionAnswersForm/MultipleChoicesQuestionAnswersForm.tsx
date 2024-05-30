@@ -1,16 +1,10 @@
 import { ArrayInput, BooleanInput, Button, RadioButtonGroupInput, SimpleFormIterator, TextInput, useSimpleFormIteratorItem } from "react-admin";
+import { useWatch } from 'react-hook-form';
 import { trueFalseNotGiven, yesNoNotGiven } from "../../../../helper/constants";
-import { useWatch, useFormContext } from 'react-hook-form'
-import { useEffect } from "react";
 
 const MultipleChoicesQuestionAnswersForm = () => {
     const { index } = useSimpleFormIteratorItem()
     const questionType = useWatch({ name: `questions.${index}.questionType` })
-    const { setValue } = useFormContext()
-
-    useEffect(() => {
-        setValue(`questions.${index}.questionAnswers`, [])
-    }, [questionType])
 
     if (questionType === 'True/False/Not Given') {
         return (

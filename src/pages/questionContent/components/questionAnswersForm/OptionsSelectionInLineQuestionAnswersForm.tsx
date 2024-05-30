@@ -1,19 +1,10 @@
 import { RichTextInput } from "ra-input-rich-text"
-import { useEffect } from "react"
-import { ArrayInput, Button, SelectInput, SimpleFormIterator, TextInput, useRecordContext, useSimpleFormIteratorItem } from "react-admin"
-import { useFormContext, useWatch } from 'react-hook-form'
+import { ArrayInput, Button, SelectInput, SimpleFormIterator, TextInput, useSimpleFormIteratorItem } from "react-admin"
+import { useWatch } from 'react-hook-form'
 
 const OptionsSelectionInLineQuestionAnswersForm = () => {
     const { index } = useSimpleFormIteratorItem()
-    const questionType = useWatch({ name: `questions.${index}.questionType` })
-    const { setValue } = useFormContext()
     const options: string[] | undefined = useWatch({ name: `questions.${index}.questionAnswers.answerOptions` })
-
-    useEffect(() => {
-        setValue(`questions.${index}.questionAnswers.summary`, '')
-        setValue(`questions.${index}.questionAnswers.answerOptions`, [])
-        setValue(`questions.${index}.questionAnswers.answers`, [])
-    }, [questionType])
 
     return (
         <>
