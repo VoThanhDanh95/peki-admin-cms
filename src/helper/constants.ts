@@ -1,15 +1,33 @@
 import { ChoiceBasedQuestionType, OptionsSelectionInLineQuestionType, OptionsSelectionNewLineQuestionType, QuestionType, TextBasedInLineMultipleQuestionsQuestionType, TextBasedInlineQuestionType, TextBasedNewLineQuestionType } from "../types/question"
 
-export const yesNoNotGiven = [
-    "Yes",
-    "No",
-    "Not Given"
+export const yesNoNotGivenAnswers = [
+    {
+        id: "YES",
+        name: "Yes"
+    },
+    {
+        id: "NO",
+        name: "No"
+    },
+    {
+        id: "NOT GIVEN",
+        name: "Not Given"
+    },
 ] as const
 
-export const trueFalseNotGiven = [
-    "True",
-    "False",
-    "Not Given"
+export const trueFalseGivenAnswers = [
+    {
+        id: "TRUE",
+        name: "True"
+    },
+    {
+        id: "FALSE",
+        name: "False"
+    },
+    {
+        id: "NOT GIVEN",
+        name: "Not Given"
+    },
 ] as const
 
 export const choiceBasedQuestionType: ChoiceBasedQuestionType[] = [

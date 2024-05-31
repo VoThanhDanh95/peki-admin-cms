@@ -1,6 +1,6 @@
 import { ArrayInput, BooleanInput, Button, RadioButtonGroupInput, SimpleFormIterator, TextInput, useSimpleFormIteratorItem } from "react-admin";
 import { useWatch } from 'react-hook-form';
-import { trueFalseNotGiven, yesNoNotGiven } from "../../../../helper/constants";
+import { trueFalseGivenAnswers, yesNoNotGivenAnswers } from "../../../../helper/constants";
 
 const MultipleChoicesQuestionAnswersForm = () => {
     const { index } = useSimpleFormIteratorItem()
@@ -13,10 +13,7 @@ const MultipleChoicesQuestionAnswersForm = () => {
                     <TextInput source='question' fullWidth />
                     <RadioButtonGroupInput
                         source="answer"
-                        choices={trueFalseNotGiven.map(item => ({
-                            id: item,
-                            name: item
-                        }))}
+                        choices={trueFalseGivenAnswers.slice()}
                     />
                 </SimpleFormIterator>
             </ArrayInput>
@@ -30,10 +27,7 @@ const MultipleChoicesQuestionAnswersForm = () => {
                     <TextInput source='question' fullWidth />
                     <RadioButtonGroupInput
                         source="answer"
-                        choices={yesNoNotGiven.map(item => ({
-                            id: item,
-                            name: item
-                        }))}
+                        choices={yesNoNotGivenAnswers.slice()}
                     />
                 </SimpleFormIterator>
             </ArrayInput>

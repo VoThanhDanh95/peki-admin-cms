@@ -2,6 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { FunctionField, Labeled } from "react-admin";
 import { Question } from "../../../../types/question";
 import { MultipleChoicesQuestionAnswer } from "../../../../types/questionAnswer";
+import { trueFalseGivenAnswers, yesNoNotGivenAnswers } from '../../../../helper/constants';
 
 const MultipleChoicesQuestionAnswersDetail = () => {
     return (
@@ -19,10 +20,28 @@ const MultipleChoicesQuestionAnswersDetail = () => {
                             <Box key={index}>
                                 <Typography variant="body2" sx={{ fontWeight: 'bold' }}>{`${index + 1}. ${question}`}</Typography>
                                 {answerOptions.map((value, optionIndex) => {
-                                    const isAnswer =
-                                        r.questionType === 'Multiple Choices Multiple Answers'
-                                            ? answers.includes(value)
-                                            : answer === value
+                                    let isAnswer = false
+
+                                    switch (r.questionType) {
+                                        case 'Multiple Choices Multiple Answers':
+                                            isAnswer = answers.includes(value);
+                                            break;
+
+                                        case 'Yes/No/Not Given':
+                                            isAnswer = !!yesNoNotGivenAnswers.find(
+                                                item => item.id === answer && item.name === value
+                                            )
+                                            break;
+                                        case 'True/False/Not Given':
+                                            isAnswer = !!trueFalseGivenAnswers.find(
+                                                item => item.id === answer && item.name === value
+                                            )
+                                            break;
+
+                                        default:
+                                            isAnswer = answer === value
+                                            break;
+                                    }
 
                                     return <Typography
                                         variant="body2"

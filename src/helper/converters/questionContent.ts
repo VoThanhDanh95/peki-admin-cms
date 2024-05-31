@@ -2,7 +2,7 @@ import { FormQuestion, FormQuestionContent } from "../../types/forms/questionCon
 import { Question } from "../../types/question"
 import { MultipleChoicesQuestionAnswer, OptionsSelectionInLineQuestionAnswer, OptionsSelectionNewLineQuestionAnswer, TextBasedInLineMultipleQuestionQuestionAnswer, TextBasedInLineQuestionAnswer, TextBasedNewLineQuestionAnswer } from "../../types/questionAnswer"
 import { MutationQuestionContent, QuestionContent } from "../../types/questionContent"
-import { trueFalseNotGiven, yesNoNotGiven } from "../constants"
+import { trueFalseGivenAnswers, yesNoNotGivenAnswers } from "../constants"
 
 export const fromFormQuestionContent = (formQuestionContent: FormQuestionContent, mode: 'edit' | 'create'): MutationQuestionContent => {
     const { questions, exerciseId, ...rest } = formQuestionContent
@@ -97,7 +97,7 @@ const fromYesNoNotGivenForm = (questionAnswers: { question: string, answer: stri
     return {
         questions: questionAnswers.map(questionAnswer => ({
             question: questionAnswer.question,
-            answerOptions: yesNoNotGiven.slice()
+            answerOptions: yesNoNotGivenAnswers.map(({ name }) => name)
         })),
         answers: questionAnswers.map(questionAnswer => questionAnswer.answer)
     }
@@ -107,7 +107,7 @@ const fromTrueFalseNotGivenForm = (questionAnswers: { question: string, answer: 
     return {
         questions: questionAnswers.map(questionAnswer => ({
             question: questionAnswer.question,
-            answerOptions: trueFalseNotGiven.slice()
+            answerOptions: trueFalseGivenAnswers.map(({ name }) => name)
         })),
         answers: questionAnswers.map(questionAnswer => questionAnswer.answer)
     }
