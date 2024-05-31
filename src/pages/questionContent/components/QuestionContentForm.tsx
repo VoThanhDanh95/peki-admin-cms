@@ -1,8 +1,8 @@
 import { Stack } from '@mui/material'
-import { RichTextInput } from "ra-input-rich-text"
 import { ArrayInput, AutocompleteInput, Button, NumberInput, ReferenceInput, SelectInput, SimpleFormIterator, TabbedForm, TextInput } from "react-admin"
 import { allQuestionType } from '../../../helper/constants'
 import QuestionAnswersForm from './QuestionAnswersForm'
+import CustomRichTextInput from '../../../components/CustomRichTextInput'
 
 const QuestionContentForm = ({ mode }: {
     mode: 'create' | 'edit'
@@ -10,7 +10,7 @@ const QuestionContentForm = ({ mode }: {
     return (
         <TabbedForm>
             <TabbedForm.Tab label="Main">
-                <RichTextInput source="content" fullWidth />
+                <CustomRichTextInput source="content" fullWidth />
                 <Stack direction="row" spacing={2}>
                     <TextInput source="topic" />
                     <NumberInput source="level" />
@@ -47,7 +47,7 @@ const QuestionContentForm = ({ mode }: {
                             }))}
                             fullWidth
                         />
-                        <RichTextInput source="requirement" fullWidth />
+                        <CustomRichTextInput source="requirement" fullWidth />
                         <QuestionAnswersForm />
                     </SimpleFormIterator>
                 </ArrayInput>

@@ -16,6 +16,7 @@ import QuestionContentEdit from "./pages/questionContent/QuestionContentEdit";
 import QuestionContentCreate from "./pages/questionContent/QuestionContentCreate";
 import ExerciseCreate from "./pages/exercise/ExerciseCreate";
 import ExerciseEdit from "./pages/exercise/ExerciseEdit";
+import './stytles.css'
 
 export const App = () => (
   <Admin dataProvider={dataProvider} authProvider={authProvider} i18nProvider={i18nProvider}>

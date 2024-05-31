@@ -1,6 +1,6 @@
-import { RichTextInput } from "ra-input-rich-text"
 import { ArrayInput, Button, SelectInput, SimpleFormIterator, TextInput, useSimpleFormIteratorItem } from "react-admin"
 import { useWatch } from 'react-hook-form'
+import CustomRichTextInput from "../../../../components/CustomRichTextInput"
 
 const OptionsSelectionInLineQuestionAnswersForm = () => {
     const { index } = useSimpleFormIteratorItem()
@@ -8,7 +8,7 @@ const OptionsSelectionInLineQuestionAnswersForm = () => {
 
     return (
         <>
-            <RichTextInput label="Summary" source={`questions.${index}.questionAnswers.summary`} />
+            <CustomRichTextInput label="Summary" source={`questions.${index}.questionAnswers.summary`} />
             <ArrayInput label="Options" source={`questions.${index}.questionAnswers.answerOptions`}>
                 <SimpleFormIterator fullWidth addButton={<Button label="Add option" />}>
                     <TextInput source="" fullWidth />
