@@ -22,13 +22,13 @@ const QuestionContentForm = ({ mode }: {
                         <TextInput source="" fullWidth />
                     </SimpleFormIterator>
                 </ArrayInput>
-                <ReferenceInput source="exerciseId" reference="exercises" disabled={mode === 'edit'} >
+                {mode === 'create' && <ReferenceInput source="exerciseId" reference="exercises" >
                     <AutocompleteInput
                         label="Exercise"
                         optionText="name"
                         filterToQuery={searchText => ({ name: searchText })}
                     />
-                </ReferenceInput>
+                </ReferenceInput>}
             </TabbedForm.Tab>
             <TabbedForm.Tab label="Questions">
                 <ArrayInput source="questions" label={false} fullWidth>
@@ -46,7 +46,7 @@ const QuestionContentForm = ({ mode }: {
                             }))}
                             fullWidth
                         />
-                        <TextInput source="requirement" fullWidth multiline />
+                        <RichTextInput source="requirement" fullWidth />
                         <QuestionAnswersForm />
                     </SimpleFormIterator>
                 </ArrayInput>
