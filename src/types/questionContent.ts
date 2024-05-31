@@ -16,6 +16,7 @@ export type QuestionContent = {
     content: string
     level: number
     topic: string
+    order: number
     grammars: string[]
     exerciseId: string
     createAt: number

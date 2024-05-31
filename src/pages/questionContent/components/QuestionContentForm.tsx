@@ -14,6 +14,7 @@ const QuestionContentForm = ({ mode }: {
                 <Stack direction="row" spacing={2}>
                     <TextInput source="topic" />
                     <NumberInput source="level" />
+                    <NumberInput source="order" />
                 </Stack>
                 <ArrayInput source="grammars" fullWidth>
                     <SimpleFormIterator

@@ -26,6 +26,9 @@ const QuestionContentDetail = () => {
                         <NumberField source="level" />
                     </Labeled>
                     <Labeled color="primary.main">
+                        <NumberField source="order" />
+                    </Labeled>
+                    <Labeled color="primary.main">
                         <FunctionField<QuestionContent>
                             label="Grammars"
                             render={(r) => <>
