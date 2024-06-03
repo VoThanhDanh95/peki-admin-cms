@@ -1,8 +1,8 @@
 import { Grid } from '@mui/material';
-import { DateField, DeleteButton, EditButton, FunctionField, Labeled, NumberField, ReferenceManyField, Show, SimpleShowLayout, TabbedShowLayout, TextField, TopToolbar } from "react-admin";
+import { Datagrid, DateField, DeleteButton, EditButton, FunctionField, Labeled, NumberField, ReferenceManyField, RichTextField, Show, SimpleShowLayout, TabbedShowLayout, TextField, TopToolbar, WithRecord } from "react-admin";
 import { SimpleExercise } from "../../types/exercise";
-import QuestionContentDataGrid from "../shared/QuestionContentDatagrid";
 import ExerciseAvailabilityField from "./components/ExerciseAvailabilityField";
+import { SimpleQuestionContent } from '../../types/questionContent';
 
 const ExerciseDetailShowActions = () => {
     return (
@@ -90,11 +90,36 @@ const ExerciseDetail = () => {
                     <ReferenceManyField
                         reference="question_contents"
                         target="exerciseId"
+                        sort={{ field: "order", order: "ASC" }}
                     >
-                        <QuestionContentDataGrid
+                        <Datagrid
                             rowClick="show"
                             bulkActionButtons={false}
-                        />
+                        >
+                            <WithRecord render={({ content, ...rest }) => {
+                                return <RichTextField source="content" record={{
+                                    ...rest,
+                                    content: content.length > 200 ? content.slice(0, 200) + "..." : content
+                                }}
+                                />
+                            }} />
+
+                            <TextField source="topic" />
+                            <NumberField source="level" />
+                            <FunctionField
+                                label="Grammars"
+                                render={(r: SimpleQuestionContent) => <>
+                                    {r.grammars.map((grammar, index) => <div key={index}>{`- ${grammar}`}</div>)}
+                                </>}
+                            />
+                            <FunctionField
+                                label="No. question"
+                                render={(r: SimpleQuestionContent) => r.questions.length}
+                            />
+                            <NumberField source="order" />
+                            <DateField source='createAt' />
+                            <TextField source="id" />
+                        </Datagrid>
                     </ReferenceManyField>
                 </TabbedShowLayout.Tab>
             </TabbedShowLayout>

@@ -1,5 +1,5 @@
 import { Datagrid, DatagridProps, DateField, FunctionField, NumberField, RichTextField, TextField, WithRecord } from "react-admin"
-import { SimpleQuestionContent } from "../../types/questionContent"
+import { SimpleQuestionContent } from "../../../types/questionContent"
 
 type Props = DatagridProps
 
@@ -26,7 +26,7 @@ const QuestionContentDataGrid = (props: Props) => {
                 label="No. question"
                 render={(r: SimpleQuestionContent) => r.questions.length}
             />
-            {/* <ReferenceField source="exerciseId" reference="exercises" /> */}
+            <NumberField source="order" />
             <DateField source='createAt' />
             <TextField source="id" />
         </Datagrid>
