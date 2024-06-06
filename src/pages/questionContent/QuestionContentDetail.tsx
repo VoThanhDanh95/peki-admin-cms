@@ -1,4 +1,4 @@
-import { ArrayField, DateField, DeleteButton, EditButton, FunctionField, Labeled, NumberField, RecordContextProvider, RichTextField, Show, TabbedShowLayout, TextField, TopToolbar, WithListContext } from "react-admin"
+import { ArrayField, DateField, DeleteButton, EditButton, FileField, FunctionField, Labeled, NumberField, RecordContextProvider, RichTextField, Show, TabbedShowLayout, TextField, TopToolbar, UrlField, WithListContext } from "react-admin"
 import { QuestionContent } from "../../types/questionContent"
 import QuestionFields from "./components/QuestionFields"
 

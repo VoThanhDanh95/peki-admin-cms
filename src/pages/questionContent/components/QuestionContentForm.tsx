@@ -1,14 +1,16 @@
 import { Stack } from '@mui/material'
-import { ArrayInput, AutocompleteInput, Button, FileField, FileInput, FormDataConsumer, NumberInput, ReferenceInput, SelectInput, SimpleFormIterator, TabbedForm, TextInput, required, useGetOne } from "react-admin"
+import { ArrayInput, AutocompleteInput, Button, FileField, FileInput, FormDataConsumer, NumberInput, ReferenceInput, SelectInput, SimpleFormIterator, TabbedForm, TextInput, required, useGetOne, useRecordContext } from "react-admin"
 import { allQuestionType } from '../../../helper/constants'
 import QuestionAnswersForm from './QuestionAnswersForm'
 import CustomRichTextInput from '../../../components/CustomRichTextInput'
 import { useState } from 'react'
+import { FormQuestionContent } from '../../../types/forms/questionContent'
 
 const QuestionContentForm = ({ mode }: {
     mode: 'create' | 'edit'
 }) => {
-    const [exerciseId, setExerciseId] = useState<string>()
+    const record = useRecordContext<FormQuestionContent>()
+    const [exerciseId, setExerciseId] = useState<string | undefined>(record?.exerciseId)
     const { data: exercise } = useGetOne('exercises', { id: exerciseId }, {
         enabled: exerciseId !== undefined
     })
@@ -32,11 +34,13 @@ const QuestionContentForm = ({ mode }: {
                     />
                 </ReferenceInput>}
                 {
-                    exercise?.skill === 'reading'
-                        ? <CustomRichTextInput source="content" fullWidth />
-                        : <FileInput source="audio">
-                            <FileField source="src" title="title" />
-                        </FileInput>
+                    exercise
+                        ? exercise.skill === 'reading'
+                            ? <CustomRichTextInput source="content" fullWidth />
+                            : <FileInput source="audio">
+                                <FileField source="src" title="title" />
+                            </FileInput>
+                        : null
                 }
                 <Stack direction="row" spacing={2}>
                     <TextInput source="topic" />
