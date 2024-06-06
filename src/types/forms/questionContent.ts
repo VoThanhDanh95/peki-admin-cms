@@ -1,7 +1,13 @@
 import { MultipleChoicesMultipleAnswers, MultipleChoicesOneAnswer, OptionsSelectionInLineQuestionType, OptionsSelectionNewLineQuestionType, TextBasedInLineMultipleQuestionsQuestionType, TextBasedInlineQuestionType, TextBasedNewLineQuestionType, TrueFalseNotGiven, YesNoNotGiven } from "../question"
 
 export type FormQuestionContent = {
-    content: string
+    questionContentType: 'listening' | 'reading'
+    audio?: {
+        src: string
+        title: string
+        rawFile: File
+    }
+    content?: string
     grammars: string[]
     level: number
     topic: string

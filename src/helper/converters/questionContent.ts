@@ -1,14 +1,37 @@
+import { fetchUtils } from "react-admin"
 import { FormQuestion, FormQuestionContent } from "../../types/forms/questionContent"
 import { Question } from "../../types/question"
 import { MultipleChoicesQuestionAnswer, OptionsSelectionInLineQuestionAnswer, OptionsSelectionNewLineQuestionAnswer, TextBasedInLineMultipleQuestionQuestionAnswer, TextBasedInLineQuestionAnswer, TextBasedNewLineQuestionAnswer } from "../../types/questionAnswer"
 import { MutationQuestionContent, QuestionContent } from "../../types/questionContent"
 import { trueFalseGivenAnswers, yesNoNotGivenAnswers } from "../constants"
+import { fetchJson } from "../../dataProvider"
 
-export const fromFormQuestionContent = (formQuestionContent: FormQuestionContent, mode: 'edit' | 'create'): MutationQuestionContent => {
-    const { questions, exerciseId, ...rest } = formQuestionContent
+const createPostFormData = (
+    params: FormQuestionContent
+) => {
+    const formData = new FormData();
+    params.audio?.rawFile && formData.append("file", params.audio.rawFile);
+
+    return formData;
+};
+
+export const fromFormQuestionContent = async (formQuestionContent: FormQuestionContent, mode: 'edit' | 'create'): Promise<MutationQuestionContent> => {
+    const { questions, exerciseId, questionContentType, audio, ...rest } = formQuestionContent
+    let content = formQuestionContent.content
+
+    if (questionContentType === 'listening') {
+        const formData = createPostFormData(formQuestionContent);
+        const { json } = await fetchJson(`${import.meta.env.VITE_API_URL}/cms/upload/audio`, {
+            method: "POST",
+            body: formData,
+        });
+
+        content = `${import.meta.env.VITE_API_URL}/static_serve/audios/${json.mediaMeta.id}`
+    }
 
     return {
         ...rest,
+        content: content || '',
         exerciseId: mode === 'create' ? exerciseId : undefined,
         questions: questions.map(question => fromFormQuestion(question))
     }

@@ -23,7 +23,7 @@ import {
     fetchUtils
 } from "react-admin";
 
-const fetchJson = (url: string, options: fetchUtils.Options = {}) => {
+export const fetchJson = (url: string, options: fetchUtils.Options = {}) => {
     const customHeaders = (options.headers ||
         new Headers({
             Accept: 'application/json',

@@ -1,5 +1,5 @@
 import { Stack } from '@mui/material'
-import { ArrayInput, AutocompleteInput, Button, NumberInput, ReferenceInput, SelectInput, SimpleFormIterator, TabbedForm, TextInput } from "react-admin"
+import { ArrayInput, AutocompleteInput, Button, FileField, FileInput, FormDataConsumer, NumberInput, ReferenceInput, SelectInput, SimpleFormIterator, TabbedForm, TextInput, required } from "react-admin"
 import { allQuestionType } from '../../../helper/constants'
 import QuestionAnswersForm from './QuestionAnswersForm'
 import CustomRichTextInput from '../../../components/CustomRichTextInput'
@@ -10,7 +10,30 @@ const QuestionContentForm = ({ mode }: {
     return (
         <TabbedForm>
             <TabbedForm.Tab label="Main">
-                <CustomRichTextInput source="content" fullWidth />
+                <SelectInput
+                    source="questionContentType"
+                    choices={[
+                        {
+                            id: 'listening',
+                            name: 'Listening'
+                        },
+                        {
+                            id: 'reading',
+                            name: 'Reading'
+                        }
+                    ]}
+                    validate={required()}
+                    defaultValue='reading'
+                />
+                <FormDataConsumer<{ questionContentType: 'listening' | 'reading' }>>
+                    {({ formData, ...rest }) =>
+                        formData.questionContentType === 'reading'
+                            ? <CustomRichTextInput source="content" fullWidth />
+                            : <FileInput source="audio">
+                                <FileField source="src" title="title" />
+                            </FileInput>
+                    }
+                </FormDataConsumer>
                 <Stack direction="row" spacing={2}>
                     <TextInput source="topic" />
                     <NumberInput source="level" />
