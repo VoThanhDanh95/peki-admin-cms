@@ -16,10 +16,10 @@ const createPostFormData = (
 };
 
 export const fromFormQuestionContent = async (formQuestionContent: FormQuestionContent, mode: 'edit' | 'create'): Promise<MutationQuestionContent> => {
-    const { questions, exerciseId, questionContentType, audio, ...rest } = formQuestionContent
+    const { questions, exerciseId, audio, ...rest } = formQuestionContent
     let content = formQuestionContent.content
 
-    if (questionContentType === 'listening') {
+    if (audio) {
         const formData = createPostFormData(formQuestionContent);
         const { json } = await fetchJson(`${import.meta.env.VITE_API_URL}/cms/upload/audio`, {
             method: "POST",
