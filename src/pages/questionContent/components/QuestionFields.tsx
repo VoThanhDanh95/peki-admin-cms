@@ -27,6 +27,9 @@ const QuestionFields = () => {
                         <TextField source="questionType" />
                     </Labeled>
                     <Labeled color="primary.main">
+                        <TextField source="belongsTo" />
+                    </Labeled>
+                    <Labeled color="primary.main">
                         <NumberField source="level" />
                     </Labeled>
                     <Labeled color="primary.main">

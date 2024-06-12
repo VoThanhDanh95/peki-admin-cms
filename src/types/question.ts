@@ -4,6 +4,7 @@ export type QuestionBase = {
     id: string
     level: number
     requirement: string
+    belongsTo: BelongsTo
 }
 
 export type TrueFalseNotGiven = 'True/False/Not Given'
@@ -59,6 +60,32 @@ export type QuestionType =
     | TextBasedInlineQuestionType
     | TextBasedInLineMultipleQuestionsQuestionType
     | TextBasedNewLineQuestionType
+
+export type MatchingHeadingBelongsTo = 'Matching Headings'
+export type TrueFalseNotGivenBelongsTo = 'True / False / Not Given'
+export type YesNoNotGivenBelongsTo = 'Yes / No / Not Given'
+export type MultipleChoicesBelongsTo = 'Multiple Choices'
+export type SummaryCompletionBelongsTo = 'Summary Completion'
+export type TableCompletionBelongsTo = 'Table Completion'
+export type FlowchartDiagramCompletionBelongsTo = 'Flowchart - Diagram Completion'
+export type SentenceCompletionBelongsTo = 'Sentence Completion'
+export type ShortAnswerQuestionsBelongsTo = 'Short-answer questions'
+export type WhichParagraphContainsBelongsTo = 'Which paragraph contains'
+export type MatchingFeaturesBelongsTo = 'Matching features'
+export type MatchingSentenceEndingsBelongsTo = 'Matching sentence endings'
+export type BelongsTo =
+    | MatchingHeadingBelongsTo
+    | TrueFalseNotGivenBelongsTo
+    | YesNoNotGivenBelongsTo
+    | MultipleChoicesBelongsTo
+    | SummaryCompletionBelongsTo
+    | TableCompletionBelongsTo
+    | FlowchartDiagramCompletionBelongsTo
+    | SentenceCompletionBelongsTo
+    | ShortAnswerQuestionsBelongsTo
+    | WhichParagraphContainsBelongsTo
+    | MatchingFeaturesBelongsTo
+    | MatchingSentenceEndingsBelongsTo
 
 type MultipleChoicesQuestion = QuestionBase & {
     questionType: ChoiceBasedQuestionType

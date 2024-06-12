@@ -3,7 +3,7 @@ import { FormQuestion, FormQuestionContent } from "../../types/forms/questionCon
 import { Question } from "../../types/question"
 import { MultipleChoicesQuestionAnswer, OptionsSelectionInLineQuestionAnswer, OptionsSelectionNewLineQuestionAnswer, TextBasedInLineMultipleQuestionQuestionAnswer, TextBasedInLineQuestionAnswer, TextBasedNewLineQuestionAnswer } from "../../types/questionAnswer"
 import { MutationQuestionContent, QuestionContent } from "../../types/questionContent"
-import { trueFalseGivenAnswers, yesNoNotGivenAnswers } from "../constants"
+import { questionTypeBelongsToMapping, trueFalseGivenAnswers, yesNoNotGivenAnswers } from "../constants"
 import { fetchJson } from "../../dataProvider"
 
 const createPostFormData = (
@@ -42,6 +42,7 @@ export const fromFormQuestion = (formQuestions: FormQuestion): Omit<Question, 'i
     if (formQuestions.questionType === 'Yes/No/Not Given') {
         return {
             ...rest,
+            belongsTo: questionTypeBelongsToMapping[formQuestions.questionType],
             questionAnswers: fromYesNoNotGivenForm(formQuestions.questionAnswers)
         }
     }
@@ -49,6 +50,7 @@ export const fromFormQuestion = (formQuestions: FormQuestion): Omit<Question, 'i
     if (formQuestions.questionType === 'True/False/Not Given') {
         return {
             ...rest,
+            belongsTo: questionTypeBelongsToMapping[formQuestions.questionType],
             questionAnswers: fromTrueFalseNotGivenForm(formQuestions.questionAnswers)
         }
     }
@@ -56,6 +58,7 @@ export const fromFormQuestion = (formQuestions: FormQuestion): Omit<Question, 'i
     if (formQuestions.questionType === 'Multiple Choices One Answer') {
         return {
             ...rest,
+            belongsTo: questionTypeBelongsToMapping[formQuestions.questionType],
             questionAnswers: fromSingleChoiceForm(formQuestions.questionAnswers)
         }
     }
@@ -63,6 +66,7 @@ export const fromFormQuestion = (formQuestions: FormQuestion): Omit<Question, 'i
     if (formQuestions.questionType === 'Multiple Choices Multiple Answers') {
         return {
             ...rest,
+            belongsTo: questionTypeBelongsToMapping[formQuestions.questionType],
             questionAnswers: fromMultiChoicesForm(formQuestions.questionAnswers)
         }
     }
@@ -74,6 +78,7 @@ export const fromFormQuestion = (formQuestions: FormQuestion): Omit<Question, 'i
     ) {
         return {
             ...rest,
+            belongsTo: questionTypeBelongsToMapping[formQuestions.questionType],
             questionAnswers: fromOptionsSelectionNewLineForm(formQuestions.questionAnswers)
         }
     }
@@ -81,6 +86,7 @@ export const fromFormQuestion = (formQuestions: FormQuestion): Omit<Question, 'i
     if (formQuestions.questionType === 'Summary Completion Select Words') {
         return {
             ...rest,
+            belongsTo: questionTypeBelongsToMapping[formQuestions.questionType],
             questionAnswers: fromOptionsSelectionInLineForm(formQuestions.questionAnswers)
         }
     }
@@ -88,6 +94,7 @@ export const fromFormQuestion = (formQuestions: FormQuestion): Omit<Question, 'i
     if (formQuestions.questionType === 'Sentence Completion Paragraph') {
         return {
             ...rest,
+            belongsTo: questionTypeBelongsToMapping[formQuestions.questionType],
             questionAnswers: fromTextBasedInLineMultipleQuestionsForm(formQuestions.questionAnswers)
         }
     }
@@ -96,6 +103,7 @@ export const fromFormQuestion = (formQuestions: FormQuestion): Omit<Question, 'i
         || formQuestions.questionType === 'Short-answer questions Paragraph') {
         return {
             ...rest,
+            belongsTo: questionTypeBelongsToMapping[formQuestions.questionType],
             questionAnswers: fromTextBaseNewLineForm(formQuestions.questionAnswers)
         }
     }
@@ -108,6 +116,7 @@ export const fromFormQuestion = (formQuestions: FormQuestion): Omit<Question, 'i
     ) {
         return {
             ...rest,
+            belongsTo: questionTypeBelongsToMapping[formQuestions.questionType],
             questionAnswers: fromTextBaseInLineForm(formQuestions.questionAnswers)
         }
     }

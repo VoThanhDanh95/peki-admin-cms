@@ -1,4 +1,4 @@
-import { ChoiceBasedQuestionType, OptionsSelectionInLineQuestionType, OptionsSelectionNewLineQuestionType, QuestionType, TextBasedInLineMultipleQuestionsQuestionType, TextBasedInlineQuestionType, TextBasedNewLineQuestionType } from "../types/question"
+import { BelongsTo, ChoiceBasedQuestionType, OptionsSelectionInLineQuestionType, OptionsSelectionNewLineQuestionType, QuestionType, TextBasedInLineMultipleQuestionsQuestionType, TextBasedInlineQuestionType, TextBasedNewLineQuestionType } from "../types/question"
 
 export const yesNoNotGivenAnswers = [
     {
@@ -73,3 +73,23 @@ export const allQuestionType: QuestionType[] = [
     ...textBasedNewLineQuestionType,
     ...textBasedInLineMultipleQuestionType
 ] as const
+
+export const questionTypeBelongsToMapping: Record<QuestionType, BelongsTo> = {
+    'Matching Heading': 'Matching Headings',
+    'True/False/Not Given': 'True / False / Not Given',
+    'Yes/No/Not Given': 'Yes / No / Not Given',
+    'Multiple Choices One Answer': 'Multiple Choices',
+    'Multiple Choices Multiple Answers': 'Multiple Choices',
+    'Summary Completion Fill Words': 'Summary Completion',
+    'Summary Completion Select Words': 'Summary Completion',
+    'Table': 'Table Completion',
+    'Flowchart': 'Flowchart - Diagram Completion',
+    'Diagram': 'Flowchart - Diagram Completion',
+    'Sentence Completion Paragraph': 'Sentence Completion',
+    'Sentence Completion One-Two Sentence': 'Sentence Completion',
+    'Short-answer questions Paragraph': 'Short-answer questions',
+    'Short-answer questions One-Two Sentence': 'Short-answer questions',
+    'Matching Features': 'Matching features',
+    'Matching Sentence Endings': 'Matching sentence endings',
+    'Which Paragraph Contains': 'Which paragraph contains',
+}
