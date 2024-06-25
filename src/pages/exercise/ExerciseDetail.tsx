@@ -30,6 +30,9 @@ const ExerciseDetail = () => {
                                 <Labeled color="primary.main">
                                     <TextField source="category" />
                                 </Labeled>
+                                <Labeled color="primary.main">
+                                    <TextField source="catalog" />
+                                </Labeled>
                             </SimpleShowLayout>
                         </Grid>
                         <Grid item xs={6}>

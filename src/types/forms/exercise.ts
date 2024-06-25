@@ -4,6 +4,7 @@ export type FormExercise = {
     mode: 'practice' | 'test'
     level: number
     skill: 'reading' | 'listening' | 'writing' | 'speaking'
+    catalog: 'IELTS' | 'THPT'
     category: string
     duration: number
     isAlwaysAvailable: boolean

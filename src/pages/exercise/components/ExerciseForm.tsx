@@ -4,6 +4,7 @@ import { BooleanInput, DateInput, FormDataConsumer, NumberInput, SelectInput, Si
 const modes = ["practice", "test", "custom"] as const
 const statuses = ["private", "public"] as const
 const skills = ["reading", "listening", "writing", "speaking"] as const
+const catalogs = ['IELTS', 'THPT'] as const
 
 const ExerciseForm = () => {
     const t = useTranslate()
@@ -33,6 +34,13 @@ const ExerciseForm = () => {
                 <SelectInput
                     source="status"
                     choices={statuses.map(item => ({
+                        id: item,
+                        name: item,
+                    }))}
+                />
+                <SelectInput
+                    source="catalog"
+                    choices={catalogs.map(item => ({
                         id: item,
                         name: item,
                     }))}

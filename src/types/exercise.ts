@@ -20,6 +20,7 @@ export type Exercise = {
     mode: 'practice' | 'test'
     level: number
     skill: 'reading' | 'listening' | 'writing' | 'speaking'
+    catalog: 'IELTS' | 'THPT'
     category: string
     duration: number
     startAt: number
@@ -34,6 +35,7 @@ export type MutationExercise = {
     mode: 'practice' | 'test'
     level: number
     skill: 'reading' | 'listening' | 'writing' | 'speaking'
+    catalog: 'IELTS' | 'THPT'
     category: string
     duration: number
     startAt: number
