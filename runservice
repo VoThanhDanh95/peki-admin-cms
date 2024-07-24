@@ -1,0 +1,1 @@
+pm2 serve dist 5573 --spa --name peki-admin
